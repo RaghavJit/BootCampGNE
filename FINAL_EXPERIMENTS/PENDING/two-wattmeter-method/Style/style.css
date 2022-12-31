@@ -15,7 +15,7 @@ body {
     /* height: 1300px; */
     height: auto;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 0;
     border-radius: 10px;
 }
 
@@ -693,26 +693,36 @@ transform: translate(12px,-12px);
     right: 940px;
 }
 
+#verify1{
+    bottom: 220px;
+    right: 1002px;
+}
+
 #VLDelta{
     height: 20px;
     bottom: 96px;
-    right: 952px;
+    right: 1065px;
 }
 
 #ILDelta{
     height: 20px;
     bottom: 96px;
-    right: 935px;
+    right: 1050px;
 }
 
 #cosDelta{
     height: 20px;
     bottom: 96px;
-    right: 918px;
+    right: 1035px;
 }
 
 #powDelta{
     height: 20px;
-    bottom: 68px;
-    right: 1190px;
+    bottom: 94px;
+    right: -50px;
+}
+
+#verify2{
+    bottom: 54px;
+    right: 12px;
 }

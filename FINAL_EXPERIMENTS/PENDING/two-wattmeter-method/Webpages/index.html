@@ -55,7 +55,7 @@
                         </ul>
                     <li id="s7">Switch on the MCB and click on 'ADD' to add observations to the table.</li>
 
-                    <li id="s8">Click on 'CALCULATE' to calculate readings for the experiment.</li>
+                    <li id="s8">Type the observations in calculation tab and click on 'Calculate Delta' and 'Calculate Star' to calculate readings for the experiment.</li>
 
                 </ul>
 
@@ -79,7 +79,6 @@
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="calculate" disabled="true">CALCULATE</button>
                         <button id="reset">RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
@@ -89,9 +88,6 @@
 
                 <div class="formulas">
                     <p>SLIDERS</p>
-
-                    <input type="range" min="0" max="408" step="1" value="0" disabled="true" id="V_Slider">
-                    <label for="Rls">Voltage</label>
 
                     <!-- <input type="range" min="0.1" max="10" step="1" value="0.1" id="R1">
                     <label for="R1">R1</label>
@@ -229,11 +225,13 @@
                 <input type="text" id="ILStar">
                 <input type="text" id="cosStar">
                 <input type="text" id="powStar">
+                <input style="width:110px;" type="button" onclick="multiplyStar()" value ="Calculate Star" id="verify1" disabled="true">
 
                 <input type="text" id="VLDelta">
                 <input type="text" id="ILDelta">
                 <input type="text" id="cosDelta">
                 <input type="text" id="powDelta">
+                <input style="width: 110px;" type="button" onclick="multiplyDelta()" value="Calculate Delta" id="verify2" disabled="true">
                 
             </div>
             <div class="calc_output"></div>

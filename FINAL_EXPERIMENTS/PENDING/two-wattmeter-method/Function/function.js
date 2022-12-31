@@ -51,7 +51,7 @@ var ILDelta = document.getElementById("ILDelta")
 var cosDelta = document.getElementById("cosDelta")
 var powDelta = document.getElementById("powDelta")
 
-var VoltageSlider = document.getElementById("V_Slider")
+var VoltageSlider = 0
 
 var ObsTable = document.getElementById("valTable")
 
@@ -80,6 +80,7 @@ var WC2 = Watt_2_C
 var MCB_state = 0;
 
 var connArrnagment = 0
+var connHistory = []
 
 var index = 0;
 var current = 0;
@@ -102,7 +103,7 @@ instance.bind("ready", function () {
             paintStyle: { stroke: "rgb(229, 97, 97)", strokeWidth: 2.5 },
             hoverPaintStyle: { stroke: "rgb(229, 97, 97)", strokeWidth: 2.5 }
         },
-        
+
         "blue0": {
             paintStyle: { stroke: "blue", strokeWidth: 2.5 },
             hoverPaintStyle: { stroke: "blue", strokeWidth: 2.5 }
@@ -221,13 +222,13 @@ instance.bind("ready", function () {
 
 })
 
-window.onload = function setPage(){
-    instance.connect({ source:VoltmeterNegative, target:VoltmeterPositive })
+window.onload = function setPage() {
+    instance.connect({ source: VoltmeterNegative, target: VoltmeterPositive })
     instance.deleteEveryConnection()
 }
 
-if((instance.getConnections({ source: AmmeterNegative, target: Watt_2_C })[0] != undefined) || (instance.getConnections({ source: Watt_2_C, target: AmmeterNegative })[0] != undefined)){
-    if((instance.getConnections({ source: AmmeterNegative, target: Watt_2_M })[0] != undefined) || (instance.getConnections({ source: Watt_2_M, target: AmmeterNegative })[0] != undefined)){
+if ((instance.getConnections({ source: AmmeterNegative, target: Watt_2_C })[0] != undefined) || (instance.getConnections({ source: Watt_2_C, target: AmmeterNegative })[0] != undefined)) {
+    if ((instance.getConnections({ source: AmmeterNegative, target: Watt_2_M })[0] != undefined) || (instance.getConnections({ source: Watt_2_M, target: AmmeterNegative })[0] != undefined)) {
         WV1 = Watt_2_V
         WL1 = Watt_2_L
         WM1 = Watt_2_M
@@ -280,8 +281,8 @@ function check_delta() { //check delta config
 
     let in_nodes = []
 
-    for(let i=0; i<config_nodes.length; i++){
-        in_nodes[i]=config_nodes[i];
+    for (let i = 0; i < config_nodes.length; i++) {
+        in_nodes[i] = config_nodes[i];
     }
 
     let out_nodes = []
@@ -293,7 +294,7 @@ function check_delta() { //check delta config
         if (numOfConnections(config_nodes[i]) == 2) { //saperate out in_nodes and out_nodes
 
             if (connInNodes(config_nodes[i]) == 1) {
-                
+
                 let targetIndex = in_nodes.indexOf(config_nodes[i])
                 in_nodes.splice(targetIndex, 1);
 
@@ -308,7 +309,7 @@ function check_delta() { //check delta config
             console.log(SpecialNode)
 
             if (connInNodes(config_nodes[i]) == 1) {
-                
+
                 let targetIndex = in_nodes.indexOf(config_nodes[i])
                 in_nodes.splice(targetIndex, 1);
 
@@ -317,8 +318,8 @@ function check_delta() { //check delta config
         }
     }
 
-    for(let i = 0; i < out_nodes.length; i++){ //check if any two out_nodes are connected
-        for(let j = 0; j < out_nodes.length; j++){
+    for (let i = 0; i < out_nodes.length; i++) { //check if any two out_nodes are connected
+        for (let j = 0; j < out_nodes.length; j++) {
             if ((instance.getConnections({ source: out_nodes[i], target: out_nodes[j] })[0] != undefined) || (instance.getConnections({ source: out_nodes[j], target: out_nodes[i] })[0] != undefined)) {
                 MyCounter = MyCounter + 1; //counter will overshoot resulting in false
             }
@@ -339,7 +340,7 @@ function check_delta() { //check delta config
         return true;
     }
 
-    else{
+    else {
         return false;
     }
 }
@@ -348,10 +349,10 @@ function check_star() { //check star config
 
     let in_nodes = [];
 
-    for(let i=0; i<config_nodes.length; i++){
-        in_nodes[i]=config_nodes[i];
+    for (let i = 0; i < config_nodes.length; i++) {
+        in_nodes[i] = config_nodes[i];
     }
-    
+
     let out_nodes = [];
 
     let MyCounter = 0;
@@ -361,7 +362,7 @@ function check_star() { //check star config
         if (numOfConnections(config_nodes[i]) == 1) {
 
             if (connInNodes(config_nodes[i]) == 0) {
-                
+
                 let targetIndex = in_nodes.indexOf(config_nodes[i])
                 in_nodes.splice(targetIndex, 1);
 
@@ -375,7 +376,7 @@ function check_star() { //check star config
             console.log(SpecialNode)
 
             if (connInNodes(config_nodes[i]) == 0) {
-                
+
                 let targetIndex = in_nodes.indexOf(config_nodes[i])
                 in_nodes.splice(targetIndex, 1);
 
@@ -392,7 +393,7 @@ function check_star() { //check star config
         }
     }
 
-    if ((MyCounter == 0)&&(in_nodes.length == 3)&&(out_nodes.length == 3)) { //no connections in in_nodes and out_nodes
+    if ((MyCounter == 0) && (in_nodes.length == 3) && (out_nodes.length == 3)) { //no connections in in_nodes and out_nodes
         let indexes = [1, 2, 4]
 
         let index_tracker = 0; //checking connections between in_nodes
@@ -404,10 +405,10 @@ function check_star() { //check star config
             }
         }
 
-        if ((index_tracker/2 == 8) || (index_tracker/2 == 11) || (index_tracker/2 == 9) || (index_tracker/2 == 14)) {
+        if ((index_tracker / 2 == 8) || (index_tracker / 2 == 11) || (index_tracker / 2 == 9) || (index_tracker / 2 == 14)) {
             return true;
         }
-        else{
+        else {
             console.log(index_tracker)
             return false;
         }
@@ -417,9 +418,9 @@ function check_star() { //check star config
 function check_basic_loads() { //checks if main circuit is connected to nodes returns true only if those nodes are connected to some load nodes
 
     if ((connInNodes(WL1) == 1) && (connInNodes(WL2) == 1)) {
-        if((instance.getConnections({ source: SpecialNode, target: WV1 })[0] != undefined) || (instance.getConnections({ source: WV1, target: SpecialNode })[0] != undefined)){
-            if((instance.getConnections({ source: SpecialNode, target: WV2 })[0] != undefined) || (instance.getConnections({ source: WV2, target: SpecialNode })[0] != undefined))
-            return true;
+        if ((instance.getConnections({ source: SpecialNode, target: WV1 })[0] != undefined) || (instance.getConnections({ source: WV1, target: SpecialNode })[0] != undefined)) {
+            if ((instance.getConnections({ source: SpecialNode, target: WV2 })[0] != undefined) || (instance.getConnections({ source: WV2, target: SpecialNode })[0] != undefined))
+                return true;
         }
     }
 }
@@ -492,81 +493,85 @@ check.onclick = function giveResult() {
             connArrnagment = 2
             MCB.disabled = false
         }
-        else{
+        else {
             window.alert("Invalid Connections!")
         }
     }
-    else if(instance.getAllConnections().length == 0){
+    else if (instance.getAllConnections().length == 0) {
         window.alert("Please make connections")
     }
-    else{
+    else {
         window.alert("Invalid Connections!")
         window.location.reload();
     }
+    SpecialNode = undefined;
+    connHistory.push(connArrnagment)
 }
 
-reset.onclick = function removeLoadConnections(){
+reset.onclick = function resetExp() {
     window.location.reload();
 }
 
-MCB.onclick = function toggle_MCB(){
+MCB.onclick = function toggle_MCB() {
     flags4 = 1
-    if(MCB_state == 0){
-        MCB_state = 1;
+    if (MCB_state == 1) {
+        MCB_state = 0;
         MCB_image.src = "../Assets/MCB_Off.png"
         MCB.style.transform = "translate(0px, 0px)"
-        VoltageSlider.disabled=true
+        VoltageSlider = 0
+        trigger()
     }
-    else if(MCB_state == 1){
-        MCB_state = 0;
+    else if (MCB_state == 0) {
+        MCB_state = 1;
         MCB_image.src = "../Assets/MCB_ON.png"
         MCB.style.transform = "translate(0px, -60px)"
-        VoltageSlider.disabled=false
+        VoltageSlider = 408
+        trigger();
     }
 }
 
-VoltageSlider.oninput = function(){
-    flags5=1
+function trigger() {
+    flags5 = 1
     add.disabled = false
     updateMeters();
 }
 
-function updateMeters(){
-    if(connArrnagment==1){
-        rotateNeedle(PointerVoltmeter, VoltageSlider.value*(180/408));
-        
-        current = VoltageSlider.value*(0.5/408)
-        rotateNeedle(PointerAmmeter, current*(180/10))
+function updateMeters() {
+    if (connArrnagment == 1) {
+        rotateNeedle(PointerVoltmeter, VoltageSlider * (180 / 408));
 
-        power1 = VoltageSlider.value*(180/408)
-        rotateNeedle(PointerWatt1, power1*(90/600))
+        current = VoltageSlider * (0.5 / 408)
+        rotateNeedle(PointerAmmeter, current * (180 / 10))
 
-        power2 = VoltageSlider.value*(180/408)
-        rotateNeedle(PointerWatt2, power2*(90/600))
+        power1 = VoltageSlider * (180 / 408)
+        rotateNeedle(PointerWatt1, power1 * (90 / 600))
+
+        power2 = VoltageSlider * (180 / 408)
+        rotateNeedle(PointerWatt2, power2 * (90 / 600))
     }
 
-    else if(connArrnagment==2){
-        rotateNeedle(PointerVoltmeter, VoltageSlider.value*(108/408));
-        
-        current = VoltageSlider.value*(1.2/408)
-        rotateNeedle(PointerAmmeter, current*(180/10))
+    else if (connArrnagment == 2) {
+        rotateNeedle(PointerVoltmeter, VoltageSlider * (108 / 408));
 
-        power1 = VoltageSlider.value*(520/408)
-        rotateNeedle(PointerWatt1, power1*(90/600))
+        current = VoltageSlider * (1.2 / 408)
+        rotateNeedle(PointerAmmeter, current * (180 / 10))
 
-        power2 = VoltageSlider.value*(320/408)
-        rotateNeedle(PointerWatt2, power2*(90/600))
+        power1 = VoltageSlider * (520 / 408)
+        rotateNeedle(PointerWatt1, power1 * (90 / 600))
+
+        power2 = VoltageSlider * (320 / 408)
+        rotateNeedle(PointerWatt2, power2 * (90 / 600))
     }
 }
 
-function rotateNeedle(needle, angle){
-    needle.style.transform = "rotate("+ angle +"deg)"
+function rotateNeedle(needle, angle) {
+    needle.style.transform = "rotate(" + angle + "deg)"
 }
 
-add.onclick = function addToTable(){
-    
+add.onclick = function addToTable() {
+
     updateMeters();
-    let row = ObsTable.insertRow(index+1);
+    let row = ObsTable.insertRow(index + 1);
 
     index = index + 1
 
@@ -579,55 +584,60 @@ add.onclick = function addToTable(){
     let pow = row.insertCell(6);
 
     SNo.innerHTML = index
-    volt.innerHTML = VoltageSlider.value
+    volt.innerHTML = VoltageSlider
     curnt.innerHTML = current.toFixed(2)
     pow1.innerHTML = power1.toFixed(2)
     pow2.innerHTML = power2.toFixed(2)
     pow.innerHTML = parseFloat(power1.toFixed(2)) + parseFloat(power2.toFixed(2))
 
-    if(connArrnagment == 2){
+    if (connArrnagment == 2) {
         load.innerHTML = "Star"
     }
-    else if(connArrnagment == 1){
+    else if (connArrnagment == 1) {
         load.innerHTML = "Delta"
     }
 
-    if((connHistory.indexOf(1)>=0) && (connHistory.indexOf(2)>=0) && (connHistory.length >=2)){
-        calculate.disabled = false
+    if ((connHistory.indexOf(1) >= 0) && (connHistory.indexOf(2) >= 0)) {
+        document.getElementById("verify1").disabled = false
+        document.getElementById("verify2").disabled = false
     }
 
-    VoltageSlider.value = 0
+    VoltageSlider = 0
 
+    MCB_state = 0;
+    MCB_image.src = "../Assets/MCB_Off.png"
+    MCB.style.transform = "translate(0px, 0px)"
+    trigger()
     add.disabled = true;
 }
 
-function disconnect(num){
-    let nodes_list = [MCB_Red, MCB_Yel, MCB_Blu, VoltmeterPositive, VoltmeterNegative, AmmeterPositive, AmmeterNegative, WV1, WL1, WM1, WC1, WV2, WL2, WM2, WC2, A0, A1, B0, B1, C0, C1] 
+function disconnect(num) {
+    let nodes_list = [MCB_Red, MCB_Yel, MCB_Blu, VoltmeterPositive, VoltmeterNegative, AmmeterPositive, AmmeterNegative, WV1, WL1, WM1, WC1, WV2, WL2, WM2, WC2, A0, A1, B0, B1, C0, C1]
     instance.deleteConnectionsForElement(nodes_list[num])
 }
 
-calculate.onclick = function doCalc(){
-    if((VLDelta.value=='') || (ILDelta.value=='') || (cosDelta.value=='') || (VLStar.value=='') || (ILStar.value=='') || (cosStar.value=='')){
-        window.alert("Please input values first!")
+function multiplyStar() {
+    var num1 = 1.732;
+    var num2 = document.getElementById('VLStar').value;
+    var num3 = document.getElementById('ILStar').value;
+    var num4 = document.getElementById('cosStar').value;
 
-        window.scrollTo({
-            top: 750,
-            left: 0,
-            behavior: 'smooth'
-        });
-    }
-    else{
+    var myResult = num1 * num2 * num3 * num4;
 
-        window.scrollTo({
-            top: 750,
-            left: 0,
-            behavior: 'smooth'
-        });
-        
-        powDelta.value = parseFloat(VLDelta.value)*parseFloat(ILDelta.value)
-        powStar.value = parseFloat(VLStar.value)*parseFloat(ILStar.value)
-    }
-    console.log("testok")
+    document.getElementById('powStar').value = myResult.toFixed(2);
+}
+
+function multiplyDelta() {
+
+    var num1 = 1.732;
+
+    var num2 = document.getElementById('VLDelta').value;
+    var num3 = document.getElementById('ILDelta').value;
+    var num4 = document.getElementById('cosDelta').value;
+
+    var myResult = num1 * num2 * num3 * num4;
+
+    document.getElementById('powDelta').value = myResult.toFixed(2);
 }
 
 function highlight() {
@@ -653,7 +663,7 @@ function highlight() {
         s4.style.color = "red";
     }
 
-    if ((flags4 == 1) && (connArrnagment==2)) {
+    if ((flags4 == 1) && (connArrnagment == 2)) {
         s1.style.color = "black";
         s2.style.color = "black";
         s3.style.color = "black";
@@ -661,7 +671,7 @@ function highlight() {
         s5.style.color = "red";
     }
 
-    if ((flags5 == 1) && connArrnagment ==1) {
+    if ((flags5 == 1) && connArrnagment == 1) {
         s1.style.color = "black";
         s2.style.color = "black";
         s3.style.color = "black";
@@ -680,7 +690,7 @@ function highlight() {
         s7.style.color = "red";
     }
 
-    if ((MCB_state == 1) && (connArrnagment==1)) {
+    if ((MCB_state == 1) && (connArrnagment == 1)) {
         s1.style.color = "black";
         s2.style.color = "black";
         s3.style.color = "black";
