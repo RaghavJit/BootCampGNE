@@ -30,6 +30,7 @@ AmmeterNegative = document.getElementById("n_a")
 
 var StarterNodeEmpty;
 var MotorNodeEmpty;
+var countRotations = 0
 
 const instance = jsPlumb.getInstance({
     container: cont
@@ -292,11 +293,12 @@ check.onclick = function checkConn() {
 }
 
 var allow = 0
+var speed = 0
 
 function RotateRotor(i) {
     setTimeout(function () {
         rotor.style.transform = "rotate(" + i + "deg)"
-    }, 2 * i);
+    }, speed * i);
 }
 
 function callRotate() {
@@ -305,18 +307,23 @@ function callRotate() {
     }
 }
 
-function test(i) {
+function RepeatRotate(i) {
     setTimeout(function () {
         if(allow == 1){
             callRotate();
         }
-    }, 720 * i);
+    }, speed * 360 * i);
 }
 
-function calltest() {
-
-    for (var i = 0; i < 65536; i++) {
-        test(i);
+function callRepeat() {
+    for (countRotations = 0; countRotations < 5; countRotations++) {
+        RepeatRotate(countRotations);
     }
 }
 
+function RefreshCount(){
+    countRotations = 0
+    callRepeat()
+}
+
+window.setInterval(RefreshCount, speed * 5 * 360)
