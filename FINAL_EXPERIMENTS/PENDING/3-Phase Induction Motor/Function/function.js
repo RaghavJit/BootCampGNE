@@ -2,6 +2,8 @@ cont = document.getElementById("container")
 
 check = document.getElementById("check")
 
+MCB_image = document.getElementById("M")
+MCB = document.getElementById("on_power")
 MCB_Blue = document.getElementById("mcb_b")
 MCB_Yellow = document.getElementById("mcb_y")
 MCB_Red = document.getElementById("mcb_r")
@@ -28,9 +30,16 @@ VoltmeterNegative = document.getElementById("n_v")
 AmmeterPositive = document.getElementById("p_a")
 AmmeterNegative = document.getElementById("n_a")
 
+w1 = document.getElementById("w1_motor")
+w2 = document.getElementById("w2_motor")
+
 var StarterNodeEmpty;
 var MotorNodeEmpty;
 var countRotations = 0
+
+var MCB_state = 0
+
+var Torque = 0;
 
 const instance = jsPlumb.getInstance({
     container: cont
@@ -282,48 +291,68 @@ function StrayNode() {
     }
 }
 
+function calculateTorque(){
+    Torque = 9.81*(parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
+}
+
 check.onclick = function checkConn() {
     if (MCBToStarter() && StarterToMotor()) {
         if (EmptyCheck(StarterNodeEmpty, MotorNodeEmpty)) {
             if (StrayNode()) {
                 window.alert("Right Connections!")
+
+                MCB.disabled = false;
             }
         }
     }
 }
 
-var allow = 0
-var speed = 0
+function disconnect(num) {
+    let nodes_list = [MCB_Red, MCB_Blue, MCB_Yellow, StarterInRed, StarterInBlu, StarterInYel, StarterOutRed, StarterOutBlu, StarterOutYel, VoltmeterPositive, VoltmeterNegative, AmmeterPositive, AmmeterNegative, MotorInRed, MotorInYel, MotorInBlu]
+    instance.deleteConnectionsForElement(nodes_list[num])
+}
 
-function RotateRotor(i) {
+MCB.onclick = function toggle_MCB() {
+    console.log("working")
+
+    if (MCB_state == 1) {
+        MCB_state = 0;
+        MCB_image.src = "../Assets/MCB_Off.png"
+        MCB.style.transform = "translate(0px, 0px)"
+    }
+    else if (MCB_state == 0) {
+        MCB_state = 1;
+        MCB_image.src = "../Assets/MCB_ON.png"
+        MCB.style.transform = "translate(0px, -50px)"
+    }
+}
+
+var allow = 0
+var speed = 10
+var interval
+
+function setSpeed(value){
+    speed = value
+    window.clearInterval(interval)
+    runMotor()
+    interval = window.setInterval(runMotor, 360*speed)
+}
+
+function RotateRotor(countRotations) {
     setTimeout(function () {
-        rotor.style.transform = "rotate(" + i + "deg)"
-    }, speed * i);
+        rotor.style.transform = "rotate(" + countRotations + "deg)"
+    }, speed * countRotations);
 }
 
 function callRotate() {
-    for (let i = 0; i < 360; i++) {
-        RotateRotor(i);
+    for (let countRotations = rotor.style.transform; countRotations < 360; countRotations++) {
+        RotateRotor(countRotations);
+    }
+    console.log("called")
+}
+
+function runMotor(){
+    if(allow == 1){
+        callRotate();
     }
 }
-
-function RepeatRotate(i) {
-    setTimeout(function () {
-        if(allow == 1){
-            callRotate();
-        }
-    }, speed * 360 * i);
-}
-
-function callRepeat() {
-    for (countRotations = 0; countRotations < 5; countRotations++) {
-        RepeatRotate(countRotations);
-    }
-}
-
-function RefreshCount(){
-    countRotations = 0
-    callRepeat()
-}
-
-window.setInterval(RefreshCount, speed * 5 * 360)

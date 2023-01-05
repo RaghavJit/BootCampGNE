@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POWER CONSUMED BY THREE PHASE RESISTIVE LOAD BY 3 WATTMETER METHOD</title>
+    <title>EXPERIMENT</title>
     <link rel="stylesheet" href="../Style/style.css">
     <link href="http://fonts.cdnfonts.com/css/zacbel-x" rel="stylesheet">
     <link href="http://fonts.cdnfonts.com/css/foco-trial" rel="stylesheet">
@@ -91,7 +91,7 @@
                     <p>ACTION BUTTONS</p>
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
-                        <button id="add">ADD</button>
+                        <button id="add" disabled="true">ADD</button>
                         <button id="calculate" disabled="true">CALCULATE</button>
                         <button id="reset">RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
@@ -101,7 +101,7 @@
                 <!--Row 2 Col 1 Row1-->
 
                 <div class="formulas">
-                    <p>TEMPLATE-TEXT - Sample sliders</p>
+                    <p>SLIDERS</p>
 
                     <!-- <input type="range" min="100" max="300" step="1" value="100" id="Rls">
                     <label for="Rls">Voltage</label> -->
@@ -116,7 +116,7 @@
 
                 <!--Row 2 Col 1 Row2-->
                 <div class="o_table">
-                    <p>TABLE</p>
+                    <p>OBSERVATION TABLE</p>
                     <div class="table">
                         <!--TABLE TO BE DISPLAYED HERE-->
                         <table id="valTable">
@@ -127,8 +127,7 @@
                                 <th>Il(A)</th>
                                 <th>W1(W)</th>
                                 <th>W2(W)</th>
-                                <th>W = W1 + W2</th>
-                                <th>P = &#8730;3.Vl.Il.cos(&#981;) </th>
+                               
                             </tr>
 
                         </table>
@@ -149,24 +148,24 @@
 
                         <div class="mcb">
                             <img src="../Assets/MCB_Off.png" id="M" height="120" width="100" alt="">
-                            <button id="on_power"></button>
-                            <button id = "mcb_r"><label id = "label1">1</label></button>
-                            <button id = "mcb_b"><label id = "label2">2</label></button>
-                            <button id = "mcb_y"><label id = "label3">3</label></button>
+                            <button id="on_power" disabled="true"></button>
+                            <button id = "mcb_r"><label id = "label1" onclick="disconnect(0)">1</label></button>
+                            <button id = "mcb_b"><label id = "label2" onclick="disconnect(1)">2</label></button>
+                            <button id = "mcb_y"><label id = "label3" onclick="disconnect(2)">3</label></button>
                         </div>
 
 
 
                         <div class="motor-starter">
-                            <button id="i_r"><label id = "label4">4</label></button>
-                            <button id="i_b"><label id = "label5">5</label></button>
-                            <button id="i_y"><label id = "label6">6</label></button>
+                            <button id="i_r"><label id = "label4" onclick="disconnect(3)">4</label></button>
+                            <button id="i_b"><label id = "label5" onclick="disconnect(4)">5</label></button>
+                            <button id="i_y"><label id = "label6" onclick="disconnect(5)">6</label></button>
 
                             <img src="../Assets/motor-starter.png" id="starter" height="250" width="250" alt="">
 
-                            <button id="o_r"><label id = "label7">7</label></button>
-                            <button id="o_b"><label id = "label8">8</label></button>
-                            <button id="o_y"><label id = "label9">9</label></button>
+                            <button id="o_r"><label id = "label7" onclick="disconnect(6)">7</label></button>
+                            <button id="o_b"><label id = "label8" onclick="disconnect(7)">8</label></button>
+                            <button id="o_y"><label id = "label9" onclick="disconnect(8)">9</label></button>
 
 
                         </div>
@@ -174,8 +173,8 @@
                         <div class="voltmeter">
                             <img src="../Assets/V1.png" id="V" height="180" width="180" alt="">
                             <img src="../Assets/Pointer.png" height="11" width="44" id="P_V" alt="">
-                            <button id="p_v"><label id = "label10">10</label></button>
-                            <button id="n_v"><label id = "label11">11</label></button>
+                            <button id="p_v"><label id = "label10" onclick="disconnect(9)">10</label></button>
+                            <button id="n_v"><label id = "label11" onclick="disconnect(10)">11</label></button>
 
                         </div>
 
@@ -184,8 +183,8 @@
                         <div class="ammeter">
                             <img src="../Assets/A1.png" id="A" height="180" width="180" alt="">
                             <img src="../Assets/Pointer.png" height="11" width="44" id="P_A" alt="">
-                            <button id="p_a"><label id = "label12">12</label></button>
-                            <button id="n_a"><label id = "label13">13</label></button>
+                            <button id="p_a"><label id = "label12" onclick="disconnect(11)">12</label></button>
+                            <button id="n_a"><label id = "label13" onclick="disconnect(12)">13</label></button>
 
                         </div>
                         <!--------------------------------------------------------->
@@ -202,9 +201,9 @@
                         </div>
                         <div class="motor-view">
                             <p>MOTOR VIEW</p>
-                            <button id = "motor-1"><label id = "label14">14</label></button>
-                            <button id = "motor-2"><label id = "label15">15</label></button>
-                            <button id = "motor-3"><label id = "label16">16</label></button>
+                            <button id = "motor-1"><label id = "label14" onclick="disconnect(13)">14</label></button>
+                            <button id = "motor-2"><label id = "label15" onclick="disconnect(14)">15</label></button>
+                            <button id = "motor-3"><label id = "label16" onclick="disconnect(15)">16</label></button>
                             <br>
                             <!-- <button id = "motor-4"></button>
                             <button id = "motor-5"></button>
