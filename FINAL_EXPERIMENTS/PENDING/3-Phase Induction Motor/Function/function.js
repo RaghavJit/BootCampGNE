@@ -1,6 +1,7 @@
 cont = document.getElementById("container")
 
 check = document.getElementById("check")
+add = document.getElementById("add")
 
 MCB_image = document.getElementById("M")
 MCB = document.getElementById("on_power")
@@ -30,6 +31,8 @@ VoltmeterNegative = document.getElementById("n_v")
 AmmeterPositive = document.getElementById("p_a")
 AmmeterNegative = document.getElementById("n_a")
 
+vtable =document.getElementById("valTable")
+
 w1 = document.getElementById("w1_motor")
 w2 = document.getElementById("w2_motor")
 
@@ -40,6 +43,10 @@ var countRotations = 0
 var MCB_state = 0
 
 var Torque = 0;
+
+var SpeedList = []
+var TorqueList = []
+var index = 1
 
 const instance = jsPlumb.getInstance({
     container: cont
@@ -173,7 +180,7 @@ function MCBToStarter() {
 
 function StarterToMotor() {
     let Starter_nodes = [StarterOutBlu, StarterOutRed, StarterOutYel]
-    let MotorInNodes = [MotorInBlu, MotorInRed, MotorInYel]
+    let MotorInNodes = [MotorInRed, MotorInYel, MotorInBlu ]
     let counter = 0;
     let motor_connected_r = 0;
     let motor_connected_b = 0;
@@ -292,7 +299,7 @@ function StrayNode() {
 }
 
 function calculateTorque(){
-    Torque = 9.81*(parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
+    Torque = 9.81 * (parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
 }
 
 check.onclick = function checkConn() {
@@ -330,6 +337,33 @@ MCB.onclick = function toggle_MCB() {
 var allow = 0
 var speed = 10
 var interval
+
+add.onclick = function AddToTable(){
+    calculateTorque()
+    var torque = Torque;
+    var speed = 1491.03 - (29.132*torque)
+
+    console.log(torque)
+    console.log(speed)
+    let row = vtable.insertRow(index);
+
+    let Sno = row.insertCell(0)
+    let w1Val = row.insertCell(1)
+    let w2Val = row.insertCell(2)
+    let tqVal = row.insertCell(3)
+    let spVal = row.insertCell(4)
+
+    Sno.innerHTML = index
+    w1Val.innerHTML = w1.value
+    w2Val.innerHTML = w2.value
+    tqVal.innerHTML = torque
+    spVal.innerHTML = speed
+
+    TorqueList.push(torque)
+    SpeedList.push(speed)
+
+    index = index + 1
+}
 
 function setSpeed(value){
     speed = value
