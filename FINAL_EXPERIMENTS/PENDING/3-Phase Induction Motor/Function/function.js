@@ -2,6 +2,7 @@ cont = document.getElementById("container")
 
 check = document.getElementById("check")
 add = document.getElementById("add")
+plot = document.getElementById("plot")
 
 MCB_image = document.getElementById("M")
 MCB = document.getElementById("on_power")
@@ -31,13 +32,14 @@ VoltmeterNegative = document.getElementById("n_v")
 AmmeterPositive = document.getElementById("p_a")
 AmmeterNegative = document.getElementById("n_a")
 
-vtable =document.getElementById("valTable")
+vtable = document.getElementById("valTable")
 
 w1 = document.getElementById("w1_motor")
 w2 = document.getElementById("w2_motor")
 
 var StarterNodeEmpty;
 var MotorNodeEmpty;
+
 var countRotations = 0
 
 var MCB_state = 0
@@ -180,7 +182,7 @@ function MCBToStarter() {
 
 function StarterToMotor() {
     let Starter_nodes = [StarterOutBlu, StarterOutRed, StarterOutYel]
-    let MotorInNodes = [MotorInRed, MotorInYel, MotorInBlu ]
+    let MotorInNodes = [MotorInRed, MotorInYel, MotorInBlu]
     let counter = 0;
     let motor_connected_r = 0;
     let motor_connected_b = 0;
@@ -194,16 +196,19 @@ function StarterToMotor() {
                 starter_connected = starter_connected + 1;
                 switch (j) {
                     case 0:
-                        motor_connected_b = motor_connected_b + 1
+                        motor_connected_r = motor_connected_r + 1
+                        console.log(motor_connected_r)
                         break;
                     case 1:
-                        motor_connected_r = motor_connected_r + 1
+                        motor_connected_y = motor_connected_y + 1
+                        console.log(motor_connected_y)
                         break;
                     case 2:
-                        motor_connected_y = motor_connected_y + 1
+                        motor_connected_b = motor_connected_b + 1
+                        console.log(motor_connected_b)
                         break;
                 }
-                MotorInNodes.splice(MotorInNodes.indexOf(MotorInNodes[j]), 1)
+                // MotorInNodes.splice(MotorInNodes.indexOf(MotorInNodes[j]), 1)
                 break;
             }
         }
@@ -254,52 +259,79 @@ function StarterToMotor() {
     }
 }*/
 
-function EmptyCheck(st_node, mt_node) {
-    if (isConnected(st_node, VoltmeterPositive)) {
-        if (isConnected(st_node, AmmeterPositive)) {
-            if (isConnected(mt_node, AmmeterNegative)) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
-    }
-    else {
-        return false;
-    }
-}
+// function EmptyCheck(st_node, mt_node) {
+//     if (isConnected(st_node, VoltmeterPositive)) {
+//         if (isConnected(st_node, AmmeterPositive)) {
+//             if (isConnected(mt_node, AmmeterNegative)) {
+//                 return true;
+//             }
+//             else {
+//                 return false;
+//             }
+//         }
+//         else {
+//             return false;
+//         }
+//     }
+//     else {
+//         return false;
+//     }
+// }
 
-function StrayNode() {
-    let node_list = [StarterOutBlu, StarterOutRed, StarterOutYel, MotorInBlu, MotorInRed, MotorInYel]
-    let counter = 0;
-    node_list.splice(node_list.indexOf(StarterNodeEmpty), 1)
-    node_list.splice(node_list.indexOf(MotorNodeEmpty), 1)
+// function StrayNode() {
+//     let node_list = [StarterOutBlu, StarterOutRed, StarterOutYel, MotorInBlu, MotorInRed, MotorInYel]
+//     let counter = 0;
+//     node_list.splice(node_list.indexOf(StarterNodeEmpty), 1)
+//     node_list.splice(node_list.indexOf(MotorNodeEmpty), 1)
 
-    for (let i = 0; i < node_list.length; i++) {
-        if (isConnected(node_list[i], VoltmeterNegative)) {
-            counter = counter + 1
-        }
-    }
+//     for (let i = 0; i < node_list.length; i++) {
+//         if (isConnected(node_list[i], VoltmeterNegative)) {
+//             counter = counter + 1
+//         }
+//     }
 
-    if (counter == 1) {
-        if (instance.getConnections({ source: VoltmeterNegative }).length == 1) {
+//     if (counter == 1) {
+//         if (instance.getConnections({ source: VoltmeterNegative }).length == 1) {
+//             return true
+//         }
+//         else {
+//             return false
+//         }
+//     }
+//     else {
+//         return false
+//     }
+// }
+
+function checkVoltmeter() {
+    let connected 
+    let unconnected 
+    let strt_nodes = [StarterOutBlu, StarterOutRed, StarterOutYel]
+
+    if (isConnected(StarterNodeEmpty, VoltmeterPositive)) {
+        connected = VoltmeterPositive
+        unconnected = VoltmeterNegative
+        strt_nodes.splice(strt_nodes.indexOf(VoltmeterPositive), 1)
+        console.log(strt_nodes)
+        if (isConnected(unconnected, strt_nodes[0]) || isConnected(unconnected, strt_nodes[1])) {
             return true
         }
-        else {
-            return false
+    }
+
+    else if (isConnected(StarterNodeEmpty, VoltmeterNegative)) {
+        connected = VoltmeterNegative
+        unconnected = VoltmeterPositive
+        strt_nodes.splice(strt_nodes.indexOf(VoltmeterNegative), 1)
+        console.log(strt_nodes)
+        if (isConnected(unconnected, strt_nodes[0]) || isConnected(unconnected, strt_nodes[1])) {
+            return true
         }
     }
-    else {
-        return false
-    }
+
 }
 
-function calculateTorque(){
-    Torque = 9.81 * (parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
+function checkAmmeter() {
+
 }
 
 check.onclick = function checkConn() {
@@ -312,6 +344,10 @@ check.onclick = function checkConn() {
             }
         }
     }
+}
+
+function calculateTorque() {
+    Torque = 9.81 * Math.abs(parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
 }
 
 function disconnect(num) {
@@ -334,14 +370,10 @@ MCB.onclick = function toggle_MCB() {
     }
 }
 
-var allow = 0
-var speed = 10
-var interval
-
-add.onclick = function AddToTable(){
+add.onclick = function AddToTable() {
     calculateTorque()
     var torque = Torque;
-    var speed = 1491.03 - (29.132*torque)
+    var speed = 1491.03 - (29.132 * torque)
 
     console.log(torque)
     console.log(speed)
@@ -365,11 +397,65 @@ add.onclick = function AddToTable(){
     index = index + 1
 }
 
-function setSpeed(value){
+plot.onclick = function plotGraph() {
+    var temp1 = document.getElementById("plotContiner")
+    var temp2 = temp1.innerHTML
+    temp1.innerHTML = temp2
+
+    window.scrollTo({
+        top: 750,
+        left: 0,
+        behavior: 'smooth'
+    });
+
+    new Chart("myPlot", {
+        type: "line",
+        data: {
+            labels: TorqueList,
+            datasets: [{
+                label: "MOTOR",
+                fill: false,
+                lineTension: 0.8,
+                borderColor: "blue",
+                data: SpeedList
+            }]
+        },
+
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Speed"
+                    }
+                },
+                x: {
+                    beginAtZero: true,
+                    type: "linear",
+                    title: {
+                        display: true,
+                        text: "Torque"
+                    }
+                }
+            }
+        }
+    });
+}
+
+var allow = 0
+var speed = 10
+var interval
+
+function getAngle() {
+    return parseInt((rotor.style.transform).slice(7, (rotor.style.transform).indexOf('d')))
+}
+
+function setSpeed(value) {
     speed = value
     window.clearInterval(interval)
-    runMotor()
-    interval = window.setInterval(runMotor, 360*speed)
+    setMotor()
+    interval = window.setInterval(runMotor, 360 * speed)
 }
 
 function RotateRotor(countRotations) {
@@ -379,14 +465,27 @@ function RotateRotor(countRotations) {
 }
 
 function callRotate() {
-    for (let countRotations = rotor.style.transform; countRotations < 360; countRotations++) {
+    for (let countRotations = 0; countRotations < 360; countRotations++) {
         RotateRotor(countRotations);
     }
     console.log("called")
 }
 
-function runMotor(){
-    if(allow == 1){
+function runMotor() {
+    if (allow == 1) {
+        callRotate();
+    }
+}
+
+function setcallRotate() {
+    for (let countRotations = getAngle(); countRotations < 360; countRotations++) {
+        RotateRotor(countRotations);
+    }
+    console.log("called")
+}
+
+function setMotor() {
+    if (allow == 1) {
         callRotate();
     }
 }
