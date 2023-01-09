@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EXPERIMENT</title>
     <link rel="stylesheet" href="../Style/style.css">
-    <link href="http://fonts.cdnfonts.com/css/zacbel-x" rel="stylesheet">
-    <link href="http://fonts.cdnfonts.com/css/foco-trial" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/round-slider/dist/roundslider.min.js"></script>
+    <link href="../CDN_folder/Font(zacbel-x).css" rel="stylesheet">
+    <link href="../CDN_folder/Font(foco-trial).css" rel="stylesheet">
+    <link href="../CDN_folder/SevenSegmentFont.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@firestitch/jsplumb@2.12.0/dist/js/jsplumb.min.js"></script>
+    <script src="../CDN_folder/ChartCDN.js"></script>
 
 </head>
 
@@ -66,7 +67,7 @@
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="calculate" disabled="true">CALCULATE</button>
+                        <button id="plot" disabled="true">PLOT</button>
                         <button id="reset">RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
@@ -193,7 +194,7 @@
                             <input type="number" id = "w1_motor"></input>
                             <input type="number" id = "w2_motor"></input>
                             <img src="../Assets/2.png" alt="" height="270" width ="270" id = "rotor1">
-                            <img src="../Assets/1.png" alt="" height="270" width ="270" id = "rotor2">
+                            <img src="../Assets/1.png" alt="" height="270" width ="270" id = "rotor2" style="transform: rotate(0deg);">
 
 
 
@@ -216,20 +217,15 @@
 
 
         <div class="r3">
-            <div class="calculation">
-                <p>CALCULATIONS</p>
-
-                <input type="text" id="VthC">
-                <input type="text" id="RthC">
-                <input type="text" id="RlC">
-                <input type="text" id="numerator">
-                <input type="text" id="denominator1">
-                <input type="text" id="denominator2">
-                <input type="text" id="IlC">
-                <input type="text" id="IlC_calc">
-                <input type="text" id="IlC_obsv">
-            </div>
-            <div class="calc_output"></div>
+            <div class="graph" id="plotContiner">
+                <div class="graph-heading">
+                    <p>GRAPH</p>
+                    </div>
+                    <div class="chart-container">
+                    <canvas id="myPlot" class="MyCanvas" height = "150" width = "450">
+    
+                    </canvas>
+                    </div>
 
         </div>
 

@@ -563,6 +563,7 @@ left:110px;
     border: 1px solid black;
     border-radius: 25px;
     overflow: hidden;
+    transform: rotate(0deg);
 }
 
 .rotor-view p {
@@ -601,10 +602,12 @@ left:110px;
 #rotor1{
     position: relative;
     bottom:24.0px;
+    transform: rotate(0deg);
 }
 #rotor2{
     position: relative;
     bottom:264px;
+    transform: rotate(0deg);
     transform-origin: 50% 63.5%;
 }
 
