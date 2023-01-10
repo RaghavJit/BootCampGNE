@@ -13,11 +13,11 @@ MCB_Red = document.getElementById("mcb_r")
 rotor = document.getElementById("rotor2")
 
 StarterInRed = document.getElementById("i_r")
-StarterInYel = document.getElementById("i_b")
-StarterInBlu = document.getElementById("i_y")
+StarterInYel = document.getElementById("i_y")
+StarterInBlu = document.getElementById("i_b")
 StarterOutRed = document.getElementById("o_r")
-StarterOutYel = document.getElementById("o_b")
-StarterOutBlu = document.getElementById("o_y")
+StarterOutYel = document.getElementById("o_y")
+StarterOutBlu = document.getElementById("o_b")
 
 MotorInRed = document.getElementById("motor-1")
 MotorInYel = document.getElementById("motor-2")
@@ -28,9 +28,11 @@ MotorInBlu = document.getElementById("motor-3")
 
 VoltmeterPositive = document.getElementById("p_v")
 VoltmeterNegative = document.getElementById("n_v")
+VoltmeterNeedle = document.getElementById("P_V")
 
 AmmeterPositive = document.getElementById("p_a")
 AmmeterNegative = document.getElementById("n_a")
+AmmeterNeedle = document.getElementById("P_A")
 
 vtable = document.getElementById("valTable")
 
@@ -45,10 +47,27 @@ var countRotations = 0
 var MCB_state = 0
 
 var Torque = 0;
+var Current = 0;
+var MTSpeed = 0;
+var mtspeed = 0;
 
 var SpeedList = []
 var TorqueList = []
 var index = 1
+
+var s1 = document.getElementById("s1")
+var s2 = document.getElementById("s2")
+var s3 = document.getElementById("s3")
+var s4 = document.getElementById("s4")
+var s5 = document.getElementById("s5")
+var s6 = document.getElementById("s6")
+
+var flags2 = 0
+var flags3 = 0
+var flags4 = 0
+var flags5 = 0
+var flags6 = 0
+
 
 const instance = jsPlumb.getInstance({
     container: cont
@@ -112,7 +131,7 @@ instance.bind("ready", function () {
         maxConnections: 10
     })
 
-    instance.addEndpoint([StarterInBlu, StarterInRed, StarterInYel, StarterOutBlu, StarterOutRed, StarterOutYel, MotorInBlu, MotorInRed, MotorInYel, VoltmeterPositive, AmmeterPositive], {
+    instance.addEndpoint([StarterInBlu, StarterInRed, StarterInYel, StarterOutBlu, StarterOutRed, StarterOutYel, MotorInBlu, MotorInRed, MotorInYel], {
         endpoint: "Dot",
         anchor: ["Center"],
         isSource: true,
@@ -143,7 +162,20 @@ instance.bind("ready", function () {
         connectionsDetachable: true,
         connectionType: "blue",
         paintStyle: { fill: "rgb(97, 97, 229)", strokeWidth: 2.5 },
-        maxConnections: 10
+        maxConnections: 10,
+        connector: ["StateMachine", { curviness: -30 }]
+    })
+
+    instance.addEndpoint([VoltmeterPositive, AmmeterPositive], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        connectionsDetachable: true,
+        connectionType: "red",
+        paintStyle:  { fill: "rgb(229, 97, 97)", strokeWidth: 2.5 },
+        maxConnections: 10,
+        connector: ["StateMachine", { curviness: -30 }]
     })
 })
 
@@ -311,7 +343,7 @@ function checkVoltmeter() {
     if (isConnected(StarterNodeEmpty, VoltmeterPositive)) {
         connected = VoltmeterPositive
         unconnected = VoltmeterNegative
-        strt_nodes.splice(strt_nodes.indexOf(VoltmeterPositive), 1)
+        strt_nodes.splice(strt_nodes.indexOf(StarterNodeEmpty), 1)
         console.log(strt_nodes)
         if (isConnected(unconnected, strt_nodes[0]) || isConnected(unconnected, strt_nodes[1])) {
             return true
@@ -321,7 +353,7 @@ function checkVoltmeter() {
     else if (isConnected(StarterNodeEmpty, VoltmeterNegative)) {
         connected = VoltmeterNegative
         unconnected = VoltmeterPositive
-        strt_nodes.splice(strt_nodes.indexOf(VoltmeterNegative), 1)
+        strt_nodes.splice(strt_nodes.indexOf(StarterNodeEmpty), 1)
         console.log(strt_nodes)
         if (isConnected(unconnected, strt_nodes[0]) || isConnected(unconnected, strt_nodes[1])) {
             return true
@@ -331,28 +363,55 @@ function checkVoltmeter() {
 }
 
 function checkAmmeter() {
-
+    if((isConnected(StarterNodeEmpty, AmmeterNegative) && isConnected(MotorNodeEmpty, AmmeterPositive)) || (isConnected(StarterNodeEmpty, AmmeterPositive) && (isConnected(MotorNodeEmpty, AmmeterNegative)))){
+        return true
+    }
 }
 
 check.onclick = function checkConn() {
     if (MCBToStarter() && StarterToMotor()) {
-        if (EmptyCheck(StarterNodeEmpty, MotorNodeEmpty)) {
-            if (StrayNode()) {
-                window.alert("Right Connections!")
-
-                MCB.disabled = false;
-            }
+        if(checkAmmeter() && checkVoltmeter()){
+            window.alert("Right Connections!")
+            flags2=1
+            MCB.disabled=false
         }
     }
 }
 
 function calculateTorque() {
     Torque = 9.81 * Math.abs(parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
+    MTSpeed = 1491.03 - (29.132 * Torque)
 }
 
 function disconnect(num) {
     let nodes_list = [MCB_Red, MCB_Blue, MCB_Yellow, StarterInRed, StarterInBlu, StarterInYel, StarterOutRed, StarterOutBlu, StarterOutYel, VoltmeterPositive, VoltmeterNegative, AmmeterPositive, AmmeterNegative, MotorInRed, MotorInYel, MotorInBlu]
     instance.deleteConnectionsForElement(nodes_list[num])
+}
+
+function setMeters(){
+    VoltmeterNeedle.style.transform = "rotate(144deg)"
+    calculateTorque()
+
+    Current = (Torque+1.2754)/2.6065
+
+    AmmeterNeedle.style.transform = "rotate("+ Current*18 +"deg)"
+}
+
+function refresh(){
+    calculateTorque()
+    setMeters()
+
+    mtspeed =  20 - Math.abs(parseInt(w1.value) - parseInt(w2.value))
+    setSpeed(mtspeed)
+}
+
+w1.oninput = function (){
+    refresh()
+    flags4 = 1
+}
+w2.oninput = function (){
+    refresh()
+    flags4 = 1
 }
 
 MCB.onclick = function toggle_MCB() {
@@ -362,42 +421,57 @@ MCB.onclick = function toggle_MCB() {
         MCB_state = 0;
         MCB_image.src = "../Assets/MCB_Off.png"
         MCB.style.transform = "translate(0px, 0px)"
+        allow = 0
     }
     else if (MCB_state == 0) {
         MCB_state = 1;
         MCB_image.src = "../Assets/MCB_ON.png"
         MCB.style.transform = "translate(0px, -50px)"
+        add.disabled = false
+        setMeters()
+        allow = 1
+        flags3 = 1
     }
 }
 
 add.onclick = function AddToTable() {
     calculateTorque()
     var torque = Torque;
-    var speed = 1491.03 - (29.132 * torque)
+    var speed = MTSpeed
 
     console.log(torque)
     console.log(speed)
     let row = vtable.insertRow(index);
 
     let Sno = row.insertCell(0)
-    let w1Val = row.insertCell(1)
-    let w2Val = row.insertCell(2)
-    let tqVal = row.insertCell(3)
-    let spVal = row.insertCell(4)
+    let volt = row.insertCell(1)
+    let curr = row.insertCell(2)
+    let w1Val = row.insertCell(3)
+    let w2Val = row.insertCell(4)
+    let tqVal = row.insertCell(5)
+    let spVal = row.insertCell(6)
 
     Sno.innerHTML = index
+    volt.innerHTML = 400
+    setMeters()
+    curr.innerHTML = Current.toFixed(2)
     w1Val.innerHTML = w1.value
     w2Val.innerHTML = w2.value
-    tqVal.innerHTML = torque
-    spVal.innerHTML = speed
+    tqVal.innerHTML = torque.toFixed(2)
+    spVal.innerHTML = speed.toFixed(3)
 
     TorqueList.push(torque)
     SpeedList.push(speed)
 
     index = index + 1
+
+    if(index > 6){
+        plot.disabled = false
+    }
 }
 
 plot.onclick = function plotGraph() {
+    flags6 = 1
     var temp1 = document.getElementById("plotContiner")
     var temp2 = temp1.innerHTML
     temp1.innerHTML = temp2
@@ -446,6 +520,7 @@ plot.onclick = function plotGraph() {
 var allow = 0
 var speed = 10
 var interval
+var start
 
 function getAngle() {
     return parseInt((rotor.style.transform).slice(7, (rotor.style.transform).indexOf('d')))
@@ -454,7 +529,6 @@ function getAngle() {
 function setSpeed(value) {
     speed = value
     window.clearInterval(interval)
-    setMotor()
     interval = window.setInterval(runMotor, 360 * speed)
 }
 
@@ -477,15 +551,46 @@ function runMotor() {
     }
 }
 
-function setcallRotate() {
-    for (let countRotations = getAngle(); countRotations < 360; countRotations++) {
-        RotateRotor(countRotations);
+
+function highlight() {
+
+    let conn = instance.getConnections();
+
+    if (conn.length >= 1) {
+        s1.style.color = "black";
+        s2.style.color = "red";
+
     }
-    console.log("called")
+
+    if (flags2 == 1) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "red";
+    }
+
+    if (flags3 == 1) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "red";
+    }
+
+    if ((flags4 == 1)) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "black";
+        s5.style.color = "red";
+    }
+
+    if (flags6 == 1) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "black";
+        s5.style.color = "black";
+        s6.style.color = "red";
+    }
 }
 
-function setMotor() {
-    if (allow == 1) {
-        callRotate();
-    }
-}
+window.setInterval(highlight, 100);
