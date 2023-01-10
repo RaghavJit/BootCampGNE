@@ -29,21 +29,20 @@
                 <p>Instructions</p>
 
                 <ul class="steps">
-                    <li id="step1"><b>Step 1:</b> Make connections as per the instructions given below:</li>
+                    <li id="s1" style="color: red;"><b>Step 1:</b> Make connections as per the instructions given below:</li>
                         <ul>
                             <li>(1-4), (2-5), (3-6)</li>
                             <li>(7-10), (8-11)</li>
                             <li> (7-12), (13-14)</li>
                             <li>(8-15), (9-16)</li>
                         </ul>
-                    <li id="step2"><b>Step 2:</b> Check the connections by clicking on the ‘CHECK’ button. </li>
-                    <li id="step3"><b>Step 3:</b> Turn on the MCB </li>
-                    <li id="step4"><b>Step 4:</b> Vary the values of w1 and w2 to and add observations to table by clicking on 'ADD'. </li>
-                    <li id="step5"><b>Step 5:</b> Take atleast 6 reading in table. </li>
-                    <li id="step6"><b>Step 6:</b> Click on the ‘PLOT’ button to plot the graph. </li>
-                    <li id="step7"><b>Step 7:</b> Click on the ‘PRINT’ button to takeout the print of the webpage. </li>
-                    <li id="step8"><b>Step 8:</b> Click on 'PRINT' to take print out of experiment.</li>
-                    <li id="step9"><b>Step 9:</b> Click on 'RESET' to reset the experiment.</li>
+                    <li id="s2"><b>Step 2:</b> Check the connections by clicking on the ‘CHECK’ button. </li>
+                    <li id="s3"><b>Step 3:</b> Turn on the MCB </li>
+                    <li id="s4"><b>Step 4:</b> Vary the values of w1 and w2 to and add observations to table by clicking on 'ADD'. </li>
+                    <li id="s5"><b>Step 5:</b> Take atleast 6 reading in table. </li>
+                    <li id="s6"><b>Step 6:</b> Click on the ‘PLOT’ button to plot the graph. </li>
+                    <li id="s7"><b>Step 7:</b> Click on the ‘PRINT’ button to takeout the print of the webpage. </li>
+                    <li id="s8"><b>Step 8:</b> Click on 'RESET' to reset the experiment.</li>
 
                 </ul>
 
@@ -97,6 +96,8 @@
                         <table id="valTable">
                             <tr>
                                 <th>S.No.</th>
+                                <th>Volt</th>
+                                <th>Amp</th>
                                 <th>W1</th>
                                 <th>W2</th>
                                 <th>TORQUE</th>
@@ -139,7 +140,7 @@
 
                             <button id="o_r"><label id = "label7" onclick="disconnect(6)">7</label></button>
                             <button id="o_b"><label id = "label8" onclick="disconnect(7)">8</label></button>
-                            <button id="o_y"><label id = "label9" onclick="disconnect(8)">9</label></button>
+                            <button id="o_y"><label id = "label9" onclick="disconnect(8)">9x</label></button>
 
 
                         </div>
@@ -191,9 +192,9 @@
                          </div>
                          <div class="rotor-view">
                             <p>ROTOR VIEW</p>
-                            <input type="number" id = "w1_motor"></input>
-                            <input type="number" id = "w2_motor"></input>
-                            <img src="../Assets/2.png" alt="" height="270" width ="270" id = "rotor1">
+                            <input type="number" id = "w1_motor" value="0" min="0" max="15"></input>
+                            <input type="number" id = "w2_motor" value="0" min="0" max="15"></input>
+                            <img src="../Assets/2.png" alt="" height="270" width ="270" id = "rotor1" style="transform: rotate(0deg);">
                             <img src="../Assets/1.png" alt="" height="270" width ="270" id = "rotor2" style="transform: rotate(0deg);">
 
 

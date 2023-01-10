@@ -1,4 +1,4 @@
-pp,/*BASE STYLING GOES HERE*/
+/*BASE STYLING GOES HERE*/
 body {
     background-image: linear-gradient(#eaeaea, #d6d6d6);
     background-repeat: no-repeat;
@@ -480,6 +480,7 @@ opacity: 1;
     position: relative;
     bottom: 111.5px;
     left: 50px;
+    transform-origin: 80%;
 }
 
 
