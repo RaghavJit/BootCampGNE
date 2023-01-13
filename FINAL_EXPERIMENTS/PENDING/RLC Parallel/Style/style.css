@@ -346,7 +346,7 @@ body {
 
 .rheostat {
     position: relative;
-    top: -109px;
+    top: -70px;
     left: 350px;
 }
 
@@ -684,3 +684,65 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+/*Last minute changes--Variac__*/
+#transformer{
+    position: relative;
+    right:100px;
+    top:-20px;
+}
+#t_on{
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+}
+
+#t_a{
+    position: relative;
+    top:169px;
+    left:220.5px;
+
+
+}
+#t_b{
+    position: relative;
+    top:169px;
+    left:250.5px;
+
+
+}
+#t_c{
+    position: relative;
+    top:232px;
+    left:160px;
+
+
+}
+#t_d{
+    position: relative;
+    top:232px;
+    left:190px;
+
+
+}
+#t_on{
+    position: relative;
+    top:214px;
+    left:128px;
+    opacity: 0;
+}
+
+#knob{
+    position: relative;
+top:-323px;
+left:73px;
+
+}
+
+
+
+.transformer button{
+    z-index: +2;
+}
+.transformer #t_a label,#t_b label{
+transform: translate(-5px, -28px);}
