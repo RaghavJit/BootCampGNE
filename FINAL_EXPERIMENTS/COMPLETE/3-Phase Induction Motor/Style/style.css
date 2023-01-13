@@ -82,19 +82,7 @@ body {
 
 }
 
-.r3 {
-    float: left;
 
-    width: 1400px;
-    height: 500px;
-    margin: 30px 30px 30px 30px;
-    border-radius: 10px;
-    background-color: white;
-    color: #111111;
-
-
-
-}
 
 .r2c1 .o_table {
     float: left;
@@ -723,7 +711,7 @@ border-radius: 2px;
 
 .chart-container{
 
-background-color: #efefef;
+background-color: white;
 height:400px;
 width:1200px;
 margin: 0 auto;
@@ -731,10 +719,26 @@ filter:  drop-shadow(5px 5px 5px rgba(75, 75, 75, 0.31));
     border-radius: 10px;
 
 }
+.graph{
+    float: left;
 
+    width: 1400px;
+    height: 500px;
+    /* margin: 30px 30px 30px 30px; */
+    margin: 0 30px;
+    border-radius: 10px;
+
+    color: #111111;
+
+    background-color: #b1b1b1;
+}
 .graph-heading p{
+    border-radius: 10px;
+    margin-top: 0px;
     text-align: center;
-    font-size: 20px;
+    font-size: 30px;
     font-family: 'Zacbel X', sans-serif;
     color: rgb(31, 31, 31);
+    background-color: #d0d0d0;
+
 }
