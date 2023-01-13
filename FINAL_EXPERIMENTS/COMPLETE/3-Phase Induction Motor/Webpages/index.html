@@ -29,16 +29,18 @@
                 <p>Instructions</p>
 
                 <ul class="steps">
-                    <li id="s1" style="color: red;"><b>Step 1:</b> Make connections as per the instructions given below:</li>
-                        <ul>
-                            <li>(1-4), (2-5), (3-6)</li>
-                            <li>(7-10), (8-11)</li>
-                            <li> (7-12), (13-14)</li>
-                            <li>(8-15), (9-16)</li>
-                        </ul>
+                    <li id="s1" style="color: red;"><b>Step 1:</b> Make connections as per the instructions given below:
+                    </li>
+                    <ul>
+                        <li>(1-4), (2-5), (3-6)</li>
+                        <li>(7-10), (8-11)</li>
+                        <li> (7-12), (13-14)</li>
+                        <li>(8-15), (9-16)</li>
+                    </ul>
                     <li id="s2"><b>Step 2:</b> Check the connections by clicking on the ‘CHECK’ button. </li>
                     <li id="s3"><b>Step 3:</b> Turn on the MCB </li>
-                    <li id="s4"><b>Step 4:</b> Vary the values of w1 and w2 to and add observations to table by clicking on 'ADD'. </li>
+                    <li id="s4"><b>Step 4:</b> Vary the values of w1 and w2 to and add observations to table by clicking
+                        on 'ADD'. </li>
                     <li id="s5"><b>Step 5:</b> Take atleast 6 reading in table. </li>
                     <li id="s6"><b>Step 6:</b> Click on the ‘PLOT’ button to plot the graph. </li>
                     <li id="s7"><b>Step 7:</b> Click on the ‘PRINT’ button to takeout the print of the webpage. </li>
@@ -66,7 +68,7 @@
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="plot" disabled="true">PLOT</button>
+                        <button id="plot" >PLOT</button>
                         <button id="reset">RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
@@ -102,7 +104,7 @@
                                 <th>W2</th>
                                 <th>TORQUE</th>
                                 <th>SPEED</th>
-                               
+
                             </tr>
 
                         </table>
@@ -124,23 +126,23 @@
                         <div class="mcb">
                             <img src="../Assets/MCB_Off.png" id="M" height="120" width="100" alt="">
                             <button id="on_power" disabled="true"></button>
-                            <button id = "mcb_r"><label id = "label1" onclick="disconnect(0)">1</label></button>
-                            <button id = "mcb_b"><label id = "label2" onclick="disconnect(1)">2</label></button>
-                            <button id = "mcb_y"><label id = "label3" onclick="disconnect(2)">3</label></button>
+                            <button id="mcb_r"><label id="label1" onclick="disconnect(0)">1</label></button>
+                            <button id="mcb_b"><label id="label2" onclick="disconnect(1)">2</label></button>
+                            <button id="mcb_y"><label id="label3" onclick="disconnect(2)">3</label></button>
                         </div>
 
 
 
                         <div class="motor-starter">
-                            <button id="i_r"><label id = "label4" onclick="disconnect(3)">4</label></button>
-                            <button id="i_b"><label id = "label5" onclick="disconnect(4)">5</label></button>
-                            <button id="i_y"><label id = "label6" onclick="disconnect(5)">6</label></button>
+                            <button id="i_r"><label id="label4" onclick="disconnect(3)">4</label></button>
+                            <button id="i_b"><label id="label5" onclick="disconnect(4)">5</label></button>
+                            <button id="i_y"><label id="label6" onclick="disconnect(5)">6</label></button>
 
                             <img src="../Assets/motor-starter.png" id="starter" height="250" width="250" alt="">
 
-                            <button id="o_r"><label id = "label7" onclick="disconnect(6)">7</label></button>
-                            <button id="o_b"><label id = "label8" onclick="disconnect(7)">8</label></button>
-                            <button id="o_y"><label id = "label9" onclick="disconnect(8)">9x</label></button>
+                            <button id="o_r"><label id="label7" onclick="disconnect(6)">7</label></button>
+                            <button id="o_b"><label id="label8" onclick="disconnect(7)">8</label></button>
+                            <button id="o_y"><label id="label9" onclick="disconnect(8)">9x</label></button>
 
 
                         </div>
@@ -148,8 +150,8 @@
                         <div class="voltmeter">
                             <img src="../Assets/V1.png" id="V" height="180" width="180" alt="">
                             <img src="../Assets/Pointer.png" height="11" width="44" id="P_V" alt="">
-                            <button id="p_v"><label id = "label10" onclick="disconnect(9)">10</label></button>
-                            <button id="n_v"><label id = "label11" onclick="disconnect(10)">11</label></button>
+                            <button id="p_v"><label id="label10" onclick="disconnect(9)">10</label></button>
+                            <button id="n_v"><label id="label11" onclick="disconnect(10)">11</label></button>
 
                         </div>
 
@@ -158,8 +160,8 @@
                         <div class="ammeter">
                             <img src="../Assets/A1.png" id="A" height="180" width="180" alt="">
                             <img src="../Assets/Pointer.png" height="11" width="44" id="P_A" alt="">
-                            <button id="p_a"><label id = "label12" onclick="disconnect(11)">12</label></button>
-                            <button id="n_a"><label id = "label13" onclick="disconnect(12)">13</label></button>
+                            <button id="p_a"><label id="label12" onclick="disconnect(11)">12</label></button>
+                            <button id="n_a"><label id="label13" onclick="disconnect(12)">13</label></button>
 
                         </div>
                         <!--------------------------------------------------------->
@@ -172,47 +174,50 @@
 
 
                         <!--------------------------------------------------------->
-
-                        </div>
-                        <div class="motor-view">
-                            <p>MOTOR VIEW</p>
-                            <button id = "motor-1"><label id = "label14" onclick="disconnect(13)">14</label></button>
-                            <button id = "motor-2"><label id = "label15" onclick="disconnect(14)">15</label></button>
-                            <button id = "motor-3"><label id = "label16" onclick="disconnect(15)">16</label></button>
-                            <br>
-                            <!-- <button id = "motor-4"></button>
-                            <button id = "motor-5"></button>
-                            <button id = "motor-6"></button> -->
-                            <img src="../Assets/3-phase induction motor copy.png" alt="" height="280" width ="280" id = "motor">
-
-
-
-
-
-                         </div>
-                         <div class="rotor-view">
-                            <p>ROTOR VIEW</p>
-                            <input type="number" id = "w1_motor" value="0" min="0" max="15"></input>
-                            <input type="number" id = "w2_motor" value="0" min="0" max="15"></input>
-                            <img src="../Assets/2.png" alt="" height="270" width ="270" id = "rotor1" style="transform: rotate(0deg);">
-                            <img src="../Assets/1.png" alt="" height="270" width ="270" id = "rotor2" style="transform: rotate(0deg);">
-
-
-
-
-
-                         </div>
 
                     </div>
+                    <div class="motor-view">
+                        <p>MOTOR VIEW</p>
+                        <button id="motor-1"><label id="label14" onclick="disconnect(13)">14</label></button>
+                        <button id="motor-2"><label id="label15" onclick="disconnect(14)">15</label></button>
+                        <button id="motor-3"><label id="label16" onclick="disconnect(15)">16</label></button>
+                        <br>
+                        <!-- <button id = "motor-4"></button>
+                            <button id = "motor-5"></button>
+                            <button id = "motor-6"></button> -->
+                        <img src="../Assets/3-phase induction motor copy.png" alt="" height="280" width="280"
+                            id="motor">
 
+
+
+
+
+                    </div>
+                    <div class="rotor-view">
+                        <p>ROTOR VIEW</p>
+                        <input type="number" id="w1_motor" value="0" min="0" max="15"></input>
+                        <input type="number" id="w2_motor" value="0" min="0" max="15"></input>
+                        <img src="../Assets/2.png" alt="" height="270" width="270" id="rotor1"
+                            style="transform: rotate(0deg);">
+                        <img src="../Assets/1.png" alt="" height="270" width="270" id="rotor2"
+                            style="transform: rotate(0deg);">
+
+
+
+
+
+                    </div>
 
                 </div>
 
 
-
             </div>
 
+
+
         </div>
+
+
 
         <div class="clear"></div>
 
@@ -221,19 +226,19 @@
             <div class="graph" id="plotContiner">
                 <div class="graph-heading">
                     <p>GRAPH</p>
-                    </div>
-                    <div class="chart-container">
-                    <canvas id="myPlot" class="MyCanvas" height = "150" width = "450">
-    
+                </div>
+                <div class="chart-container">
+                    <canvas id="myPlot" class="MyCanvas" height="70px" width="200px">
+
                     </canvas>
-                    </div>
+                </div>
+
+            </div>
 
         </div>
-
     </div>
 
-
 </body>
- <script src="../Function/function.js"></script>
+<script src="../Function/function.js"></script>
 
 </html>

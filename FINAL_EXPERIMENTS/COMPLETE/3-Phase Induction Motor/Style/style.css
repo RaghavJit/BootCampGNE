@@ -720,3 +720,21 @@ border-radius: 2px;
 #label14,#label15,#label16{
     transform: translate(-9px, -34px);
 }
+
+.chart-container{
+
+background-color: #efefef;
+height:400px;
+width:1200px;
+margin: 0 auto;
+filter:  drop-shadow(5px 5px 5px rgba(75, 75, 75, 0.31));
+    border-radius: 10px;
+
+}
+
+.graph-heading p{
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Zacbel X', sans-serif;
+    color: rgb(31, 31, 31);
+}
