@@ -134,7 +134,7 @@ function task(i, x, y) {
 }
 
 knob.onclick = function () {
-
+    console.log("called")
     for (let i = 0; i < 100; i++) {
         task(i, angle_inc, volt_inc);
     }
