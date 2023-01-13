@@ -51,6 +51,10 @@ var ILDelta = document.getElementById("ILDelta")
 var cosDelta = document.getElementById("cosDelta")
 var powDelta = document.getElementById("powDelta")
 
+var RLamp = document.getElementById("R-lamp")
+var YLamp = document.getElementById("Y-lamp")
+var BLamp = document.getElementById("B-lamp")
+
 var VoltageSlider = 0
 
 var ObsTable = document.getElementById("valTable")
@@ -520,6 +524,10 @@ MCB.onclick = function toggle_MCB() {
         MCB.style.transform = "translate(0px, 0px)"
         VoltageSlider = 0
         trigger()
+
+        RLamp.src = "../Assets/r_off.png"
+        YLamp.src = "../Assets/y_off.png"
+        BLamp.src = "../Assets/b_off.png"
     }
     else if (MCB_state == 0) {
         MCB_state = 1;
@@ -537,6 +545,11 @@ function trigger() {
 }
 
 function updateMeters() {
+
+    RLamp.src = "../Assets/r_on.png"
+    YLamp.src = "../Assets/y_on.png"
+    BLamp.src = "../Assets/b_on.png"
+
     if (connArrnagment == 1) {
         rotateNeedle(PointerVoltmeter, VoltageSlider * (180 / 408));
 

@@ -1,0 +1,77 @@
+for (let i = 0; i < 11; i++) {
+
+        if (instance.getConnections({ source: [validConn[i]], target: [validConn[i + 1]] })[0] != undefined) {
+
+            if (i % 2 == 0) {
+
+                arrChk.push(instance.getConnections({ source: [validConn[i]], target: [validConn[i + 1]] })[0])
+
+                try {
+
+                    if ((instance.getConnections({ source: [validConn[i + 2]], target: [validConn[i + 3]] })[0] == undefined) & (i % 4 == 0)) {
+
+                        if ((instance.getConnections({ source: [validConn[i + 3]], target: [validConn[i + 2]] })[0] == undefined) & (i % 4 == 0)) {
+
+                            arrChk.pop();
+                        }
+                    }
+                }
+
+                catch {
+
+                    continue;
+
+                }
+            }
+        }
+
+        else if ((instance.getConnections({ source: [validConn[i + 1]], target: [validConn[i]] })[0] != undefined)) {
+
+            if (i % 2 == 0) {
+
+                arrChk.push(instance.getConnections({ source: [validConn[i + 1]], target: [validConn[i]] })[0])
+
+                try {
+
+                    if ((instance.getConnections({ source: [validConn[i + 2]], target: [validConn[i + 3]] })[0] == undefined) & (i % 4 == 0)) {
+
+                        if ((instance.getConnections({ source: [validConn[i + 3]], target: [validConn[i + 2]] })[0] == undefined) & (i % 4 == 0)) {
+
+                            arrChk.pop();
+                        }
+                    }
+                }
+
+                catch {
+                    continue;
+                }
+            }
+        }
+    }
+
+    if ((arrChk.length == 18) && (instance.getAllConnections().length == 18)) {
+
+        window.alert("Right connections! Please choose the resistance values");
+
+        if (voltageVal.length == 0) {
+
+            r1val.disabled = false;
+            r2val.disabled = false;
+            r3val.disabled = false;
+
+        }
+
+        arrChkStore = arrChk;
+        arrChk = [];
+    }
+
+    else if (arrChk.length == 0) {
+
+        window.alert("Please make connections!");
+    }
+
+    else {
+
+        window.alert("Invalid connections!");
+        //window.location.reload()
+    }
