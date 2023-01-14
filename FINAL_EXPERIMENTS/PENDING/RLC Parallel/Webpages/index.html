@@ -29,25 +29,21 @@
                 <p>Instructions</p>
 
                 <ul class="steps">
-                    <li>!!! Click on labels to delete connectinos for the corrusponding node.</li>
-                    <li id="s1" style="color:red ;">Choose a load resistance by adjusting 'RL' slider (5 ohm).</li>
 
-                    <li id="s2">Set up the circuit for experiment.</li>
-                    <ul>
-                        <li>Connect Multimeter across the Load resistance Rl. 5->13, 6->14</li>
-                        <li>Connect ammeter in series with R1, conncet voltmeter across Rl. 3->11, 4->12</li>
-                        <li>Connect PowerSupply to the circuit. 7->9, 8->10</li>
-                        <li>Connect voltmeter to resistance RL 1->13, 2->14</li>
-                        <li>Click on 'CHECK' button to check your connections.</li>
-                    </ul>
-                    <li id="s3"> Click on 'CHECK' button to check your connections.</li>
-                    <li id="s4">Turn on the MCB.</li>
-                    <li id="s5">Turn on the power-supply by clicking on the 'POWER' button, and choose a voltage value.
-                    </li>
-                    <li id="s6">Choose a resistance value of 'R1'.</li>
-                    <li id="s7">Click on 'ADD' button to add observations to the table.</li>
-                    <li id="s8">Keep changing values of resistance until the Power Transfered is Maximum.</li>
-                    <li id="s9">Click 'CALCULATE' button to obtain calculations.</li>
+                    <li>!!! Click on labels to delete connections for the corrusponding node.</li>
+                    <li id="s1" style="color:red ;">Make connections as per the instructions given below.</li>
+
+                    <li id="s2"> Now, Check the connections by clicking on ‘CHECK’ button.</li>
+                        <ul>
+                            <li>If the connections are ‘Invalid connections’ click on corresponding node to remove the connection.</li>
+                            <li> And if the connections are ‘Right Connections’ then follow the below steps.</li>
+                        </ul>
+                   
+                    <li id="s3">Turn on the MCB.</li>
+                    <li id="s4">Switch on the variac by clicking on the button.</li>
+                    <li id="s5">Click on the variac knob to set the voltage at 220V.</li>
+                    <li id="s6">Now, Click on ‘ADD’ button to add the readings in the observation table.</li>
+                    <li id="s7">In Calculations section, We have to manually calculate the values by using the formula.</li>
 
                 </ul>
             </div>
@@ -70,7 +66,7 @@
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="plot">PLOT</button>
+                        <button id="plot" disabled="true">PLOT</button>
                         <button id="reset" onclick='window.location.reload();'>RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
@@ -125,7 +121,7 @@
 
 
                             <img class="forbidden" src="../Assets/MCB_Off.png" alt="" height="120" width="100" id="mcb">
-                            <button id="mcb_switch"></button>
+                            <button id="mcb_switch" disabled="true"></button>
                             <button id="mcb_p"><label onclick="disconnect(0)">1</label></button>
                             <button id="mcb_n"><label onclick="disconnect(1)">2</label></button>
 
@@ -231,7 +227,7 @@
                             <button id="t_b"><label onclick="disconnect(23)">24</label></button>
                             <button id="t_c"><label onclick="disconnect(24)">25</label></button>
                             <button id="t_d"><label onclick="disconnect(25)">26</label></button>
-                            <button id="t_on"></button>
+                            <button id="t_on" disabled="true"></button>
 
                             <img class="forbidden" src="../Assets/Variac_OFF.png" width="450" height="450" alt="" id="transformer">
 
