@@ -21,7 +21,7 @@
         <!--ROW1-->
         <div class="heading">
             <!--Heading goes here-->
-            <p>RLC EXPERIMENT SERIES RLC</p>
+            <p>RLC RESONANCE</p>
         </div>
 
         <div class="instructions" id="instTab">
@@ -125,7 +125,7 @@
 
 
                             <img class="forbidden" src="../Assets/MCB_Off.png" alt="" height="120" width="100" id="mcb">
-                            <button id="mcb_switch" disabled="0"></button>
+                            <button id="mcb_switch"></button>
                             <button id="mcb_p"><label onclick="disconnect(0)">1</label></button>
                             <button id="mcb_n"><label onclick="disconnect(1)">2</label></button>
 
@@ -135,8 +135,8 @@
                         <div class="voltmeter">
                             <img class="forbidden" src="../Assets/V1.png" width="179" height="179" alt="" id="V">
                             <img class="forbidden" src="../Assets/Pointer.png" width="44" height="14" alt="" id="P_V">
-                            <button id="p_v"><label onclick="disconnect(0)">1</label></button>
-                            <button id="n_v"><label onclick="disconnect(1)">2</label></button>
+                            <button id="p_v"><label onclick="disconnect(2)">3</label></button>
+                            <button id="n_v"><label onclick="disconnect(3)">4</label></button>
 
                         </div>
 
@@ -145,8 +145,8 @@
                             <img class="forbidden" src="../Assets/A1.png" width="179" height="179" alt="" id="A">
 
                             <img class="forbidden" src="../Assets/Pointer.png" width="44" height="14" alt="" id="P_A">
-                            <button id="p_a"><label onclick="disconnect(2)">3</label></button>
-                            <button id="n_a"><label onclick="disconnect(3)">4</label></button>
+                            <button id="p_a"><label onclick="disconnect(4)">5</label></button>
+                            <button id="n_a"><label onclick="disconnect(5)">6</label></button>
                         </div>
 
                         <div class="break">
@@ -157,16 +157,16 @@
 
                                 <img class="forbidden" src="../Assets/resistor.png" width="300" height="300" alt=""
                                     id="rheostat">
-                                <button id="rh_p"><label onclick="disconnect(2)">3</label></button>
-                                <button id="rh_n"><label onclick="disconnect(3)">4</label></button>
+                                <button id="rh_p"><label onclick="disconnect(6)">7</label></button>
+                                <button id="rh_n"><label onclick="disconnect(7)">8</label></button>
 
                             </div>
 
                             <div class="inductor">
                                 <img class="forbidden" src="../Assets/inductor.png" width="200" height="150" alt=""
                                     id="inductor">
-                                <button id="i_p"><label onclick="disconnect(2)">3</label></button>
-                                <button id="i_n"><label onclick="disconnect(3)">4</label></button>
+                                <button id="i_p"><label onclick="disconnect(8)">9</label></button>
+                                <button id="i_n"><label onclick="disconnect(9)">10</label></button>
 
 
 
@@ -175,8 +175,8 @@
                             <div class="capacitor">
                                 <img class="forbidden" src="../Assets/capacitor.png" width="250" height="250" alt=""
                                     id="capacitor">
-                                <button id="c_p"><label onclick="disconnect(2)">3</label></button>
-                                <button id="c_n"><label onclick="disconnect(3)">4</label></button>
+                                <button id="c_p"><label onclick="disconnect(10)">11</label></button>
+                                <button id="c_n"><label onclick="disconnect(11)">12</label></button>
 
 
 
@@ -191,12 +191,15 @@
 
                         <div class="transformer">
 
+                            <input id="fg_dis" type="text">
+
                             <button id="fg_on"></button>
 
-                            <button id="fg_a"><label onclick="disconnect(2)">3</label></button>
-                            <button id="fg_b"><label onclick="disconnect(3)">4</label></button>
-                            <button id="fg_c"><label onclick="disconnect(3)">4</label></button>
-                            <button id="fg_d"><label onclick="disconnect(3)">4</label></button>
+                            <button id="fg_a"><label onclick="disconnect(12)">13</label></button>
+                            <button id="fg_b"><label onclick="disconnect(13)">14</label></button>
+                            <button id="fg_c"><label onclick="disconnect(14)">15</label></button>
+                            <button id="fg_d"><label onclick="disconnect(15)">16</label></button>
+                            
 
 
                             <img class="forbidden" src="../Assets/function-generator-off.png" width="400" height="250" alt="" id="transformer">
@@ -256,6 +259,6 @@
 
 
 </body>
-<!-- <script src="../Function/function.js"></script> -->
+<script src="../Function/function.js"></script>
 
 </html>
