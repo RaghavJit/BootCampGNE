@@ -385,37 +385,45 @@ img {
     margin-top: 20px;
     margin-left: 50px;
 }
-.motor-starter{
+
+.motor-starter {
     position: relative;
-    bottom:50px;
-    right:50px;
+    bottom: 50px;
+    right: 50px;
 }
-.motor-starter button{
-position: relative;
+
+.motor-starter button {
+    position: relative;
 }
-#i_r{
-    left:70px;
-top:45px;
+
+#i_r {
+    left: 70px;
+    top: 45px;
 }
-#i_b{
-    left:90px;
-top:45px;
+
+#i_b {
+    left: 90px;
+    top: 45px;
 }
-#i_y{
-    left:110px;
-top:45px;
+
+#i_y {
+    left: 110px;
+    top: 45px;
 }
-#o_r{
-    left:70px;
-bottom:51px;
+
+#o_r {
+    left: 70px;
+    bottom: 51px;
 }
-#o_b{
-    left:90px;
-bottom:51px;
+
+#o_b {
+    left: 90px;
+    bottom: 51px;
 }
-#o_y{
-    left:110px;
-bottom:51px;
+
+#o_y {
+    left: 110px;
+    bottom: 51px;
 }
 
 .c-diag button {
@@ -427,29 +435,35 @@ bottom:51px;
     border-radius: 8px;
 
 }
-.mcb button{
+
+.mcb button {
     position: relative;
     opacity: 1;
 }
+
 .mcb #on_power {
     width: 75px;
     height: 14px;
 }
-#mcb_r{
-bottom:28px;
-left:20px;
-opacity: 1;
+
+#mcb_r {
+    bottom: 28px;
+    left: 20px;
+    opacity: 1;
 }
-#mcb_b{
-bottom:28px;
-left:30px;
-opacity: 1;
+
+#mcb_b {
+    bottom: 28px;
+    left: 30px;
+    opacity: 1;
 }
-#mcb_y{
-bottom:28px;
-left:40px;
-opacity: 1;
+
+#mcb_y {
+    bottom: 28px;
+    left: 40px;
+    opacity: 1;
 }
+
 #p_v,
 #p_a {
     bottom: 69px;
@@ -502,7 +516,7 @@ opacity: 1;
     background-color: #3b3b3b;
     border: 8px solid #3b3b3b;
     border-radius: 25px;
-    margin-top:0px;
+    margin-top: 0px;
 }
 
 .motor-view img {
@@ -528,23 +542,25 @@ opacity: 1;
     position: relative;
 }
 
-#motor-3{
-left:150px;
+#motor-3 {
+    left: 150px;
 }
-#motor-2{
-left:130px;
+
+#motor-2 {
+    left: 130px;
 }
-#motor-1{
-left:110px;
+
+#motor-1 {
+    left: 110px;
 }
 
 
 
 .rotor-view {
 
-    float:right;
-    margin-top:-70px;
-    margin-right:80px;
+    float: right;
+    margin-top: -70px;
+    margin-right: 80px;
     height: 280px;
     width: 320px;
 
@@ -564,7 +580,7 @@ left:110px;
     background-color: #3b3b3b;
     border: 8px solid #3b3b3b;
     border-radius: 25px;
-    margin-top:0px;
+    margin-top: 0px;
 }
 
 .rotor-view img {
@@ -588,19 +604,20 @@ left:110px;
 }
 
 
-#rotor1{
+#rotor1 {
     position: relative;
-    bottom:24.0px;
+    bottom: 24.0px;
     transform: rotate(0deg);
 }
-#rotor2{
+
+#rotor2 {
     position: relative;
-    bottom:264px;
+    bottom: 264px;
     transform: rotate(0deg);
     transform-origin: 50% 63.5%;
 }
 
-.rotor-view input{
+.rotor-view input {
     outline: none;
     border: none;
     height: 25px;
@@ -613,12 +630,15 @@ left:110px;
     border-radius: 10px;
     z-index: 1;
 }
-#w1_motor{
-    left:70px;
+
+#w1_motor {
+    left: 70px;
 }
-#w2_motor{
-    left:135px;
+
+#w2_motor {
+    left: 135px;
 }
+
 /*Calculation Implementation*/
 .calculation {
     margin-top: -15px;
@@ -684,42 +704,50 @@ left:110px;
 
 
 /*adding labels*/
-.circuit button label{
+.circuit button label {
     text-align: center;
     font-family: 'Zacbel X', sans-serif;
     overflow: visible;
     position: absolute;
 
 
-font-size: 12px;
+    font-size: 12px;
 
-border: 2px solid white;
-background-color: white;
-border-radius: 2px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 2px;
 
 
 }
-.circuit button label{
+
+.circuit button label {
     transform: translate(-5px, 12px);
 }
-#label4,#label5,#label6{
+
+#label4,
+#label5,
+#label6 {
     transform: translate(-5px, -34px);
 }
-#label14,#label15,#label16{
+
+#label14,
+#label15,
+#label16 {
     transform: translate(-9px, -34px);
 }
 
-.chart-container{
+.chart-container {
 
-background-color: white;
-height:400px;
-width:1200px;
-margin: 0 auto;
-filter:  drop-shadow(5px 5px 5px rgba(75, 75, 75, 0.31));
+    background-color: white;
+    height: 400px;
+    width: 1200px;
+    margin: 0 auto;
+    filter: drop-shadow(5px 5px 5px rgba(75, 75, 75, 0.31));
     border-radius: 10px;
 
 }
-.graph{
+
+.graph {
     float: left;
 
     width: 1400px;
@@ -732,7 +760,8 @@ filter:  drop-shadow(5px 5px 5px rgba(75, 75, 75, 0.31));
 
     background-color: #b1b1b1;
 }
-.graph-heading p{
+
+.graph-heading p {
     border-radius: 10px;
     margin-top: 0px;
     text-align: center;
@@ -741,4 +770,20 @@ filter:  drop-shadow(5px 5px 5px rgba(75, 75, 75, 0.31));
     color: rgb(31, 31, 31);
     background-color: #d0d0d0;
 
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #rotor2 {
+        animation: App-logo-spin infinite 2000000000s linear;
+    }
 }

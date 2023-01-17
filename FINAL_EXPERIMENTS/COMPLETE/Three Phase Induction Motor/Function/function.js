@@ -373,7 +373,8 @@ check.onclick = function checkConn() {
         if(checkAmmeter() && checkVoltmeter()){
             window.alert("Right Connections!")
             flags2=1
-            MCB.disabled=false
+            w1.disabled = false
+            w2.disabled = false
         }
     }
 }
@@ -401,17 +402,23 @@ function refresh(){
     calculateTorque()
     setMeters()
 
-    mtspeed =  20 - Math.abs(parseInt(w1.value) - parseInt(w2.value))
+    mtspeed =  Math.abs(parseInt(w1.value) - parseInt(w2.value))/3 + 1
     setSpeed(mtspeed)
 }
 
 w1.oninput = function (){
-    refresh()
+    if((w1.value != 0) || (w2.value != 0)){
+        refresh()
+    }
     flags4 = 1
+    MCB.disabled=false
 }
 w2.oninput = function (){
-    refresh()
+    if((w1.value != 0) || (w2.value != 0)){
+        refresh()
+    }
     flags4 = 1
+    MCB.disabled=false
 }
 
 MCB.onclick = function toggle_MCB() {
@@ -517,39 +524,41 @@ plot.onclick = function plotGraph() {
     });
 }
 
-var allow = 0
-var speed = 10
-var interval
-var start
+// var allow = 0
+// var speed = 10
+// var interval
+// var start
 
 function getAngle() {
     return parseInt((rotor.style.transform).slice(7, (rotor.style.transform).indexOf('d')))
 }
 
 function setSpeed(value) {
-    speed = value
-    window.clearInterval(interval)
-    interval = window.setInterval(runMotor, 360 * speed)
+    console.log("done")
+    rotor.style.animation = "App-logo-spin infinite "+value+"s linear"
+    // speed = value
+    // window.clearInterval(interval)
+    // interval = window.setInterval(runMotor, 360 * speed)
 }
 
-function RotateRotor(countRotations) {
-    setTimeout(function () {
-        rotor.style.transform = "rotate(" + countRotations + "deg)"
-    }, speed * countRotations);
-}
+// function RotateRotor(countRotations) {
+//     setTimeout(function () {
+//         rotor.style.transform = "rotate(" + countRotations + "deg)"
+//     }, speed * countRotations);
+// }
 
-function callRotate() {
-    for (let countRotations = 0; countRotations < 360; countRotations++) {
-        RotateRotor(countRotations);
-    }
-    console.log("called")
-}
+// function callRotate() {
+//     for (let countRotations = 0; countRotations < 360; countRotations++) {
+//         RotateRotor(countRotations);
+//     }
+//     console.log("called")
+// }
 
-function runMotor() {
-    if (allow == 1) {
-        callRotate();
-    }
-}
+// function runMotor() {
+//     if (allow == 1) {
+//         callRotate();
+//     }
+// }
 
 
 function highlight() {
