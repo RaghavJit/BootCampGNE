@@ -109,6 +109,12 @@ instance.bind("ready", function () {
 
 })
 
+function checkConn() {
+    flags2 = 1
+    MCB.disabled = false
+    return true
+}
+
 function isConnected(node1, node2) {
     if ((instance.getConnections({ source: node1, target: node2 })[0] != undefined) || (instance.getConnections({ source: node2, target: node1 })[0] != undefined)) {
         return true;
@@ -139,6 +145,8 @@ function updateMeters(){
     rotate_element(Mvol, VoltmeterNeedle)
 
 }
+
+
 
 MCB.onclick = function () {
     flags3 = 1
@@ -196,3 +204,4 @@ add.onclick = function (){
         powDelta.disabled = false
     }
 }
+
