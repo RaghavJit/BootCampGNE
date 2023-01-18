@@ -371,10 +371,12 @@ function checkAmmeter() {
 check.onclick = function checkConn() {
     if (MCBToStarter() && StarterToMotor()) {
         if(checkAmmeter() && checkVoltmeter()){
-            window.alert("Right Connections!")
+            window.alert("Right Connections! Please Select weights and then turn on the MCB")
             flags2=1
             w1.disabled = false
+            w1.style.border = '3px solid red'
             w2.disabled = false
+            w2.style.border = '3px solid red'
         }
     }
 }
@@ -398,6 +400,12 @@ function setMeters(){
     AmmeterNeedle.style.transform = "rotate("+ Current*18 +"deg)"
 }
 
+function setZero(){
+    AmmeterNeedle.style.transform = "rotate(0deg)"
+    VoltmeterNeedle.style.transform = "rotate(0deg)"
+    setSpeed(20000000)
+}
+
 function refresh(){
     calculateTorque()
     setMeters()
@@ -407,17 +415,19 @@ function refresh(){
 }
 
 w1.oninput = function (){
-    if((w1.value != 0) || (w2.value != 0)){
+    if(((w1.value != 0) || (w2.value != 0)) && (MCB_state == 1)){
         refresh()
     }
     flags4 = 1
+    w1.style.border = '0px solid red'
     MCB.disabled=false
 }
 w2.oninput = function (){
-    if((w1.value != 0) || (w2.value != 0)){
+    if(((w1.value != 0) || (w2.value != 0)) && (MCB_state == 1)){
         refresh()
     }
     flags4 = 1
+    w2.style.border = '0px solid red'
     MCB.disabled=false
 }
 
@@ -428,6 +438,7 @@ MCB.onclick = function toggle_MCB() {
         MCB_state = 0;
         MCB_image.src = "../Assets/MCB_Off.png"
         MCB.style.transform = "translate(0px, 0px)"
+        setZero()
         allow = 0
     }
     else if (MCB_state == 0) {
@@ -436,6 +447,7 @@ MCB.onclick = function toggle_MCB() {
         MCB.style.transform = "translate(0px, -50px)"
         add.disabled = false
         setMeters()
+        refresh()
         allow = 1
         flags3 = 1
     }
@@ -529,9 +541,9 @@ plot.onclick = function plotGraph() {
 // var interval
 // var start
 
-function getAngle() {
-    return parseInt((rotor.style.transform).slice(7, (rotor.style.transform).indexOf('d')))
-}
+// function getAngle() {
+//     return parseInt((rotor.style.transform).slice(7, (rotor.style.transform).indexOf('d')))
+// }
 
 function setSpeed(value) {
     console.log("done")
