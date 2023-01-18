@@ -376,9 +376,6 @@ function staticConn() {
             if (isConnected(Ammeter[i], VarOut[conjNum(i)])) {
                 return ThreeNodes(Ammeter[conjNum(i)], WattmeterC, WattmeterM) && (conn == 4)
             }
-            else if (isConnected(Ammeter[conjNum(i)], VarOut[conjNum(i)])) {
-                return ThreeNodes(Ammeter[i], WattmeterC, WattmeterM) && (conn == 4)
-            }
         }
     }
 }
