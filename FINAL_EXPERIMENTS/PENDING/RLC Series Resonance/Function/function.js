@@ -54,6 +54,8 @@ var flags6 = 0
 
 var index = 0
 
+var ValidConn = [MCB_Positive, FunctGeneA, MCB_Negative, FunctGeneB, FunctGeneC, VoltmeterPositive, FunctGeneD, VoltmeterNegative]
+
 function disconnect(num) {
     let node_list = [
         MCB_Positive, MCB_Negative, 
@@ -66,6 +68,19 @@ function disconnect(num) {
 
     ]
     instance.deleteConnectionsForElement(node_list[num])
+}
+
+function isConnected(node1, node2) {
+    if ((instance.getConnections({ source: node1, target: node2 })[0] != undefined) || (instance.getConnections({ source: node2, target: node1 })[0] != undefined)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function numConnect(node) {
+    return instance.getConnections({ source: node }).length + instance.getConnections({ target: node }).length
 }
 
 const instance = jsPlumb.getInstance({
@@ -109,10 +124,111 @@ instance.bind("ready", function () {
 
 })
 
+function conjNum(num) {
+    return Math.abs(num - 1)
+}
+
+function ToLoads(ammNode, funNode){
+    let inductor = [InductorPositive, InductorNegative]
+    let resistor = [ResistorPositive, ResistorNegative]
+    let capacitor = [CapacitorPositive, CapacitorNegative]
+
+    let loadsList = [inductor, resistor, capacitor]
+    let arrange = []
+    let index = [inductor, resistor, capacitor]
+
+    for (let i = 0; i < loadsList.length; i++) {
+        if (isConnected(loadsList[i][0], ammNode)) {
+            arrange.push(loadsList[i][0])
+            arrange.push(loadsList[i][1])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+        else if (isConnected(loadsList[i][1], ammNode)) {
+            arrange.push(loadsList[i][1])
+            arrange.push(loadsList[i][0])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+    }
+
+    for (let i = 0; i < loadsList.length; i++) {
+        if (isConnected(loadsList[i][0], funNode)) {
+            arrange.push(loadsList[i][1])
+            arrange.push(loadsList[i][0])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+        else if (isConnected(loadsList[i][1], funNode)) {
+            arrange.push(loadsList[i][0])
+            arrange.push(loadsList[i][1])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+    }
+
+    temp = arrange.splice(2, 3)
+    arrange.push(index[0][0])
+    arrange.push(index[0][1])
+    arrange = arrange.concat(temp)
+
+    if ((isConnected(arrange[1], arrange[2])) && (isConnected(arrange[3], arrange[4]))) {
+        return true
+    }
+    else if ((isConnected(arrange[1], arrange[3])) && (isConnected(arrange[2], arrange[4]))) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+function staticConn() {
+    let VarOut = [FunctGeneC, FunctGeneD]
+    let Ammeter = [AmmeterPositive, AmmeterNegative]
+
+    let conn = 0;
+    for (let i = 0; i < ValidConn.length; i++) {
+        if (i % 2 == 0) {
+            if (isConnected(ValidConn[i], ValidConn[i + 1])) {
+                conn = conn + 1
+            }
+        }
+    }
+
+    for (let i = 0; i < ValidConn.length; i++) {
+        if (i % 4 == 0) {
+            if (isConnected(ValidConn[i], ValidConn[i + 3])) {
+                conn = conn + 1
+            }
+            if (isConnected(ValidConn[i + 1], ValidConn[i + 2])) {
+                conn = conn + 1
+            }
+        }
+    }
+
+    console.log(conn)
+
+    for (let i = 0; i < 2; i++) {
+        if(isConnected(Ammeter[i], VarOut[i])){
+            if(ToLoads(Ammeter[conjNum(i)], VarOut[conjNum(i)])){
+                return true
+            }
+        }
+        else if(isConnected(Ammeter[i], VarOut[conjNum(i)])){
+            if(ToLoads(Ammeter[conjNum(i)], VarOut[i])){
+                return true
+            }
+        } 
+    }
+}
+
 function checkConn() {
     flags2 = 1
-    MCB.disabled = false
-    return true
+    
+    if(staticConn()){
+        MCB.disabled = false
+        window.alert("Right connections!")
+    }
+    else{
+        window.alert("Invalid connections!")
+    }
 }
 
 function isConnected(node1, node2) {
@@ -145,8 +261,6 @@ function updateMeters(){
     rotate_element(Mvol, VoltmeterNeedle)
 
 }
-
-
 
 MCB.onclick = function () {
     flags3 = 1
