@@ -45,8 +45,8 @@ var InductorNegative = document.getElementById("i_n")
 var ResistorPositive = document.getElementById("rh_p")
 var ResistorNegative = document.getElementById("rh_n")
 
-var CapacitorPositive = document.getElementById("c_p")
-var CapacitorNegative = document.getElementById("c_n")
+var CapacitorPositive = document.getElementById("c_n")
+var CapacitorNegative = document.getElementById("c_p")
 
 var MainAmmeterNeedle = document.getElementById("P_A")
 var MainVoltmeterNeedle = document.getElementById("P_V")
@@ -86,7 +86,10 @@ var flags4 = 0
 var flags5 = 0
 var flags6 = 0
 
-var index = 0
+var rindex = 0
+
+var ValidConn = [MCB_Positive, VariacInPositive, MCB_Negative, VariacInNegative, VariacOutPositive, MainVoltmeterPositive, VariacOutNegative, MainVoltmeterNegative]
+
 
 function disconnect(num) {
     let node_list = [
@@ -132,7 +135,7 @@ instance.bind("ready", function () {
         }
     })
 
-    instance.addEndpoint([MainVoltmeterPositive, MainAmmeterPositive, MCB_Positive, TopAmmeterPositive, SecAmmeterPositive, BotAmmeterPositive, VariacInPositive, VariacOutPositive, InductorPositive, ResistorPositive, CapacitorPositive, WattmeterV, WattmeterL, WattmeterM, WattmeterC], {
+    instance.addEndpoint([MainVoltmeterPositive, MainAmmeterPositive, MCB_Positive, VariacInPositive, VariacOutPositive, WattmeterM, WattmeterC], {
         endpoint: "Dot",
         anchor: ["Center"],
         isSource: true,
@@ -143,7 +146,7 @@ instance.bind("ready", function () {
         connectionsDetachable: true
     })
 
-    instance.addEndpoint([MainVoltmeterNegative, MainAmmeterNegative, MCB_Negative, TopAmmeterNegative, SecAmmeterNegative, BotAmmeterNegative, VariacInNegative, VariacOutNegative, InductorNegative, ResistorNegative, CapacitorNegative], {
+    instance.addEndpoint([MainVoltmeterNegative, MainAmmeterNegative, MCB_Negative, VariacInNegative, VariacOutNegative], {
         endpoint: "Dot",
         anchor: ["Center"],
         isSource: true,
@@ -154,6 +157,76 @@ instance.bind("ready", function () {
         connectionsDetachable: true
     })
 
+    instance.addEndpoint([MainAmmeterNegative], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        paintStyle: { fill: "rgb(229, 97, 97)" },
+        connectionType: "negative",
+        maxConnections: 10,
+        connectionsDetachable: true,
+        connector: ["StateMachine", { curviness: -40, proximityLimit: 10 }]
+    })
+
+    instance.addEndpoint([WattmeterC, WattmeterM, ResistorPositive, InductorPositive, CapacitorPositive], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        paintStyle: { fill: "rgb(97,106,229)" },
+        connectionType: "positive",
+        maxConnections: 10,
+        connectionsDetachable: true,
+        connector: ["StateMachine", { curviness: -40, proximityLimit: 10 }]
+    })
+
+    instance.addEndpoint([ResistorNegative, CapacitorNegative, InductorNegative], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        paintStyle: { fill: "rgb(229, 97, 97)" },
+        connectionType: "negative",
+        maxConnections: 10,
+        connectionsDetachable: true,
+        connector: ["StateMachine", { curviness: -40, proximityLimit: 10 }]
+    })
+
+    instance.addEndpoint([TopAmmeterPositive, SecAmmeterPositive, BotAmmeterPositive], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        paintStyle: { fill: "rgb(97,106,229)" },
+        connectionType: "positive",
+        maxConnections: 10,
+        connectionsDetachable: true,
+        connector: ["StateMachine", { curviness: -30, proximityLimit: 20 }]
+    })
+
+    instance.addEndpoint([TopAmmeterNegative, SecAmmeterNegative, BotAmmeterNegative], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        paintStyle: { fill: "rgb(229, 97, 97)" },
+        connectionType: "negative",
+        maxConnections: 10,
+        connectionsDetachable: true,
+        connector: ["StateMachine", { curviness: -30, proximityLimit: 20 }]
+    })
+
+    instance.addEndpoint([WattmeterV, WattmeterL], {
+        endpoint: "Dot",
+        anchor: ["Center"],
+        isSource: true,
+        isTarget: true,
+        paintStyle: { fill: "rgb(97,106,229)" },
+        connectionType: "positive",
+        maxConnections: 10,
+        connectionsDetachable: true,
+    })
 })
 
 MCB.onclick = function () {
@@ -173,8 +246,8 @@ MCB.onclick = function () {
         MCB_image.src = '../Assets/MCB_ON.png'
         MCB.style.transform = "translate(0px, -49px)"
         Variac.disabled = false
-        if(variac_state == 1){
-        updateMeters()
+        if (variac_state == 1) {
+            updateMeters()
         }
     }
 }
@@ -189,17 +262,17 @@ Variac.onclick = function () {
     else if (variac_state == 0) {
         variac_state = 1
         Var_image.src = '../Assets/Variac_ON.png'
-        if(mcb_state == 1){
+        if (mcb_state == 1) {
             updateMeters()
         }
     }
 }
 
-add.onclick = function (){
+add.onclick = function () {
     flags6 = 1
 
-    let row = vtable.insertRow(index + 1);
-
+    let row = vtable.insertRow(rindex + 1);
+    rindex = rindex + 1
     let SNo = row.insertCell(0);
     let load = row.insertCell(1)
     let volt = row.insertCell(2);
@@ -208,7 +281,7 @@ add.onclick = function (){
     let pow2 = row.insertCell(5);
     let pow = row.insertCell(6);
 
-    if(vtable.row.length > 6){
+    if (vtable.row.length > 6) {
         powDelta.disabled = false
     }
 }
@@ -249,15 +322,185 @@ function rotate_element(deg, elemnt) {
     elemnt.style.transform = "rotate(" + deg + "deg)"
 }
 
+function ThreeNodes(node1, node2, node3) {
+    let TriList = [node1, node2, node3]
+    let index_tracker = 0
+    let indexes = [1, 2, 4]
+    for (let i = 0; i < TriList.length; i++) {
+        for (let j = 0; j < TriList.length; j++) {
+            if (isConnected(TriList[i], TriList[j])) {
+                index_tracker = index_tracker + (indexes[i] + indexes[j]);
+            }
+        }
+    }
 
-
-function checkConn() {
-    flags2 = 1
-    MCB.disabled = false
-    return true
+    if ((index_tracker / 2 == 8) || (index_tracker / 2 == 11) || (index_tracker / 2 == 9) || (index_tracker / 2 == 14)) {
+        return true;
+    }
+    else {
+        console.log(index_tracker)
+        return false;
+    }
 }
 
-function calculateVars(){
+function conjNum(num) {
+    return Math.abs(num - 1)
+}
+
+function staticConn() {
+    let VarOut = [VariacOutPositive, VariacOutNegative]
+    let Ammeter = [MainAmmeterPositive, MainAmmeterNegative]
+
+    let conn = 0;
+    for (let i = 0; i < ValidConn.length; i++) {
+        if (i % 2 == 0) {
+            if (isConnected(ValidConn[i], ValidConn[i + 1])) {
+                conn = conn + 1
+            }
+        }
+    }
+
+    for (let i = 0; i < ValidConn.length; i++) {
+        if (i % 4 == 0) {
+            if (isConnected(ValidConn[i], ValidConn[i + 3])) {
+                conn = conn + 1
+            }
+            if (isConnected(ValidConn[i + 1], ValidConn[i + 2])) {
+                conn = conn + 1
+            }
+        }
+    }
+
+    for (let i = 0; i < 2; i++) {
+        if (isConnected(WattmeterV, VarOut[i])) {
+            if (isConnected(Ammeter[i], VarOut[conjNum(i)])) {
+                return ThreeNodes(Ammeter[conjNum(i)], WattmeterC, WattmeterM)
+            }
+            else if (isConnected(Ammeter[conjNum(i)], VarOut[conjNum(i)])) {
+                return ThreeNodes(Ammeter[i], WattmeterC, WattmeterM)
+            }
+        }
+    }
+}
+
+function checkVoltmeters(load, meter) {
+    let flag = 0
+    if (isConnected(load[0], meter[0])) {
+        if (isConnected(load[1], meter[1])) {
+            flag = 1
+        }
+    }
+    else if (isConnected(load[0], meter[1])) {
+        if (isConnected(load[1], meter[0])) {
+            flag = 2 //we are using non polar capacitor
+        }
+    }
+    return flag
+}
+
+function LoadsToVoltmeters() {
+    connList = []
+    let inductor = [InductorPositive, InductorNegative]
+    let resistor = [ResistorPositive, ResistorNegative]
+    let capacitor = [CapacitorPositive, CapacitorNegative]
+
+    let loadsList = [inductor, resistor, capacitor]
+
+    let TopAmmeter = [TopAmmeterPositive, TopAmmeterNegative]
+    let SecAmmeter = [SecAmmeterPositive, SecAmmeterNegative]
+    let BotAmmeter = [BotAmmeterPositive, BotAmmeterNegative]
+
+    let meterList = [TopAmmeter, SecAmmeter, BotAmmeter]
+
+    let emptymeter = 0
+    for (let i = 0; i < 3; i++) {
+
+        let emptyload = 0
+        for (let j = 0; j < 3; j++) {
+
+            let data = checkVoltmeters(loadsList[j], meterList[i]);
+            emptyload = emptyload + data
+
+            if ((data != 0) && (j + data < 4)) {
+                connList.push(j)
+            }
+        }
+        if (emptyload == 0) {
+            return false
+        }
+        else {
+            emptymeter = emptymeter + 1
+        }
+    }
+    if ((emptymeter != 0) && (connList.length > 2)) {
+        return true
+    }
+}
+
+function checkArr() {
+    let inductor = [InductorPositive, InductorNegative]
+    let resistor = [ResistorPositive, ResistorNegative]
+    let capacitor = [CapacitorPositive, CapacitorNegative]
+
+    let loadsList = [inductor, resistor, capacitor]
+    let arrange = []
+    let index = [inductor, resistor, capacitor]
+
+    for (let i = 0; i < loadsList.length; i++) {
+        if (isConnected(loadsList[i][0], WattmeterV)) {
+            arrange.push(loadsList[i][0])
+            arrange.push(loadsList[i][1])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+        else if (isConnected(loadsList[i][1], WattmeterV)) {
+            arrange.push(loadsList[i][1])
+            arrange.push(loadsList[i][0])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+    }
+
+    for (let i = 0; i < loadsList.length; i++) {
+        if (isConnected(loadsList[i][0], WattmeterL)) {
+            arrange.push(loadsList[i][1])
+            arrange.push(loadsList[i][0])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+        else if (isConnected(loadsList[i][1], WattmeterL)) {
+            arrange.push(loadsList[i][0])
+            arrange.push(loadsList[i][1])
+            index.splice(index.indexOf(loadsList[i]), 1)
+        }
+    }
+
+    temp = arrange.splice(2, 3)
+    arrange.push(index[0][0])
+    arrange.push(index[0][1])
+    arrange = arrange.concat(temp)
+
+    if ((isConnected(arrange[1], arrange[2])) && (isConnected(arrange[3], arrange[4]))) {
+        return true
+    }
+    else if ((isConnected(arrange[1], arrange[3])) && (isConnected(arrange[2], arrange[4]))) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+check.onclick = function checkConn() {
+    flags2 = 1
+
+    if (staticConn() && checkArr() && LoadsToVoltmeters()) {
+        window.alert('Right Connections!')
+        MCB.disabled = false
+    }
+    else {
+        window.alert('Invalid Connections!')
+    }
+}
+
+function calculateVars() {
     Mamm = 12
     Mvol = 12
     amm1 = 12
@@ -266,7 +509,7 @@ function calculateVars(){
     Watt = 12
 }
 
-function updateMeters(){
+function updateMeters() {
     calculateVars()
 
     rotate_element(Mamm, MainAmmeterNeedle)
@@ -277,7 +520,7 @@ function updateMeters(){
     rotate_element(Watt, WattmeterNeedle)
 }
 
-function setZero(){
+function setZero() {
     rotate_element(0, MainAmmeterNeedle)
     rotate_element(0, MainVoltmeterNeedle)
     rotate_element(0, TopAmmeterNeedle)
