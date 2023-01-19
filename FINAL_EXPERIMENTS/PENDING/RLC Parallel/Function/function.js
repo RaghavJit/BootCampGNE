@@ -71,7 +71,7 @@ var variac_state = 0
 var var_voltage = 0
 var angle = 0
 var angle_inc = 3.6
-var volt_inc = 2.3
+var volt_inc = 2.2
 
 var Mamm = 0
 var Mvol = 0
@@ -300,7 +300,12 @@ function staticConn() {
         if (isConnected(WattmeterV, VarOut[i])) {
             if (isConnected(Ammeter[i], VarOut[conjNum(i)])) {
                 if(ThreeNodes(Ammeter[conjNum(i)], WattmeterC, WattmeterM) && (conn == 4)){
-                    return true;
+                    return true
+                }
+            }
+            else if (isConnected(Ammeter[conjNum(i)], VarOut[conjNum(i)])) {
+                if(ThreeNodes(Ammeter[i], WattmeterC, WattmeterM) && (conn == 4)){
+                    return true
                 }
             }
         }
@@ -468,12 +473,13 @@ function rotate_element(deg, elemnt) {
 }
 
 function calculateVars() {
-    Mamm = 12
-    Mvol = 12
-    amm1 = 12
-    amm2 = 12
-    amm3 = 12
-    Watt = 12
+    
+    Mamm = (var_voltage/220)*34.97
+    Mvol = (var_voltage/220)*220
+    amm1 = (var_voltage/220)
+    amm2 = (var_voltage/220)
+    amm3 = (var_voltage/220)
+    Watt = (var_voltage/220)*984
 }
 
 function updateMeters() {
