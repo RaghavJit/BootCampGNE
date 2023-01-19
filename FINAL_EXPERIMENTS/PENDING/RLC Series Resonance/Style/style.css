@@ -471,7 +471,7 @@ body {
     border-width: 5px;
     color: red;
     border-color:#808080;
-    font-size: 30px;
+    font-size: 18px;
 }
 
 #fg_on{
@@ -482,7 +482,6 @@ body {
     height:30px;
     width:30px;
     border-radius: 25px;
-
     opacity: 0;
 }
 

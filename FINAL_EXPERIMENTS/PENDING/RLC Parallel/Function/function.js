@@ -318,6 +318,7 @@ function checkNodes(ammeter, load) {
             if (isConnected(ammeter[i], load[j])) {
                 VList.push(load[conjNum(j)])
                 LList.push(ammeter[conjNum(i)])
+                return true
             }
         }
     }
@@ -328,7 +329,9 @@ function AmmeterToLoad() {
     LList = []
     for (let i = 0; i < ammeterList.length; i++) {
         for (let j = 0; j < loadList.length; j++) {
-            checkNodes(ammeterList[i], loadList[j])
+            if(checkNodes(ammeterList[i], loadList[j])){
+                connList.push(j)
+            }
         }
     }
 }
@@ -359,12 +362,17 @@ function ResolveVandL() {
     }
 }
 
+function PolarityCheck(){
+    let indcAmm = ammeterList[connList.indexOf(2)]
+    return ((indcAmm[0], InductorPositive) || (indcAmm[1], InductorNegative))
+}
+
 check.onclick = function checkConn() {
     if (staticConn()) {
 
         AmmeterToLoad()
 
-        if (VList.indexOf(CapacitorPositive) < 0) {
+        if (PolarityCheck()) {
             if (ResolveVandL()) {
                 MCB.disabled = false
                 window.alert("Right connections! ")
@@ -376,6 +384,9 @@ check.onclick = function checkConn() {
         else {
             window.alert("Invalid connections! ")
         }
+    }
+    else{
+        window.alert("Invalid connections! ") 
     }
 }
 
@@ -424,14 +435,22 @@ add.onclick = function () {
     let row = vtable.insertRow(rindex + 1);
     rindex = rindex + 1;
     let SNo = row.insertCell(0);
-    let load = row.insertCell(1)
-    let volt = row.insertCell(2);
-    let curnt = row.insertCell(3);
-    let pow1 = row.insertCell(4);
-    let pow2 = row.insertCell(5);
+    let voltage = row.insertCell(1)
+    let current = row.insertCell(2);
+    let ai = row.insertCell(3);
+    let ar = row.insertCell(4);
+    let ac = row.insertCell(5);
     let pow = row.insertCell(6);
 
-    if (vtable.row.length > 6) {
+    SNo.innerHtml = rindex
+    voltage.innerHtml = 220
+    current.innerHtml = 34.97
+    ai.innerHtml = 35.03
+    ar.innerHtml = 4.4
+    ac.innerHtml = 0.33
+    pow.innerHtml = 984
+
+    if (vtable.rows.length >= 2) {
         powDelta.disabled = false
     }
 }
@@ -458,13 +477,14 @@ knob.onclick = function () {
         if (angle_inc == -3.6) {
             angle_inc = 3.6
             volt_inc = 2.3
-
+            add.disabled = true
         }
         else if (angle_inc == 3.6) {
             angle_inc = -3.6
             volt_inc = -2.3
+            add.disabled = false
         }
-        add.disabled = false
+        
     }
 }
 
@@ -476,21 +496,23 @@ function calculateVars() {
     
     Mamm = (var_voltage/220)*34.97
     Mvol = (var_voltage/220)*220
-    amm1 = (var_voltage/220)
-    amm2 = (var_voltage/220)
-    amm3 = (var_voltage/220)
     Watt = (var_voltage/220)*984
+
+    let loadValueList = [36.03, 4.4, 0.33]
+    amm1 = (var_voltage/220)*loadValueList[connList[0]]
+    amm2 = (var_voltage/220)*loadValueList[connList[1]]
+    amm3 = (var_voltage/220)*loadValueList[connList[2]]
 }
 
 function updateMeters() {
     calculateVars()
 
-    rotate_element(Mamm, MainAmmeterNeedle)
-    rotate_element(Mvol, MainVoltmeterNeedle)
-    rotate_element(amm1, TopAmmeterNeedle)
-    rotate_element(amm2, SecAmmeterNeedle)
-    rotate_element(amm3, BotAmmeterNeedle)
-    rotate_element(Watt, WattmeterNeedle)
+    rotate_element(Mamm*(180/50), MainAmmeterNeedle)
+    rotate_element(Mvol*(180/220), MainVoltmeterNeedle)
+    rotate_element(amm1*(180/50), TopAmmeterNeedle)
+    rotate_element(amm2*(180/50), SecAmmeterNeedle)
+    rotate_element(amm3*(180/50), BotAmmeterNeedle)
+    rotate_element(Watt*(90/1500), WattmeterNeedle)
 }
 
 function setZero() {
