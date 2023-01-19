@@ -173,7 +173,7 @@ instance.bind("ready", function () {
         isTarget: true,
         connectionsDetachable: true,
         connectionType: "red",
-        paintStyle:  { fill: "rgb(229, 97, 97)", strokeWidth: 2.5 },
+        paintStyle: { fill: "rgb(229, 97, 97)", strokeWidth: 2.5 },
         maxConnections: 10,
         connector: ["StateMachine", { curviness: -30 }]
     })
@@ -336,8 +336,8 @@ function StarterToMotor() {
 // }
 
 function checkVoltmeter() {
-    let connected 
-    let unconnected 
+    let connected
+    let unconnected
     let strt_nodes = [StarterOutBlu, StarterOutRed, StarterOutYel]
 
     if (isConnected(StarterNodeEmpty, VoltmeterPositive)) {
@@ -363,16 +363,16 @@ function checkVoltmeter() {
 }
 
 function checkAmmeter() {
-    if((isConnected(StarterNodeEmpty, AmmeterNegative) && isConnected(MotorNodeEmpty, AmmeterPositive)) || (isConnected(StarterNodeEmpty, AmmeterPositive) && (isConnected(MotorNodeEmpty, AmmeterNegative)))){
+    if ((isConnected(StarterNodeEmpty, AmmeterNegative) && isConnected(MotorNodeEmpty, AmmeterPositive)) || (isConnected(StarterNodeEmpty, AmmeterPositive) && (isConnected(MotorNodeEmpty, AmmeterNegative)))) {
         return true
     }
 }
 
 check.onclick = function checkConn() {
     if (MCBToStarter() && StarterToMotor()) {
-        if(checkAmmeter() && checkVoltmeter()){
+        if (checkAmmeter() && checkVoltmeter()) {
             window.alert("Right Connections! Please Select weights and then turn on the MCB")
-            flags2=1
+            flags2 = 1
             w1.disabled = false
             w1.style.border = '3px solid red'
             w2.disabled = false
@@ -382,8 +382,26 @@ check.onclick = function checkConn() {
 }
 
 function calculateTorque() {
-    Torque = 9.81 * Math.abs(parseFloat(w1.value) - parseFloat(w2.value)) * 0.15;
-    MTSpeed = 1491.03 - (29.132 * Torque)
+    if (w1.selectedIndex != 0) {
+
+        let torqueOptions = [NaN, 0, 1.030, 2.648, 4.561, 5.297, 6.180]
+        Torque = torqueOptions[w1.selectedIndex]
+
+        // MTSpeed = 1491.03 - (29.132 * Torque)
+        let speedOptions = [NaN, 1492, 1450, 1420, 1380, 1330, 1300]
+        MTSpeed = speedOptions[w1.selectedIndex]
+
+        let currentOptions = [NaN, 0.5, 1, 0.5, 2, 2.5, 3]
+        console.log(currentOptions)
+        console.log(currentOptions[1])
+        console.log(currentOptions[w1.selectedIndex])
+        console.log(w1.selectedIndex)
+        Current = currentOptions[w1.selectedIndex]
+        console.log(Current)
+    }
+    else{
+        window.alert("Please select values of weights w1 and w2")
+    }
 }
 
 function disconnect(num) {
@@ -391,44 +409,50 @@ function disconnect(num) {
     instance.deleteConnectionsForElement(nodes_list[num])
 }
 
-function setMeters(){
-    VoltmeterNeedle.style.transform = "rotate(144deg)"
-    calculateTorque()
-
-    Current = (Torque+1.2754)/2.6065
-
-    AmmeterNeedle.style.transform = "rotate("+ Current*18 +"deg)"
+function setMeters() {
+    if (w1.selectedIndex == 0) {
+        calculateTorque()
+        VoltmeterNeedle.style.transform = "rotate(144deg)"
+        AmmeterNeedle.style.transform = "rotate(" + Current * 18 + "deg)"
+    }
 }
 
-function setZero(){
+function setZero() {
     AmmeterNeedle.style.transform = "rotate(0deg)"
     VoltmeterNeedle.style.transform = "rotate(0deg)"
     setSpeed(20000000)
 }
 
-function refresh(){
+function refresh() {
     calculateTorque()
     setMeters()
 
-    mtspeed =  Math.abs(parseInt(w1.value) - parseInt(w2.value))/3 + 1
+    let speedOptions = [NaN, 1, 2, 3, 4, 5, 6]
+    mtspeed = speedOptions[w1.selectedIndex]
     setSpeed(mtspeed)
 }
 
-w1.oninput = function (){
-    if(((w1.value != 0) || (w2.value != 0)) && (MCB_state == 1)){
-        refresh()
-    }
+w1.oninput = function () {
     flags4 = 1
+    w2.selectedIndex = w1.selectedIndex;
     w1.style.border = '0px solid red'
-    MCB.disabled=false
-}
-w2.oninput = function (){
-    if(((w1.value != 0) || (w2.value != 0)) && (MCB_state == 1)){
+    w2.style.border = '0px solid red'
+    MCB.disabled = false
+
+    if (MCB_state == 1) {
         refresh()
     }
+}
+w2.oninput = function () {
     flags4 = 1
+    w1.selectedIndex = w2.selectedIndex;
+    w1.style.border = '0px solid red'
     w2.style.border = '0px solid red'
-    MCB.disabled=false
+    MCB.disabled = false
+
+    if (MCB_state == 1) {
+        refresh()
+    }
 }
 
 MCB.onclick = function toggle_MCB() {
@@ -484,7 +508,7 @@ add.onclick = function AddToTable() {
 
     index = index + 1
 
-    if(index > 6){
+    if (index > 6) {
         plot.disabled = false
     }
 }
@@ -547,7 +571,7 @@ plot.onclick = function plotGraph() {
 
 function setSpeed(value) {
     console.log("done")
-    rotor.style.animation = "App-logo-spin infinite "+value+"s linear"
+    rotor.style.animation = "App-logo-spin infinite " + value + "s linear"
     // speed = value
     // window.clearInterval(interval)
     // interval = window.setInterval(runMotor, 360 * speed)

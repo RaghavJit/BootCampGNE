@@ -68,7 +68,7 @@
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="plot" >PLOT</button>
+                        <button id="plot" disabled="true">PLOT</button>
                         <button id="reset">RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
@@ -195,8 +195,44 @@
                     </div>
                     <div class="rotor-view">
                         <p>ROTOR VIEW</p>
-                        <input type="number" id="w1_motor" value="0" min="0" max="15" disabled="true"></input>
-                        <input type="number" id="w2_motor" value="0" min="0" max="15" disabled="true"></input>
+                        <!-- <input type="number" id="w1_motor" value="0" min="0" max="15" disabled="true"></input> -->
+                        <form id="w1_motor_form">
+                            <select id="w1_motor" disabled="true">
+                                <option value="W1"> -
+                                </option>
+                                <option value="0"> 0
+                                </option>
+                                <option value="2.5"> 2.5
+                                </option>
+                                <option value="3.7"> 3.7
+                                </option>
+                                <option value="5.4"> 5.4
+                                </option>
+                                <option value="6"> 6
+                                </option>
+                                <option value="6.6"> 6.6
+                                </option>
+                            </select>
+                        </form>
+                        <!-- <input type="number" id="w2_motor" value="0" min="0" max="15" disabled="true"></input> -->
+                        <form id="w2_motor_form">
+                            <select id="w2_motor" disabled="true">
+                                <option value="W2"> -
+                                </option>
+                                <option value="0"> 0 
+                                </option>
+                                <option value="1.8"> 1.8
+                                </option>
+                                <option value="1.9"> 1.9
+                                </option>
+                                <option value="2.3"> 2.3
+                                </option>
+                                <option value="2.4"> 2.4
+                                </option>
+                                <option value="2.4"> 2.4
+                                </option>
+                            </select>
+                        </form>
                         <img src="../Assets/2.png" alt="" height="270" width="270" id="rotor1"
                             style="transform: rotate(0deg);">
                         <img src="../Assets/1.png" alt="" height="270" width="270" id="rotor2"
@@ -222,17 +258,17 @@
         <div class="clear"></div>
 
 
-            <div class="graph" id="plotContiner">
-                <div class="graph-heading">
-                    <p>GRAPH</p>
-                </div>
-                <div class="chart-container">
-                    <canvas id="myPlot" class="MyCanvas" height="70px" width="200px">
-
-                    </canvas>
-                </div>
-
+        <div class="graph" id="plotContiner">
+            <div class="graph-heading">
+                <p>GRAPH</p>
             </div>
+            <div class="chart-container">
+                <canvas id="myPlot" class="MyCanvas" height="70px" width="200px">
+
+                </canvas>
+            </div>
+
+        </div>
 
 
     </div>

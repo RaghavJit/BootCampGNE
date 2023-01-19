@@ -374,8 +374,15 @@ function staticConn() {
     for (let i = 0; i < 2; i++) {
         if (isConnected(WattmeterV, VarOut[i])) {
             if (isConnected(Ammeter[i], VarOut[conjNum(i)])) {
+                
                 if(ThreeNodes(Ammeter[conjNum(i)], WattmeterC, WattmeterM) && (conn == 4)){
-                    return true;
+                    return true
+                }
+            }
+            else if (isConnected(Ammeter[conjNum(i)], VarOut[conjNum(i)])) {
+                
+                if(ThreeNodes(Ammeter[i], WattmeterC, WattmeterM) && (conn == 4)){
+                    return true
                 }
             }
         }
