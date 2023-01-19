@@ -608,16 +608,17 @@ img {
     position: relative;
     bottom: 24.0px;
     transform: rotate(0deg);
+    top: -50px;
 }
 
 #rotor2 {
     position: relative;
-    bottom: 264px;
+    bottom: 290px;
     transform: rotate(0deg);
     transform-origin: 50% 63.5%;
 }
 
-.rotor-view input {
+.rotor-view select {
     outline: none;
     border: none;
     height: 25px;
@@ -632,11 +633,13 @@ img {
 }
 
 #w1_motor {
+    top: 0px;
     left: 70px;
 }
 
 #w2_motor {
-    left: 135px;
+    top: -25px;
+    left: 200px;
 }
 
 /*Calculation Implementation*/
