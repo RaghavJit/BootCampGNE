@@ -274,14 +274,22 @@ add.onclick = function () {
     let row = vtable.insertRow(rindex + 1);
     rindex = rindex + 1
     let SNo = row.insertCell(0);
-    let load = row.insertCell(1)
-    let volt = row.insertCell(2);
-    let curnt = row.insertCell(3);
-    let pow1 = row.insertCell(4);
-    let pow2 = row.insertCell(5);
+    let voltage = row.insertCell(1)
+    let current = row.insertCell(2);
+    let vi = row.insertCell(3);
+    let vr = row.insertCell(4);
+    let vc = row.insertCell(5);
     let pow = row.insertCell(6);
 
-    if (vtable.row.length > 6) {
+    SNo.innerHTML = rindex
+    voltage.innerHTML = 220
+    current.innerHTML = 11.34
+    vi.innerHTML = 534.45
+    vr.innerHTML = 136.08
+    vc.innerHTML = 360.95
+    pow.innerHTML = 1500
+
+    if (vtable.row.length >= 2) {
         powDelta.disabled = false
     }
 }
@@ -308,13 +316,13 @@ knob.onclick = function () {
         if (angle_inc == -3.6) {
             angle_inc = 3.6
             volt_inc = 2.3
-
+            add.disabled = true
         }
         else if (angle_inc == 3.6) {
             angle_inc = -3.6
             volt_inc = -2.3
+            add.disabled = false
         }
-        add.disabled = false
     }
 }
 
@@ -507,23 +515,25 @@ check.onclick = function checkConn() {
 }
 
 function calculateVars() {
-    Mamm = 12
-    Mvol = 12
-    amm1 = 12
-    amm2 = 12
-    amm3 = 12
-    Watt = 12
+    Mamm = (var_voltage/220)*11.34
+    Mvol = (var_voltage/220)*220
+    Watt = (var_voltage/220)*1500
+
+    let loadValueList = [534.45, 136.08, 360.95]
+    amm1 = (var_voltage/220)*loadValueList[connList[0]]
+    amm2 = (var_voltage/220)*loadValueList[connList[1]]
+    amm3 = (var_voltage/220)*loadValueList[connList[2]]
 }
 
 function updateMeters() {
     calculateVars()
 
-    rotate_element(Mamm, MainAmmeterNeedle)
-    rotate_element(Mvol, MainVoltmeterNeedle)
-    rotate_element(amm1, TopAmmeterNeedle)
-    rotate_element(amm2, SecAmmeterNeedle)
-    rotate_element(amm3, BotAmmeterNeedle)
-    rotate_element(Watt, WattmeterNeedle)
+    rotate_element(Mamm*(180/50), MainAmmeterNeedle)
+    rotate_element(Mvol*(180/600), MainVoltmeterNeedle)
+    rotate_element(amm1*(180/600), TopAmmeterNeedle)
+    rotate_element(amm2*(180/600), SecAmmeterNeedle)
+    rotate_element(amm3*(180/600), BotAmmeterNeedle)
+    rotate_element(Watt*(90/1500), WattmeterNeedle)
 }
 
 function setZero() {

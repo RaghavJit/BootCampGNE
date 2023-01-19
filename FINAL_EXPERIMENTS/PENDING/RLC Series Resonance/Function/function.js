@@ -23,8 +23,8 @@ var InductorNegative = document.getElementById("i_n")
 var ResistorPositive = document.getElementById("rh_p")
 var ResistorNegative = document.getElementById("rh_n")
 
-var CapacitorPositive = document.getElementById("c_p")
-var CapacitorNegative = document.getElementById("c_n")
+var CapacitorPositive = document.getElementById("c_n")
+var CapacitorNegative = document.getElementById("c_p")
 
 var FunctionGene = document.getElementById("fg_on")
 var FunctGeneA = document.getElementById("fg_a")
@@ -33,6 +33,7 @@ var FunctGeneC = document.getElementById("fg_c")
 var FunctGeneD = document.getElementById("fg_d")
 var FunctGeneDis = document.getElementById("fg_dis")
 var FunctG_image = document.getElementById("transformer")
+var FreqSlider = document.getElementById("RL")
 
 var AmmeterNeedle = document.getElementById("P_A")
 var VoltmeterNeedle = document.getElementById("P_V")
@@ -52,7 +53,7 @@ var flags4 = 0
 var flags5 = 0
 var flags6 = 0
 
-var index = 0
+var rindex = 0
 
 var ValidConn = [MCB_Positive, FunctGeneA, MCB_Negative, FunctGeneB, FunctGeneC, VoltmeterPositive, FunctGeneD, VoltmeterNegative]
 
@@ -123,6 +124,12 @@ instance.bind("ready", function () {
     })
 
 })
+
+FreqSlider.oninput = function (){
+    FunctGeneDis.value = "Fq = " + FreqSlider.value +" Hz"
+    calculateVars()
+    updateMeters()
+}
 
 function conjNum(num) {
     return Math.abs(num - 1)
@@ -219,7 +226,7 @@ function staticConn() {
     }
 }
 
-function checkConn() {
+check.onclick = function checkConn() {
     flags2 = 1
     
     if(staticConn()){
@@ -250,15 +257,18 @@ function setZero(){
 }
 
 function calculateVars(){
-    Mamm = 12
-    Mvol = 12
+    let freqList = [1, 2, 3, 4, 5, 6, 7, 8]
+    let currList = [3.6, 7.0, 10, 8.8, 7.2, 6, 5.2, 4.6]
+
+    Mamm = currList[freqList.indexOf(parseInt(FreqSlider.value))]
+    Mvol = 10
 }
 
 function updateMeters(){
     calculateVars()
 
-    rotate_element(Mamm, AmmeterNeedle)
-    rotate_element(Mvol, VoltmeterNeedle)
+    rotate_element(Mamm*(180/10), AmmeterNeedle)
+    rotate_element(Mvol*(180/220), VoltmeterNeedle)
 
 }
 
@@ -307,12 +317,14 @@ add.onclick = function (){
     let row = vtable.insertRow(index + 1);
 
     let SNo = row.insertCell(0);
-    let load = row.insertCell(1)
-    let volt = row.insertCell(2);
-    let curnt = row.insertCell(3);
-    let pow1 = row.insertCell(4);
-    let pow2 = row.insertCell(5);
-    let pow = row.insertCell(6);
+    let voltage = row.insertCell(1);
+    let current = row.insertCell(2);
+    let freqency = row.insertCell(3);
+
+    SNo.innerHTML = rindex;
+    voltage.innerHTML = 10
+    current.innerHTML = Mamm
+    freqency.innerHTML = FreqSlider.value
 
     if(vtable.row.length > 6){
         powDelta.disabled = false
