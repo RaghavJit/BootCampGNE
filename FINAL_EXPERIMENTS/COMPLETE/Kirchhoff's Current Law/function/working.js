@@ -407,6 +407,8 @@ plot.onclick = function plotVal() {
 
     if (voltageVal.length >= 6) {
 
+        prnt.disabled = false
+
         var temp1 = document.getElementById("plotContiner")
         var temp2 = temp1.innerHTML
         temp1.innerHTML = temp2
@@ -480,6 +482,13 @@ reset.onclick = function reset_conn(){
     window.location.reload()
 }
 
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: vp, target: vn })
+        instance.deleteEveryConnection()
+    }, 50);
+}
+
 
 function highlight() {
     s1 = document.getElementById("s1");
@@ -538,7 +547,6 @@ function highlight() {
         s6.style.color = "black";
         s7.style.color = "red";
 
-        prnt.disabled = false;
     }
 }
 

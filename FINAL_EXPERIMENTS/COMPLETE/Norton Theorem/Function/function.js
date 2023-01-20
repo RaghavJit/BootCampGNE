@@ -219,7 +219,6 @@ function checkcon(l) {
             }
         }
     }
-    console.log(arrChk)
     return arrChk;
 }
 
@@ -242,11 +241,11 @@ function updateAmmeters(n) {
 
     if (pow_state == 1) {
         if (n == 2) {
-            var d = Isc * 0.8181
+            var d = Isc * (180/220)
             P_A.style.transform = "rotate(" + Math.abs(d) + "deg)"
         }
         else if (n == 3) {
-            var d = Il * 0.8181
+            var d = Il * (180/220)
             P_A.style.transform = "rotate(" + Math.abs(d) + "deg)"
         }
     }
@@ -415,12 +414,20 @@ calculate.onclick = function doCalc() {
 verify.onclick = function verifyVal() {
     if (IlC.innerHTML == user.innerHTML) {
         window.alert("Observed value and calculated values are equal, Norton's Theorem is verified")
+        print.disabled = false
     }
 }
 
 function disconnect(node) {
     var node_list = [p_a, n_a, p_mul, n_mul, p_pow, n_pow, c_p_pow, c_n_pow, c_ul, c_ur, c_ll, c_lr]
     instance.deleteConnectionsForElement(node_list[node])
+}
+
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: p_a, target: n_a })
+        instance.deleteEveryConnection()
+    }, 50);
 }
 
 function highlight() {

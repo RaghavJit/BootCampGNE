@@ -3,6 +3,7 @@ cont = document.getElementById("container")
 check = document.getElementById("check")
 add = document.getElementById("add")
 plot = document.getElementById("plot")
+prnt = document.getElementById("print")
 
 MCB_image = document.getElementById("M")
 MCB = document.getElementById("on_power")
@@ -229,15 +230,12 @@ function StarterToMotor() {
                 switch (j) {
                     case 0:
                         motor_connected_r = motor_connected_r + 1
-                        console.log(motor_connected_r)
                         break;
                     case 1:
                         motor_connected_y = motor_connected_y + 1
-                        console.log(motor_connected_y)
                         break;
                     case 2:
                         motor_connected_b = motor_connected_b + 1
-                        console.log(motor_connected_b)
                         break;
                 }
                 // MotorInNodes.splice(MotorInNodes.indexOf(MotorInNodes[j]), 1)
@@ -246,7 +244,6 @@ function StarterToMotor() {
         }
 
         if (starter_connected == 0) {
-            console.log(Starter_nodes[i]);
             StarterNodeEmpty = Starter_nodes[i];
         }
     }
@@ -344,7 +341,6 @@ function checkVoltmeter() {
         connected = VoltmeterPositive
         unconnected = VoltmeterNegative
         strt_nodes.splice(strt_nodes.indexOf(StarterNodeEmpty), 1)
-        console.log(strt_nodes)
         if (isConnected(unconnected, strt_nodes[0]) || isConnected(unconnected, strt_nodes[1])) {
             return true
         }
@@ -354,7 +350,6 @@ function checkVoltmeter() {
         connected = VoltmeterNegative
         unconnected = VoltmeterPositive
         strt_nodes.splice(strt_nodes.indexOf(StarterNodeEmpty), 1)
-        console.log(strt_nodes)
         if (isConnected(unconnected, strt_nodes[0]) || isConnected(unconnected, strt_nodes[1])) {
             return true
         }
@@ -370,7 +365,7 @@ function checkAmmeter() {
 
 check.onclick = function checkConn() {
     if (MCBToStarter() && StarterToMotor()) {
-        if (checkAmmeter() && checkVoltmeter()) {
+        if (checkAmmeter() && checkVoltmeter() && (instance.getAllConnections().length == 9)) {
             window.alert("Right Connections! Please Select weights and then turn on the MCB")
             flags2 = 1
             w1.disabled = false
@@ -392,12 +387,9 @@ function calculateTorque() {
         MTSpeed = speedOptions[w1.selectedIndex]
 
         let currentOptions = [NaN, 0.5, 1, 0.5, 2, 2.5, 3]
-        console.log(currentOptions)
-        console.log(currentOptions[1])
-        console.log(currentOptions[w1.selectedIndex])
-        console.log(w1.selectedIndex)
         Current = currentOptions[w1.selectedIndex]
-        console.log(Current)
+
+        prnt.disabled=false
     }
     else{
         window.alert("Please select values of weights w1 and w2")
@@ -412,7 +404,7 @@ function disconnect(num) {
 function setMeters() {
     if (w1.selectedIndex == 0) {
         calculateTorque()
-        VoltmeterNeedle.style.transform = "rotate(144deg)"
+        VoltmeterNeedle.style.transform = "rotate("+ 144 +"deg)"
         AmmeterNeedle.style.transform = "rotate(" + Current * 18 + "deg)"
     }
 }
@@ -456,7 +448,6 @@ w2.oninput = function () {
 }
 
 MCB.onclick = function toggle_MCB() {
-    console.log("working")
 
     if (MCB_state == 1) {
         MCB_state = 0;
@@ -482,8 +473,6 @@ add.onclick = function AddToTable() {
     var torque = Torque;
     var speed = MTSpeed
 
-    console.log(torque)
-    console.log(speed)
     let row = vtable.insertRow(index);
 
     let Sno = row.insertCell(0)
@@ -514,6 +503,9 @@ add.onclick = function AddToTable() {
 }
 
 plot.onclick = function plotGraph() {
+
+    print.disabled = false
+
     flags6 = 1
     var temp1 = document.getElementById("plotContiner")
     var temp2 = temp1.innerHTML
@@ -532,7 +524,7 @@ plot.onclick = function plotGraph() {
             datasets: [{
                 label: "MOTOR",
                 fill: false,
-                lineTension: 0.8,
+                lineTension: 0,
                 borderColor: "blue",
                 data: SpeedList
             }]
@@ -570,7 +562,6 @@ plot.onclick = function plotGraph() {
 // }
 
 function setSpeed(value) {
-    console.log("done")
     rotor.style.animation = "App-logo-spin infinite " + value + "s linear"
     // speed = value
     // window.clearInterval(interval)
@@ -596,6 +587,12 @@ function setSpeed(value) {
 //     }
 // }
 
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: MCB_Red, target: MCB_Blue })
+        instance.deleteEveryConnection()
+    }, 50);
+}
 
 function highlight() {
 

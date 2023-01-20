@@ -588,16 +588,19 @@ img {
 }
 
 #R1C {
+    position: relative;
     bottom: 410px;
     left: 50px;
 }
 
 #R2C {
+    position: relative;
     bottom: 385px;
     right: 12px;
 }
 
 #R3C {
+    position: relative;
     bottom: 360px;
     right: 74px;
 }

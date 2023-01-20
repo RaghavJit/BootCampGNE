@@ -257,6 +257,12 @@ VALID_CONNECTIONS = [
 
     AmmeterNegative, WM1,
     AmmeterNegative, WC1,
+
+    WM1, AmmeterNegative, 
+    WM1, WC1, 
+
+    WC1, WM1, 
+    WC1, AmmeterNegative
 ]
 
 function numOfConnections(node) { //counts total number of connections to and from a node
@@ -310,8 +316,6 @@ function check_delta() { //check delta config
 
             SpecialNode = config_nodes[i]
 
-            console.log(SpecialNode)
-
             if (connInNodes(config_nodes[i]) == 1) {
 
                 let targetIndex = in_nodes.indexOf(config_nodes[i])
@@ -337,8 +341,6 @@ function check_delta() { //check delta config
             }
         }
     }
-
-    console.log(MyCounter)
 
     if (MyCounter == 3) {
         return true;
@@ -377,8 +379,6 @@ function check_star() { //check star config
 
             SpecialNode = config_nodes[i]
 
-            console.log(SpecialNode)
-
             if (connInNodes(config_nodes[i]) == 0) {
 
                 let targetIndex = in_nodes.indexOf(config_nodes[i])
@@ -413,7 +413,6 @@ function check_star() { //check star config
             return true;
         }
         else {
-            console.log(index_tracker)
             return false;
         }
     }
@@ -432,6 +431,7 @@ function check_basic_loads() { //checks if main circuit is connected to nodes re
 function check_basic(port1, port2, port3) {
 
     let arrChk = 0;
+    let amv = 0;
 
     for (let i = 0; i < VALID_CONNECTIONS.length; i++) {
 
@@ -456,13 +456,13 @@ function check_basic(port1, port2, port3) {
         else if (i > 6) {
             if (i % 2 != 0) {
                 if ((instance.getConnections({ source: VALID_CONNECTIONS[i + 1], target: VALID_CONNECTIONS[i] })[0] != undefined) || (instance.getConnections({ source: VALID_CONNECTIONS[i], target: VALID_CONNECTIONS[i + 1] })[0] != undefined)) {
-                    arrChk = arrChk + 1;
+                    amv = amv + 1;
                 }
             }
         }
     }
 
-    if (arrChk == 9) {
+    if ((arrChk == 7)&&(amv == 4)) {
         return true;
     }
     else {
@@ -487,12 +487,12 @@ function check_permutations() {
 
 check.onclick = function giveResult() {
     if (check_permutations()) {
-        if (check_basic_loads() && check_delta()) {
+        if (check_basic_loads() && check_delta() && (instance.getAllConnections().length == 15)) {
             window.alert("Valid connections, loads are in DELTA configuration")
             connArrnagment = 1
             MCB.disabled = false
         }
-        else if (check_basic_loads() && check_star()) {
+        else if (check_basic_loads() && check_star() && (instance.getAllConnections().length == 14)) {
             window.alert("Valid connections, loads are in STAR configuration")
             connArrnagment = 2
             MCB.disabled = false
@@ -506,7 +506,6 @@ check.onclick = function giveResult() {
     }
     else {
         window.alert("Invalid Connections!")
-        window.location.reload();
     }
     SpecialNode = undefined;
     connHistory.push(connArrnagment)
@@ -551,29 +550,29 @@ function updateMeters() {
     BLamp.src = "../Assets/b_on.png"
 
     if (connArrnagment == 1) {
-        rotateNeedle(PointerVoltmeter, VoltageSlider * (180 / 408));
+        rotateNeedle(PointerVoltmeter, VoltageSlider * (180 / 500));
 
         current = VoltageSlider * (0.5 / 408)
         rotateNeedle(PointerAmmeter, current * (180 / 10))
 
         power1 = VoltageSlider * (180 / 408)
-        rotateNeedle(PointerWatt1, power1 * (90 / 600))
+        rotateNeedle(PointerWatt1, power1 * (90 / 1500))
 
         power2 = VoltageSlider * (180 / 408)
-        rotateNeedle(PointerWatt2, power2 * (90 / 600))
+        rotateNeedle(PointerWatt2, power2 * (90 / 1500))
     }
 
     else if (connArrnagment == 2) {
-        rotateNeedle(PointerVoltmeter, VoltageSlider * (108 / 408));
+        rotateNeedle(PointerVoltmeter, VoltageSlider * (108 / 500));
 
         current = VoltageSlider * (1.2 / 408)
         rotateNeedle(PointerAmmeter, current * (180 / 10))
 
         power1 = VoltageSlider * (520 / 408)
-        rotateNeedle(PointerWatt1, power1 * (90 / 600))
+        rotateNeedle(PointerWatt1, power1 * (90 / 1500))
 
         power2 = VoltageSlider * (320 / 408)
-        rotateNeedle(PointerWatt2, power2 * (90 / 600))
+        rotateNeedle(PointerWatt2, power2 * (90 / 1500))
     }
 }
 
@@ -621,6 +620,9 @@ add.onclick = function addToTable() {
     MCB_image.src = "../Assets/MCB_Off.png"
     MCB.style.transform = "translate(0px, 0px)"
     trigger()
+    RLamp.src = "../Assets/r_off.png"
+    YLamp.src = "../Assets/y_off.png"
+    BLamp.src = "../Assets/b_off.png"
     add.disabled = true;
 }
 
