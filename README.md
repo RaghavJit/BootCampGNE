@@ -53,6 +53,7 @@ window.onload = function setJsPlumb() {
 1. Voltmeter range = (0-230)V
 1. Ammeter range = (0-500)V
 1. Wattmeter range = (0-100)W
+1. See issue #33
 1. css for 'verify' button needs to be done.
 ![alt text](./ReadmeImages/Variac_Knob%20-%20Copy.png?raw=true)
 
@@ -97,7 +98,7 @@ window.onload = function setJsPlumb() {
 1. Voltmeter range = (0-220)V
 1. Ammeter range = (0-50)V
 1. Wattmeter range = (0-1500)W can also write as (0-1.5)KW
-
+1. See issue #33
 
 ### RLC Series
 1. Change the name of experiment. (will be provided)
@@ -110,6 +111,7 @@ window.onload = function setJsPlumb() {
 1. Voltmeter range = (0-220)V
 1. Ammeter range = (0-50)V
 1. Wattmeter range = (0-1500)W can also write as (0-1.5)KW
+1. See issue #33
 
 ### RLC Resonance 
 1. Change the name of experiment. (will be provided).
@@ -117,7 +119,5 @@ window.onload = function setJsPlumb() {
 1. Calculation tab to be made.
 1. Write 'Resistor', 'Capacitor' and 'Inductor'.
 1. Shift above components (voltmeter and ammeter etc.) to right side (where there is free space.).
-1. Place the slider on the function generator.
-1. Voltmeter range = (0-220)V
-1. Ammeter range = (0-50)V
-1. Wattmeter range = (0-1500)W can also write as (0-1.5)KW
+1. Place the slider on the function generator (exactly similar to powersupply in pervious experiments).
+1. See issue #33

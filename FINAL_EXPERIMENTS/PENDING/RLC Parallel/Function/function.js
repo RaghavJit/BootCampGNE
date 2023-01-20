@@ -372,7 +372,7 @@ check.onclick = function checkConn() {
         AmmeterToLoad()
 
         if (PolarityCheck()) {
-            if (ResolveVandL()) {
+            if (ResolveVandL() && (instance.getAllConnections().length == 17)) {
                 MCB.disabled = false
                 window.alert("Right connections! ")
             }
@@ -380,9 +380,15 @@ check.onclick = function checkConn() {
                 window.alert("Invalid connections! ")
             }
         }
+        else if(instance.getAllConnections().length == 0){
+            window.alert("Please make connections!")
+        }
         else {
             window.alert("Invalid connections! ")
         }
+    }
+    else if(instance.getAllConnections().length == 0){
+        window.alert("Please make connections!")
     }
     else{
         window.alert("Invalid connections! ") 
@@ -474,12 +480,12 @@ knob.onclick = function () {
 
         if (angle_inc == -3.6) {
             angle_inc = 3.6
-            volt_inc = 2.3
+            volt_inc = 2.2
             add.disabled = true
         }
         else if (angle_inc == 3.6) {
             angle_inc = -3.6
-            volt_inc = -2.3
+            volt_inc = -2.2
             add.disabled = false
         }
         

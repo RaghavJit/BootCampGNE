@@ -504,7 +504,7 @@ add.onclick = function AddToTable() {
 
 plot.onclick = function plotGraph() {
 
-    print.disabled = false
+    prnt.disabled = false
 
     flags6 = 1
     var temp1 = document.getElementById("plotContiner")

@@ -505,7 +505,7 @@ function checkArr() {
 check.onclick = function checkConn() {
     flags2 = 1
 
-    if (staticConn() && checkArr() && LoadsToVoltmeters()) {
+    if (staticConn() && checkArr() && LoadsToVoltmeters() && (instance.getAllConnections().length == 18)) {
         window.alert('Right Connections!')
         MCB.disabled = false
     }
@@ -545,6 +545,13 @@ function setZero() {
     rotate_element(0, WattmeterNeedle)
 }
 
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: MCB_Positive, target: MCB_Negative })
+        instance.deleteEveryConnection()
+    }, 50);
+}
+
 function highlight() {
 
     let conn = instance.getConnections();
@@ -561,7 +568,7 @@ function highlight() {
         s3.style.color = "red";
     }
 
-    if (flags3 = 1) {
+    if (flags3 == 1) {
         s1.style.color = "black";
         s2.style.color = "black";
         s3.style.color = "black";

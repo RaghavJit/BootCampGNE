@@ -47,6 +47,7 @@ var funcGen_state = 0;
 var Mamm = 0
 var Mvol = 0
 
+var flagS = 1
 var flags2 = 0
 var flags3 = 0
 var flags4 = 0
@@ -126,9 +127,11 @@ instance.bind("ready", function () {
 })
 
 FreqSlider.oninput = function (){
+    flagS = 1
     FunctGeneDis.value = "Fq = " + FreqSlider.value +" Hz"
     calculateVars()
     updateMeters()
+    add.disabled = false
 }
 
 function conjNum(num) {
@@ -314,8 +317,8 @@ FunctionGene.onclick = function () {
 add.onclick = function (){
     flags6 = 1
 
-    let row = vtable.insertRow(index + 1);
-
+    let row = vtable.insertRow(rindex + 1);
+    rindex = rindex + 1
     let SNo = row.insertCell(0);
     let voltage = row.insertCell(1);
     let current = row.insertCell(2);
@@ -326,8 +329,72 @@ add.onclick = function (){
     current.innerHTML = Mamm
     freqency.innerHTML = FreqSlider.value
 
-    if(vtable.row.length > 6){
+    if ((FreqSlider.value == '3') && (flagS != 0) && (funcGen_state != 0)) {
+        vtable.rows[rindex].style.backgroundColor = "yellow"
+    }
+
+    if(vtable.rows.length > 6){
         powDelta.disabled = false
     }
 }
 
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: MCB_Positive, target: MCB_Negative })
+        instance.deleteEveryConnection()
+    }, 50);
+}
+
+function highlight() {
+
+    let conn = instance.getConnections();
+
+    if (conn.length >= 1) {
+        s1.style.color = "black";
+        s2.style.color = "red";
+
+    }
+
+    if (flags2 == 1) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "red";
+    }
+
+    if (flags3 == 1) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "red";
+    }
+
+    if ((flags4 == 1)) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "black";
+        s5.style.color = "red";
+    }
+
+    if ((flags5 == 1)) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "black";
+        s5.style.color = "black";
+        s6.style.color = "red";
+    }
+
+    if (flags6 == 1) {
+        s1.style.color = "black";
+        s2.style.color = "black";
+        s3.style.color = "black";
+        s4.style.color = "black";
+        s5.style.color = "black";
+        s6.style.color = "black";
+        s7.style.color = "red";
+    }
+
+}
+
+window.setInterval(highlight, 100);
