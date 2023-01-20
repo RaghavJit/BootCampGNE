@@ -3,7 +3,7 @@ var cont = document.getElementById("container")
 var add = document.getElementById("add")
 var check = document.getElementById("check")
 var calculate = document.getElementById("calculate")
-var print = document.getElementById("print")
+var prnt = document.getElementById("print")
 
 var loadImg = document.getElementById("loadImg")
 
@@ -396,7 +396,7 @@ function verifyUser() {
     }
 
     else if (document.getElementById('IlC_calc').value == document.getElementById('IlC_obsv').value) {
-        print.disabled = false
+        prnt.disabled = false
         window.alert("Observed Value is equal to calculated value. Hence, Thevenin's Theorem is verified");
     }
 

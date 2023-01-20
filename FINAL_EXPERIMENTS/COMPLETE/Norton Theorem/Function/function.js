@@ -5,6 +5,7 @@ var check = document.getElementById("check")
 var calculate = document.getElementById("calculate")
 var verify = document.getElementById("verify")
 var reset = document.getElementById("reset")
+var prnt = document.getElementById("print")
 
 var V1reading = document.getElementById("V1reading")
 var A1reading = document.getElementById("A1reading")
@@ -414,7 +415,7 @@ calculate.onclick = function doCalc() {
 verify.onclick = function verifyVal() {
     if (IlC.innerHTML == user.innerHTML) {
         window.alert("Observed value and calculated values are equal, Norton's Theorem is verified")
-        print.disabled = false
+        prnt.disabled = false
     }
 }
 

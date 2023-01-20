@@ -31,7 +31,12 @@
                 <ul class="steps">
                     <li>!!! Click on labels to delete connectinos for the corrusponding node.</li>
                     <li id="s1" style="color:red ;">Make connections as per the instructions given below.</li>
-
+                    <ul>
+                        <li>1->13, 2->14</li>
+                        <li>3->15, 4->16</li>
+                        <li>5->15, 9->16</li>
+                        <li>6->7, 8->12, 10->11</li>
+                    </ul>
                     <li id="s2"> Now, Check the connections by clicking on ‘CHECK’ button.</li>
                         <ul>
                             <li>If the connections are ‘Invalid connections’ click on corresponding node to remove the connection.</li>
@@ -77,6 +82,9 @@
 
                 <div class="sliders">
                     <p>SLIDERS</p>
+
+                    \[Quality Factor = \frac{2 \pi f_{r}L}{R}\]
+                    \[f_{r} = \frac{1}{2 \pi \sqrt{LC}}\]
 
                     <label for="RL">Voltage</label>
                     <input type="range" name="RL" id="RL" , min="1" max="8" step="1" value="0.1">
@@ -250,5 +258,7 @@
 
 </body>
 <script src="../Function/function.js"></script>
-
+<!-- latex cdn -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.js"></script> -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
 </html>

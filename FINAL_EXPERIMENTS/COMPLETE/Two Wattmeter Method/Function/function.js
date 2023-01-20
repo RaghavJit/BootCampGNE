@@ -3,6 +3,7 @@ var cont = document.getElementById("container")
 var check = document.getElementById("check")
 var add = document.getElementById("add")
 var reset = document.getElementById("reset")
+var prnt = document.getElementById("print")
 var calculate = document.getElementById("calculate")
 var MCB = document.getElementById("on_power")
 var MCB_image = document.getElementById("M")
@@ -624,6 +625,7 @@ add.onclick = function addToTable() {
     YLamp.src = "../Assets/y_off.png"
     BLamp.src = "../Assets/b_off.png"
     add.disabled = true;
+    prnt.disabled = false
 }
 
 function disconnect(num) {

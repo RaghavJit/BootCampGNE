@@ -32,7 +32,14 @@
 
                     <li>!!! Click on labels to delete connections for the corrusponding node.</li>
                     <li id="s1" style="color:red ;">Make connections as per the instructions given below.</li>
-
+                    <ul>
+                        <li>1->23, 2->24</li>
+                        <li>3->25, 4->26</li>
+                        <li>25->5, 6->9, 6->10</li>
+                        <li>8->12, 12->14, 14->16</li>
+                        <li>7->18, 18->20, 20->22</li>
+                        <li>11->17, 13->19, 15->21</li>
+                    </ul>
                     <li id="s2"> Now, Check the connections by clicking on ‘CHECK’ button.</li>
                         <ul>
                             <li>If the connections are ‘Invalid connections’ click on corresponding node to remove the connection.</li>
@@ -75,8 +82,17 @@
                 <!--Row 2 Col 1 Row1-->
 
                 <div class="sliders">
-                    <p>SLIDERS</p>
+                    <p>FORMULAS</p>
 
+                    <div style="float: left; position:relative; top: -10px; padding-left: 25px;">
+                    \[R = \frac{V_{R}}{I}\]
+                    \[X_{L} = \frac{V_{L}}{I} = 2 \pi fL\]
+                    \[X_{C} = \frac{V_{C}}{I} = \frac{1}{2 \pi fC}\]                    
+                    </div>
+                    <div style="float: right; position:relative; top: -10px; padding-right: 25px;">
+                    \[Z = \frac{1}{\sqrt{(\frac{1}{R})^2 + (\frac{1}{X_{L}} + \frac{1}{X_{C}})^2}}\]
+                    \[\cos\phi = \frac{R}{Z}\]
+                    </div>
                     <!-- <input type="range" id="R1" , step="0.1" , min="0.1" , max="10" , name="R1" value="0.1"
                         disabled="true">
                     <label for="R1">R1</label>
@@ -139,12 +155,11 @@
 
                         <div class="ammeter">
                             <img class="forbidden" src="../Assets/A.png" width="179" height="179" alt="" id="A">
-
                             <img class="forbidden" src="../Assets/Pointer.png" width="44" height="14" alt="" id="P_A">
-                            <button id="Mp_a"><label onclick="disconnect(4)">885</label></button>
+                            <button id="Mp_a"><label onclick="disconnect(4)">5</label></button>
                             <button id="Mn_a"><label onclick="disconnect(5)">6</label></button>
                         </div>
-
+                         
 
                         <div class="wattmeter">
                             <img class="forbidden" src="../Assets/wattmeter.png" id="W" height="220" width="220" alt="">
@@ -289,5 +304,7 @@
 
 </body>
 <script src="../Function/function.js"></script>
-
+<!-- latex cdn -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.js"></script> -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
 </html>
