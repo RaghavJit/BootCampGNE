@@ -144,7 +144,7 @@ CHECK_BUTTON.onclick = function checkConnections() {
         }
     }
 
-    if ((arrChk == 8)&& (instance.getAllConnections().length == 8)) {
+    if ((arrChk == 8) && (instance.getAllConnections().length == 8)) {
         alert("Right connections! Please turn on the MCB and choose resistance values.")
 
         MCB_SWITCH.disabled = false
@@ -159,19 +159,20 @@ CHECK_BUTTON.onclick = function checkConnections() {
 
     else {
         alert("Invalid connections!! Please re-check your connections")
-        console.log(arrChk)
         window.location.reload()
     }
 }
 
-PLOT_BUTTON.onclick = function plotVal(){
+PLOT_BUTTON.onclick = function plotVal() {
 
     if (powerVal.length >= 6) {
+
+        PRINT_BUTTON.disabled = false
 
         var temp1 = document.getElementById("plotContiner")
         var temp2 = temp1.innerHTML
         temp1.innerHTML = temp2
-        
+
         window.scrollTo({
             top: 750,
             left: 0,
@@ -212,7 +213,7 @@ PLOT_BUTTON.onclick = function plotVal(){
             }
         });
     }
-    else{
+    else {
         window.alert("Please take atleast 6 readings")
     }
 
@@ -402,10 +403,10 @@ function createConnections() {
         })
 }
 
-function disconnect(num){
-    let nodes_list = [VOLTMETER_POSITIVE, VOLTMETER_NEGATIVE, AMMETER_POINTER, AMMETER_NEGATIVE, MULTIMETER_POSITIVE, MULTIMETER_NEGATIVE, POWER_POSITIVE, POWER_NEGATIVE, CIRCUIT_POWER_POSITIVE, CIRCUIT_POWER_NEGATIVE, CIRCUIT_AMMETER_POSITIVE, CIRCUIT_AMMETER_NEGATIVE, CIRCUIT_VOLTMETER_POSITIVE, CIRCUIT_VOLTMETER_NEGATIVE] 
+function disconnect(num) {
+    let nodes_list = [VOLTMETER_POSITIVE, VOLTMETER_NEGATIVE, AMMETER_POINTER, AMMETER_NEGATIVE, MULTIMETER_POSITIVE, MULTIMETER_NEGATIVE, POWER_POSITIVE, POWER_NEGATIVE, CIRCUIT_POWER_POSITIVE, CIRCUIT_POWER_NEGATIVE, CIRCUIT_AMMETER_POSITIVE, CIRCUIT_AMMETER_NEGATIVE, CIRCUIT_VOLTMETER_POSITIVE, CIRCUIT_VOLTMETER_NEGATIVE]
     instance.deleteConnectionsForElement(nodes_list[num])
-    
+
 }
 
 function addValuesToTable() {
@@ -433,7 +434,7 @@ function addValuesToTable() {
         AMMETER.innerHTML = parseFloat(AMMETER_READING).toFixed(2)
         POWER.innerHTML = parseFloat(VOLTMETER_READING * AMMETER_READING).toFixed(2)
 
-        if ((R1.innerHTML == LOAD_RESISTANCE.innerHTML) && (R1.innerHTML != 0.1) && (POWER.innerHTML != 0)) {
+        if ((R1.innerHTML == LOAD_RESISTANCE.innerHTML) && (flag_s5 != 0) && (POWER.innerHTML != 0)) {
             TABLE.rows[TABLE_COUNT].style.backgroundColor = "yellow"
         }
 
@@ -451,16 +452,21 @@ function calcVoltmeter(PS, R1, RL) {
 }
 
 function updateAmmeter() {
-    let d = calcAmmeter(POWER_SUPPLY, R1_SLIDER, RL_SLIDER) * 1.2;
+    let d = calcAmmeter(POWER_SUPPLY, R1_SLIDER, RL_SLIDER) * (180/50);
     AMMETER_POINTER.style.transform = "rotate(" + d + "deg)"
 }
 
 function updateVoltmeter() {
-    let d = calcVoltmeter(POWER_SUPPLY, R1_SLIDER, RL_SLIDER) * 18;
+    let d = calcVoltmeter(POWER_SUPPLY, R1_SLIDER, RL_SLIDER) * (180/10);
     VOLTAGE_POINTER.style.transform = "rotate(" + d + "deg)"
 }
 
-
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: POWER_NEGATIVE, target: POWER_POSITIVE })
+        instance.deleteEveryConnection()
+    }, 50);
+}
 
 function highlight() {
 

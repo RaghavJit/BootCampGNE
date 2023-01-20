@@ -134,7 +134,6 @@ function task(i, x, y) {
 }
 
 knob.onclick = function () {
-    console.log("called")
     for (let i = 0; i < 100; i++) {
         task(i, angle_inc, volt_inc);
     }
@@ -177,6 +176,10 @@ function rotate_element(deg, elemnt) {
 window.onload = function setSize() {
     document.body.style.zoom = "99%"
     buildNodes(true)
+    setTimeout(() => {
+        instance.connect({ source: a_var, target: b_var })
+        instance.deleteEveryConnection()
+    }, 50);
 }
 
 const instance = jsPlumb.getInstance({
@@ -459,14 +462,12 @@ check.onclick = function chkConn() {
             }
         }
     }
-    console.log(arrChk)
 
     for (var i = 0; i < valList.length; i++) {
         if (((instance.getConnections({ source: valList[i] })[0] != undefined)) || ((instance.getConnections({ target: valList[i] })[0] != undefined))) {
             arrChk = arrChk + 1;
         }
     }
-    console.log(arrChk)
     /*if (index == 3) {
         for (var i = 0; i < spl_case.length; i++) {
             if (i % 2 == 0) {
@@ -511,8 +512,6 @@ check.onclick = function chkConn() {
     }
     else {
         window.alert("Invalid Connections!")
-        console.log(arrChk)
-        console.log(ThreeNode)
         //window.location.reload();
     }
 }
@@ -780,6 +779,7 @@ calculate.onclick = function doCalc() {
 
 function verify_inputs(){
     if((equalto.value == pf.value&&(equalto.value != ""))){
+        prnt.disabled = false
         window.alert("The observations are verified!")
     }
     else{

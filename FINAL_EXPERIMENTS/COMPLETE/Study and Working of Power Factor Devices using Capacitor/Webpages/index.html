@@ -12,7 +12,6 @@
     <link href="../CDN_folder/SevenSegmentFont.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@firestitch/jsplumb@2.12.0/dist/js/jsplumb.min.js"></script>
 
-
 </head>
 
 <body id="body">
@@ -48,7 +47,8 @@
                         230V.</li>
                     <li id="s5">Click the 'ADD' button to add the values to the observation table.</li>
                     <li id="s6">Click the 'CALCULATE' button to calculate the powerfactor of the load. </li>
-                    <li id="s7">Change the load and repeat the above process, to get powerfactor of all the other loads.</li>
+                    <li id="s7">Change the load and repeat the above process, to get powerfactor of all the other loads.
+                    </li>
                 </ul>
             </div>
             <div class="MyLabel">
@@ -72,7 +72,7 @@
                         <button id="add" disabled="true">ADD</button>
                         <button id="calculate" disabled="true">CALCULATE</button>
                         <button id="reset">RESET</button>
-                        <button id="print" onclick=' window.print();' disabled="true">PRINT</button>
+                        <button id="print" disabled="true" onclick=' window.print();' disabled="true">PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
                     </div>
                 </div>
@@ -80,9 +80,13 @@
 
                 <div class="formulas">
                     <p>FORMULAS</p>
-                    <formula-text>Power Factor <BR> = True Power/Apparent Power
+                    <formula-text>
+                        \[PowerFactor = \frac{True Power}{Apparent Power}\]
+                        \[PowerFactor = \cos\phi\]
+                        \[\phi = Phase Angle\]
+                        <!-- Power Factor <BR> = True Power/Apparent Power
                         <BR>
-                        = cos(Phase angle)
+                        = cos(Phase angle) -->
                     </formula-text>
 
                 </div>
@@ -233,5 +237,9 @@
 
 </body>
 <script src="../Function/function.js"></script>
+<!-- latex cdn -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.js"></script> -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+
 
 </html>

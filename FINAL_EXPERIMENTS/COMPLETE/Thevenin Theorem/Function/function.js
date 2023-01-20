@@ -3,6 +3,7 @@ var cont = document.getElementById("container")
 var add = document.getElementById("add")
 var check = document.getElementById("check")
 var calculate = document.getElementById("calculate")
+var print = document.getElementById("print")
 
 var loadImg = document.getElementById("loadImg")
 
@@ -233,7 +234,7 @@ function updateAmmeters(n) {
         P_V.style.transform = "rotate(" + Math.abs(d) + "deg)"
     }
     else if (n == 3) {
-        var d = I * 1.8
+        var d = I * (180/10)
         P_A.style.transform = "rotate(" + Math.abs(d) + "deg)"
     }
 }
@@ -395,15 +396,22 @@ function verifyUser() {
     }
 
     else if (document.getElementById('IlC_calc').value == document.getElementById('IlC_obsv').value) {
-
+        print.disabled = false
         window.alert("Observed Value is equal to calculated value. Hence, Thevenin's Theorem is verified");
     }
 
     else {
 
-        window.alert("Observed value is not equal to calculated value. Hence, Thevenin's Theorem is not verified!");
+        window.alert("Observed value is not equal to calculated value.");
 
     }
+}
+
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: p_a, target: n_a })
+        instance.deleteEveryConnection()
+    }, 50);
 }
 
 function highlight() {

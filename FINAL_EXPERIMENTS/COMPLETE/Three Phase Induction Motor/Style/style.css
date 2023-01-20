@@ -444,6 +444,7 @@ img {
 .mcb #on_power {
     width: 75px;
     height: 14px;
+    opacity: 0;
 }
 
 #mcb_r {

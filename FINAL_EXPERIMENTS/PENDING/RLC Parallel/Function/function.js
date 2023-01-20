@@ -5,6 +5,7 @@ var add = document.getElementById("add")
 var reset = document.getElementById("reset")
 var calculate = document.getElementById("calculate")
 var plot = document.getElementById("plot")
+var prnt = document.getElementById("print")
 
 var MCB_image = document.getElementById("mcb")
 var MCB = document.getElementById("mcb_switch")
@@ -263,7 +264,6 @@ function ThreeNodes(node1, node2, node3) {
         return true;
     }
     else {
-        console.log(index_tracker)
         return false;
     }
 }
@@ -343,7 +343,6 @@ function ThreeToOne(node, list) {
             count = count + 1
         }
     }
-    console.log(count)
     if (count == 1) {
         return true
     }
@@ -390,9 +389,8 @@ check.onclick = function checkConn() {
     }
 }
 
-MCB.onclick = function () {
+MCB.onclick = function toggleMCB() {
     flags3 = 1
-    console.log("workgin")
     if (mcb_state == 1) {
         mcb_state = 0
         MCB_image.src = '../Assets/MCB_off.png'
@@ -524,6 +522,13 @@ function setZero() {
     rotate_element(0, WattmeterNeedle)
 }
 
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: MCB_Positive, target: MCB_Negative })
+        instance.deleteEveryConnection()
+    }, 50);
+}
+
 function highlight() {
 
     let conn = instance.getConnections();
@@ -540,7 +545,7 @@ function highlight() {
         s3.style.color = "red";
     }
 
-    if (flags3 = 1) {
+    if (flags3 == 1) {
         s1.style.color = "black";
         s2.style.color = "black";
         s3.style.color = "black";

@@ -14,7 +14,7 @@ body{
     /* height: 1300px; */
     height:auto;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 0;
     border-radius: 10px;
 }
 .heading{
@@ -134,6 +134,9 @@ body{
     font-size: 20px;
     font-family: 'Zacbel X', sans-serif;
     color:rgb(31, 31, 31);
+}
+.formulas formula-text{
+    font-size: 15px;
 }
 .o_table p{
 
@@ -771,7 +774,7 @@ user-select: none;
 }
 #VoltmeterC{
     bottom:215px;
-    right:812px;
+    right:800px;
 }
 #WattmeterC{
     bottom:185px;

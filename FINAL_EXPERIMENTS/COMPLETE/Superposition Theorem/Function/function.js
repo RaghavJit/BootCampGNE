@@ -714,6 +714,7 @@ function VerifyUser() {
         if ((parseFloat(R2cv.value) == parseFloat(R2cvU.value)) && (parseFloat(R2cv.value) == I_r2.toPrecision(3))) {
             if ((parseFloat(R3cv.value) == parseFloat(R3cvU.value)) && (parseFloat(R3cv.value) == I_r3.toPrecision(3))) {
                 window.alert("Observations match the calculations! Super Position Priciple is verified")
+                prnt.disabled = false
             }
             else {
                 window.alert("I3 value is wrong")
@@ -726,6 +727,13 @@ function VerifyUser() {
     else {
         window.alert("I1 value is wrong")
     }
+}
+
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: n_power1, target: p_power1 })
+        instance.deleteEveryConnection()
+    }, 50);
 }
 
 function highlight() {

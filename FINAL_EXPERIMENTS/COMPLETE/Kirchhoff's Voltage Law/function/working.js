@@ -131,10 +131,6 @@ instance.bind("ready", function () {
 
 })
 
-window.onload = function fix() {
-    document.body.style.zoom = "89%";
-}
-
 reset.onclick = function reset_conn() {
     window.location.reload()
 }
@@ -244,10 +240,6 @@ function updateAmmeters() {
     var V1 = parseFloat(ps*r1 / (r1 + R));
     var V2 = parseFloat(ps*R / (r1 + R));
     var V3 = parseFloat(ps*R / (r1 + R));
-
-    console.log(V1)
-    console.log(V2)
-    console.log(V3)
 
     var d1 = V1 * x;
     var d2 = V2 * x;
@@ -362,6 +354,9 @@ plot.onclick = function plotVal() {
     flags7 = 1;
 
     if (voltageVal.length >= 6) {
+
+        prnt.disabled = false
+
         var temp1 = document.getElementById("plotContiner")
         var temp2 = temp1.innerHTML
         temp1.innerHTML = temp2
@@ -439,6 +434,13 @@ function disconnect(num) {
     instance.deleteConnectionsForElement(nodes_list[num])
 }
 
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: vp, target: vn })
+        instance.deleteEveryConnection()
+    }, 50);
+}
+
 function highlight() {
     s1 = document.getElementById("s1");
     s2 = document.getElementById("s2");
@@ -496,7 +498,6 @@ function highlight() {
         s6.style.color = "black";
         s7.style.color = "red";
 
-        prnt.disabled = false;
     }
 }
 

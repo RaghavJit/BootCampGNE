@@ -15,7 +15,7 @@ body {
     /* height: 1300px; */
     height: auto;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 0;
     border-radius: 10px;
 }
 
@@ -587,7 +587,7 @@ img {
 
 #ReqC2 {
     position: relative;
-    right: 545px;
+    right: 538px;
     bottom: 200px;
     width: 40px;
 }
@@ -601,20 +601,20 @@ img {
 #numeriator1 {
     position: relative;
     bottom: 200px;
-    right: 570px;
+    right: 560px;
     width: 40px;
 }
 
 #newcell {
     position: relative;
     bottom: 200px;
-    right: 505px;
+    right: 495px;
     width: 40px;
 }
 
 #numeriator2 {
     bottom: 200px;
-    right: 470px;
+    right: 460px;
 }
 
 #denominator1 {
@@ -758,7 +758,7 @@ border-radius: 2px;
 #RlC2{
     position: relative;
     bottom: 200px;
-    right: 523px;
+    right: 513px;
     width: 40px;
 }
 

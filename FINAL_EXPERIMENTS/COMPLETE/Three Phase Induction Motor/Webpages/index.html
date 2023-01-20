@@ -70,14 +70,18 @@
                         <button id="add" disabled="true">ADD</button>
                         <button id="plot" disabled="true">PLOT</button>
                         <button id="reset">RESET</button>
-                        <button id="print" onclick=' window.print();'>PRINT</button>
+                        <button id="print" disabled="true" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
                     </div>
                 </div>
                 <!--Row 2 Col 1 Row1-->
 
                 <div class="formulas">
-                    <p>SLIDERS</p>
+                    <p>FORMULAS</p>
+                    
+                    \[Torque = g \times ({W_1} - {W_g}) \times r\]
+                    \[g = 9.8 m/{s^2}\]
+                    \[r = 0.15\]
 
                     <!-- <input type="range" min="100" max="300" step="1" value="100" id="Rls">
                     <label for="Rls">Voltage</label> -->
@@ -275,5 +279,8 @@
 
 </body>
 <script src="../Function/function.js"></script>
+<!-- latex cdn -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.js"></script> -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
 
 </html>
