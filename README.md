@@ -94,7 +94,7 @@ window.onload = function setJsPlumb() {
 1. Name ammeters A1, A2, A3, A4.
 1. Power Supply button is too small.
 1. Ammeter (5, 6) labels are not clickable.
-1. Write 'Resistor', 'Capacitor' and 'Inductor' .
+1. Write 'Resistor', 'Capacitor' and 'Inductor'.
 1. Voltmeter range = (0-220)V
 1. Ammeter range = (0-50)V
 1. Wattmeter range = (0-1500)W can also write as (0-1.5)KW
