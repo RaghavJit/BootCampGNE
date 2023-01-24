@@ -67,7 +67,7 @@ body {
 
     margin: -20px 10px;
     border-radius: 10px;
-    ;
+
 
     text-align: center;
     font-family: 'Foco Trial', sans-serif;
@@ -812,4 +812,18 @@ allnodes{
 .SeeOnly:focus{
     cursor:default;
     outline:none;
+}
+
+
+.control-panel-buttons button:disabled:hover {
+     background-color: rgba(129, 129, 129, 0.313);
+    color: #919191;
+    cursor: default;
+}
+
+.control-panel-buttons button:disabled:active {
+    background-color: rgba(129, 129, 129, 0.313);
+    color: #919191;
+    border: none;
+    cursor: default;
 }

@@ -54,7 +54,7 @@ body{
     font-size: 27px;
     color: white;
     z-index: +2;
- 
+
 }
 
 #mcb_1 {
@@ -128,7 +128,7 @@ color: white;
 }
 
 #ammeter_a1 {
-   
+
     position: absolute;
     margin-top: -85px;
     margin-left: 540px;
@@ -200,7 +200,7 @@ width:5px;
     position: absolute;
     margin-top:50px;
     margin-left:260px;
-   
+
     height:5px;
     width:5px;
 }
@@ -217,7 +217,7 @@ width:5px;
 }
 
 #ammeter_a2 {
-   
+
     position: absolute;
     margin-top: -675px;
     margin-left: 485px;
@@ -794,7 +794,7 @@ bottom:320px;
 left:45px;
 height:10px;
 width:10px;
-        
+
     }
 
 #n_a {
@@ -1164,7 +1164,7 @@ user-select: none;
 }
 
 #variacSlider:disabled {
-    
+
     z-index: +2;
     background-color: #808080;
     cursor: default;
@@ -1245,4 +1245,15 @@ border-radius: 2px;
     border-radius: 10px;
     filter: drop-shadow(10px 10px 10px rgba(75, 75, 75, 0.31))
 }
+.control-panel-buttons button:disabled:hover {
+    background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   cursor: default;
+}
 
+.control-panel-buttons button:disabled:active {
+   background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   border: none;
+   cursor: default;
+}
