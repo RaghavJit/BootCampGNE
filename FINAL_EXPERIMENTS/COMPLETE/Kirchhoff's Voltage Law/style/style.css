@@ -479,6 +479,9 @@ body {
     top: -25.4em;
     right: 13.5em;
 
+    font-weight: bold;
+    font-family: 'Foco Trial', sans-serif;
+
 }
 
 #textInputR2 {
@@ -486,12 +489,18 @@ body {
     top: -21.6em;
     right: 4em;
 
+    font-weight: bold;
+    font-family: 'Foco Trial', sans-serif;
+
 }
 
 #textInputR3 {
     position: relative;
     top: -25.4em;
     right: 4.2em;
+
+    font-weight: bold;
+    font-family: 'Foco Trial', sans-serif;
 
 }
 

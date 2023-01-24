@@ -519,6 +519,8 @@ body {
     position: relative;
     top: -25.4em;
     right: 10.6em;
+    font-weight: bold;
+    font-family: 'Foco Trial', sans-serif;
 
 }
 
@@ -526,6 +528,8 @@ body {
     position: relative;
     top: -19.6em;
     right: 4em;
+    font-weight: bold;
+    font-family: 'Foco Trial', sans-serif;
 
 }
 
@@ -533,6 +537,8 @@ body {
     position: relative;
     top: -25.4em;
     right: 5.5em;
+    font-weight: bold;
+    font-family: 'Foco Trial', sans-serif;
 
 }
 
