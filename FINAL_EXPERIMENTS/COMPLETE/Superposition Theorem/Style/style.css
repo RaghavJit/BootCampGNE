@@ -955,9 +955,6 @@ changeable-symbols{
 }
 #sign3{
     margin-left: 60px;
-<<<<<<< Updated upstream
-}
-=======
 }
 
 .control-panel-buttons button:disabled:hover {
@@ -971,6 +968,7 @@ changeable-symbols{
    color: #919191;
    border: none;
    cursor: default;
+
 }
 
 .sliders input:disabled:-webkit-slider-thumb {
@@ -991,4 +989,4 @@ changeable-symbols{
     cursor: default;
 
 }
->>>>>>> Stashed changes
+

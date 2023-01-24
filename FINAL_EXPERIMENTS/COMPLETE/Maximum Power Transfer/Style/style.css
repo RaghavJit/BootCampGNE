@@ -768,10 +768,9 @@ user-select: none;
 -webkit-user-drag: none;
 -webkit-user-select: none;
 -ms-user-select: none;
-<<<<<<< Updated upstream
+
 }
-=======
-}
+
 
 .control-panel-buttons button:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
@@ -784,6 +783,7 @@ user-select: none;
    color: #919191;
    border: none;
    cursor: default;
+
 }
 
 .sliders input:disabled:-webkit-slider-thumb {
@@ -804,4 +804,4 @@ user-select: none;
     cursor: default;
 
 }
->>>>>>> Stashed changes
+

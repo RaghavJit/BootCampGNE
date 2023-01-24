@@ -799,9 +799,7 @@ border-radius: 2px;
 .SeeOnly:focus{
     cursor:default;
     outline:none;
-<<<<<<< Updated upstream
-}
-=======
+
 }
 
 .control-panel-buttons button:disabled:hover {
@@ -815,6 +813,7 @@ border-radius: 2px;
    color: #919191;
    border: none;
    cursor: default;
+
 }
 .sliders input:disabled:-webkit-slider-thumb {
     appearance: none;
@@ -834,4 +833,4 @@ border-radius: 2px;
     cursor: default;
 
 }
->>>>>>> Stashed changes
+

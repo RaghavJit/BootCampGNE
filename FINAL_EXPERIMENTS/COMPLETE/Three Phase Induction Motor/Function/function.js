@@ -382,11 +382,10 @@ function calculateTorque() {
         let torqueOptions = [NaN, 0, 1.030, 2.648, 4.561, 5.297, 6.180]
         Torque = torqueOptions[w1.selectedIndex]
 
-        // MTSpeed = 1491.03 - (29.132 * Torque)
         let speedOptions = [NaN, 1492, 1450, 1420, 1380, 1330, 1300]
         MTSpeed = speedOptions[w1.selectedIndex]
 
-        let currentOptions = [NaN, 0.5, 1, 0.5, 2, 2.5, 3]
+        let currentOptions = [NaN, 0.5, 1, 1.5, 2, 2.5, 3]
         Current = currentOptions[w1.selectedIndex]
 
         prnt.disabled=false
@@ -402,7 +401,7 @@ function disconnect(num) {
 }
 
 function setMeters() {
-    if (w1.selectedIndex == 0) {
+    if (w1.selectedIndex != 0) {
         calculateTorque()
         VoltmeterNeedle.style.transform = "rotate("+ 144 +"deg)"
         AmmeterNeedle.style.transform = "rotate(" + Current * 18 + "deg)"
@@ -419,7 +418,7 @@ function refresh() {
     calculateTorque()
     setMeters()
 
-    let speedOptions = [NaN, 1, 2, 3, 4, 5, 6]
+    let speedOptions = [NaN, 1, 1.333, 1.666, 2, 2.333, 2.666]
     mtspeed = speedOptions[w1.selectedIndex]
     setSpeed(mtspeed)
 }

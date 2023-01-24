@@ -768,10 +768,8 @@ border-radius: 2px;
 .SeeOnly:focus{
     cursor:default;
     outline:none;
-<<<<<<< Updated upstream
 }
-=======
-}
+
 
 .control-panel-buttons button:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
@@ -784,7 +782,8 @@ border-radius: 2px;
    color: #919191;
    border: none;
    cursor: default;
-}
+ }
+ }
 
 
 /*fixing the disabled thumb reaction */
@@ -808,4 +807,4 @@ border-radius: 2px;
     cursor: default;
 
 }
->>>>>>> Stashed changes
+

@@ -22,21 +22,21 @@ window.onload = function setJsPlumb() {
 
 ## Experiments (COMPLETE)
 ### KCL
-1. Sliders need to be centered.
+<!-- 1. Sliders need to be centered. -->
 1. Disable onhover of disabled buttons.
 1. Font of R1, R2, R3 text boxes.
 1. Graph color need to be more subtle (optional).
 1. Seven segment font on display of PowerSupply.
 
 ### KVL
-1. Sliders need to be centered.
+<!-- 1. Sliders need to be centered. -->
 1. Disable onhover of disabled buttons.
 1. Font of R1, R2, R3 text boxes.
 1. Graph color need to be more subtle (optional).
 1. Seven segment font on display of PowerSupply.
 
 ### Maximum Power Transfer
-1. Sliders need to be centered.
+<!-- 1. Sliders need to be centered. -->
 1. Disable onhover of disabled buttons.
 1. Graph css needs to be done.
 1. Voltmeter range = (0-10)V
@@ -44,7 +44,7 @@ window.onload = function setJsPlumb() {
 1. Power slider grey-scale is not similar to KVL, KCL (thumb is not grey-scale)
 
 ### Norton 
-1. Sliders need to be centered.
+<!-- 1. Sliders need to be centered. -->
 1. Disable onhover of disabled buttons.
 1. css for 'verify' button needs to be done.
 
@@ -58,7 +58,7 @@ window.onload = function setJsPlumb() {
 ![alt text](./ReadmeImages/Variac_Knob%20-%20Copy.png?raw=true)
 
 ### SuperPosition
-1. Sliders need to be centered.
+<!-- 1. Sliders need to be centered. -->
 1. Disable onhover of disabled buttons.
 1. css for 'verify' button needs to be done.
 1. Write A1 A2 A3 on ammeters.
@@ -66,7 +66,7 @@ window.onload = function setJsPlumb() {
 1. Calculation tab text boxes move on changing zoom.
 
 ### Thevenin
-1. Sliders need to be centered.
+<!-- 1. Sliders need to be centered. -->
 1. Disable onhover of disabled buttons.
 1. css for 'verify' button needs to be done. 
 1. Calculation tab text boxes move on changing zoom.
@@ -94,7 +94,7 @@ window.onload = function setJsPlumb() {
 1. Name ammeters A1, A2, A3, A4.
 1. Power Supply button is too small.
 1. Ammeter (5, 6) labels are not clickable.
-1. Write 'Resistor', 'Capacitor' and 'Inductor' .
+1. Write 'Resistor', 'Capacitor' and 'Inductor'.
 1. Voltmeter range = (0-220)V
 1. Ammeter range = (0-50)V
 1. Wattmeter range = (0-1500)W can also write as (0-1.5)KW

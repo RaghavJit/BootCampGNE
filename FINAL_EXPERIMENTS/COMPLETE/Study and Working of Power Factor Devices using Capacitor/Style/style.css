@@ -909,6 +909,18 @@ border-radius: 2px;
     left:250px;
 }
 
+.control-panel-buttons button:disabled:hover {
+    background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   cursor: default;
+}
+
+.control-panel-buttons button:disabled:active {
+   background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   border: none;
+   cursor: default;
+}
 
 .sliders input:disabled:-webkit-slider-thumb {
     appearance: none;
