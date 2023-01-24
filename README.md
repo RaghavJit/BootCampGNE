@@ -4,25 +4,36 @@ Please create your own branch and commit changes to it.
 
 All the experiments are now complete with their basic functionality
 
-### Things left to do
+## Things left to do
 1. Complete calculations tab for RLC experiments.
 1. Test all the experiments and fix any bugs and problems.
 1. Review the .css of all the files, and do the reqested changes/fixes.
 1. Do the final touch up.
 1. Change the directory structure for hosting.
 
+
+## Commands for ekus
 ```
-window.onload = function setJsPlumb() {
-    setTimeout(() => {
-        instance.connect({ source: POWER_NEGATIVE, target: POWER_POSITIVE })
-        instance.deleteEveryConnection()
-    }, 50);
-}
+git branch
+git checkout ui_changes
+git status
+git add .
+git commit -m "commit message"
+git push
 ```
+
+1. git branch helps you know your current branch
+1. git checkout ui_changes will take you to ui_changes branch
+1. git status will list all the files that you have changed
+1. git add . will help you add all the fils to the commit
+1. git commit will create a commit 
+1. git push will push your local changes to the ui_changes branch on github.
+
+**Mergeing branches or creating pull requests will be done by RaghavJit.**
 
 ## Experiments (COMPLETE)
 
-### Please Ignore the commented changes! Please ignore the changes that don't have a tag "()" on them.
+### Please Ignore the commented changes! Please ignore the changes that don't have a tag "(name)" on them.
 ### KCL
 <!-- 1. Sliders need to be centered. -->
 <!-- 1. Disable onhover of disabled buttons.
