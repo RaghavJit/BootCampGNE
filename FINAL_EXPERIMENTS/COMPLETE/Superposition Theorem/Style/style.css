@@ -956,3 +956,16 @@ changeable-symbols{
 #sign3{
     margin-left: 60px;
 }
+
+.control-panel-buttons button:disabled:hover {
+    background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   cursor: default;
+}
+
+.control-panel-buttons button:disabled:active {
+   background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   border: none;
+   cursor: default;
+}
