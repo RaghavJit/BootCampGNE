@@ -595,7 +595,7 @@ img {
 #RlC {
     bottom: 315px;
     right: 655px;
-    
+
 }
 
 #numeriator1 {
@@ -810,4 +810,25 @@ border-radius: 2px;
    color: #919191;
    border: none;
    cursor: default;
+
 }
+
+.sliders input:disabled:-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 30px;
+    border-radius: 10px;
+    background-color: #d0d0d0;
+    transition: background-color 0.2s ease-in;
+}
+
+.sliders input:disabled::-webkit-slider-thumb:hover {
+    cursor: default;
+    background-color: #d0d0d0
+}
+
+.sliders input:disabled::-webkit-slider-thumb:active {
+    cursor: default;
+
+}
+
