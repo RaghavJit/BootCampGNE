@@ -768,4 +768,44 @@ border-radius: 2px;
 .SeeOnly:focus{
     cursor:default;
     outline:none;
+<<<<<<< Updated upstream
 }
+=======
+}
+
+.control-panel-buttons button:disabled:hover {
+    background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   cursor: default;
+}
+
+.control-panel-buttons button:disabled:active {
+   background-color: rgba(129, 129, 129, 0.313);
+   color: #919191;
+   border: none;
+   cursor: default;
+}
+
+
+/*fixing the disabled thumb reaction */
+
+
+.sliders input:disabled:-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 30px;
+    border-radius: 10px;
+    background-color: #d0d0d0;
+    transition: background-color 0.2s ease-in;
+}
+
+.sliders input:disabled::-webkit-slider-thumb:hover {
+    cursor: default;
+    background-color: #d0d0d0
+}
+
+.sliders input:disabled::-webkit-slider-thumb:active {
+    cursor: default;
+
+}
+>>>>>>> Stashed changes
