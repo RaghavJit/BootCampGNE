@@ -12,7 +12,12 @@ All the experiments are now complete with their basic functionality
 1. Change the directory structure for hosting.
 
 ```
-
+window.onload = function setJsPlumb() {
+    setTimeout(() => {
+        instance.connect({ source: POWER_NEGATIVE, target: POWER_POSITIVE })
+        instance.deleteEveryConnection()
+    }, 50);
+}
 ```
 
 ## Experiments (COMPLETE)
