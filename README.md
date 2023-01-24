@@ -16,6 +16,7 @@ All the experiments are now complete with their basic functionality
 ```
 git branch
 git checkout ui_changes
+git merge master
 git status
 git add .
 git commit -m "commit message"
@@ -24,6 +25,7 @@ git push
 
 1. git branch helps you know your current branch
 1. git checkout ui_changes will take you to ui_changes branch
+1. git merge master will bring all the changes of master to ui_changes this will help us verify that before pushing data to ui_changes it is updates with master's changes
 1. git status will list all the files that you have changed
 1. git add . will help you add all the fils to the commit
 1. git commit will create a commit 
