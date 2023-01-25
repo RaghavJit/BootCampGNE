@@ -186,7 +186,7 @@ label {
     text-align: center;
 }
 
-.control-panel-buttons button {
+.control-panel-buttons button,#verify {
     border: none;
     height: 35px;
     outline: none;
@@ -203,13 +203,13 @@ label {
     cursor: pointer;
 }
 
-.control-panel-buttons button:hover {
+.control-panel-buttons button:hover ,#verify:hover{
     background-color: #1e1e1ee8;
     color: rgb(238, 234, 234);
 
 }
 
-.control-panel-buttons button:active {
+.control-panel-buttons button:active ,#verify:active{
     background-color: #606471;
     color: rgb(238, 234, 234);
     border: 3px solid #6a6b6e;
@@ -589,79 +589,79 @@ img {
 
 #R1C {
     position: relative;
-    bottom: 410px;
+    bottom: 420px;
     left: 50px;
 }
 
 #R2C {
     position: relative;
-    bottom: 385px;
+    bottom: 395px;
     right: 12px;
 }
 
 #R3C {
     position: relative;
-    bottom: 360px;
+    bottom: 370px;
     right: 74px;
 }
 
 #currentSupplyC {
-    bottom: 316px;
+    bottom: 326px;
     right: 32px;
 }
 
 #voltageSupplyC {
-    bottom: 293px;
+    bottom: 303px;
     right: 94px;
 }
 
 #R1_cs {
-    bottom: 200px;
+    bottom: 210px;
     left: 15px;
 }
 
 #sigh1{
-    bottom: 180px;
+    bottom: 190px;
     left: 15px;
 }
 
 #R2_cs {
-    bottom: 200px;
+    bottom: 210px;
     left: 45px;
 }
 
 #R3_cs {
-    bottom: 200px;
+    bottom: 210px;
     left: 75px;
 }
 
 #R1_vs {
-    bottom: 150px;
+    bottom: 160px;
     right: 170px;
 }
 
 #R2_vs {
-    bottom: 150px;
+    bottom: 160px;
     right: 140px;
 }
 
 #R3_vs {
-    bottom: 150px;
+    bottom: 160px;
     right: 110px;
 }
 
 #R1_cv {
-    bottom: 100px;
+    bottom: 110px;
     right: 355px;
 }
 
 #R2_cv {
-    bottom: 100px;
+    bottom: 110px;
     right: 325px;
 }
 
 #R3_cv {
-    bottom: 100px;
+    bottom: 110px;
     right: 295px;
 }
 
@@ -913,25 +913,25 @@ img {
 
 #R1_cvU {
     position: relative;
-    bottom: 54px;
+    bottom: 64px;
     right: 540px;
 }
 
 #R2_cvU {
     position: relative;
-    bottom: 54px;
+    bottom: 64px;
     right: 510px;
 }
 
 #R3_cvU {
     position: relative;
-    bottom: 54px;
+    bottom: 64px;
     right: 480px;
 }
 
 #verify {
     position: relative;
-    bottom: 54px;
+    bottom: 58px;
     right: 450px;
 }
 
@@ -957,13 +957,13 @@ changeable-symbols{
     margin-left: 60px;
 }
 
-.control-panel-buttons button:disabled:hover {
+.control-panel-buttons button:disabled:hover,#verify:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    cursor: default;
 }
 
-.control-panel-buttons button:disabled:active {
+.control-panel-buttons button:disabled:active,#verify:disabled:active {
    background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    border: none;

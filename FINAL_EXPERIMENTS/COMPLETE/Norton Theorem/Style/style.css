@@ -178,7 +178,7 @@ body {
     text-align: center;
 }
 
-.control-panel-buttons button {
+.control-panel-buttons button,#verify {
     border: none;
     height: 35px;
     outline: none;
@@ -195,13 +195,13 @@ body {
     cursor: pointer;
 }
 
-.control-panel-buttons button:hover {
+.control-panel-buttons button:hover,#verify:hover {
     background-color: #1e1e1ee8;
     color: rgb(238, 234, 234);
 
 }
 
-.control-panel-buttons button:active {
+.control-panel-buttons button:active,#verify:active {
     background-color: #606471;
     color: rgb(238, 234, 234);
     border: 3px solid #6a6b6e;
@@ -779,8 +779,8 @@ border-radius: 2px;
 
 #verify{
     position: relative;
-    bottom: 80px;
-    right: 1120px;
+    bottom: 70px;
+    right: 1050px;
 }
 
 #IscC:hover{
@@ -799,13 +799,13 @@ border-radius: 2px;
     outline:none;
 }
 
-.control-panel-buttons button:disabled:hover {
+.control-panel-buttons button:disabled:hover,#verify:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    cursor: default;
 }
 
-.control-panel-buttons button:disabled:active {
+.control-panel-buttons button:disabled:active,#verify:disabled:active {
    background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    border: none;
@@ -831,4 +831,5 @@ border-radius: 2px;
     cursor: default;
 
 }
+
 

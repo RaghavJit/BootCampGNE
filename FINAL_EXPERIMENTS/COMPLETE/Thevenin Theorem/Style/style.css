@@ -178,7 +178,7 @@ body {
     text-align: center;
 }
 
-.control-panel-buttons button {
+.control-panel-buttons button ,#verifyButton {
     border: none;
     height: 35px;
     outline: none;
@@ -195,13 +195,13 @@ body {
     cursor: pointer;
 }
 
-.control-panel-buttons button:hover {
+.control-panel-buttons button:hover,#verifyButton:hover {
     background-color: #1e1e1ee8;
     color: rgb(238, 234, 234);
 
 }
 
-.control-panel-buttons button:active {
+.control-panel-buttons button:active,#verifyButton:active {
     background-color: #606471;
     color: rgb(238, 234, 234);
     border: 3px solid #6a6b6e;
@@ -673,22 +673,22 @@ body {
 
 #denominator2 {
     bottom: 170px;
-    right: 610px;
+    right: 600px;
 }
 
 #IlC {
     bottom: 185px;
-    right: 600px;
+    right: 590px;
 }
 
 #IlC_calc {
     bottom: 140px;
-    right: 970px;
+    right: 960px;
 }
 
 #IlC_obsv {
     bottom: 110px;
-    right: 1025px;
+    right: 1020px;
 }
 
 #PSDisplay {
@@ -790,7 +790,8 @@ border-radius: 2px;
 
 #verifyButton{
     position: relative;
-    left: -1200px;
+    left: -1095px;
+    bottom: 65px;
 }
 
 .SeeOnly:hover{
@@ -802,13 +803,13 @@ border-radius: 2px;
 
 }
 
-.control-panel-buttons button:disabled:hover {
+.control-panel-buttons button:disabled:hover ,#verifyButton:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    cursor: default;
 }
 
-.control-panel-buttons button:disabled:active {
+.control-panel-buttons button:disabled:active,#verifyButton:disabled:active {
    background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    border: none;

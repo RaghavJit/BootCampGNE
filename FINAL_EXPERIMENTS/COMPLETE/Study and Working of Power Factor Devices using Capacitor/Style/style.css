@@ -178,7 +178,7 @@ body{
     text-align: center;
 }
 
-.control-panel-buttons button {
+.control-panel-buttons button,#VRF {
     border: none;
     height: 35px;
     outline: none;
@@ -195,13 +195,13 @@ body{
     cursor: pointer;
 }
 
-.control-panel-buttons button:hover {
+.control-panel-buttons button:hover ,#VRF:hover{
     background-color: #1e1e1ee8;
     color: rgb(238, 234, 234);
 
 }
 
-.control-panel-buttons button:active {
+.control-panel-buttons button:active ,#VRF:active {
     background-color: #606471;
     color: rgb(238, 234, 234);
     border: 3px solid #6a6b6e;
@@ -774,11 +774,11 @@ user-select: none;
 }
 #VoltmeterC{
     bottom:215px;
-    right:800px;
+    right:810px;
 }
 #WattmeterC{
     bottom:185px;
-    right:882px;
+    right:880px;
 }
 #numerator{
     bottom:95px;
@@ -792,22 +792,22 @@ user-select: none;
 }
 #denominator2{
     bottom:65px;
-    right:1010px;
+    right:1003px;
 
 }
 #equalto{
     bottom:80px;
-    right:1010px;
+    right:1002px;
 
 }
 #DeviceC2{
-    bottom:52px;
+    bottom:60px;
     left:205px;
     width:100px;
 
 }
 #powerfactor{
-    bottom:52px;
+    bottom:60px;
     left:235px;
 
 }
@@ -905,17 +905,17 @@ border-radius: 2px;
 
 #VRF{
     position: relative;
-    bottom:53px;
+    bottom:58px;
     left:250px;
 }
 
-.control-panel-buttons button:disabled:hover {
+.control-panel-buttons button:disabled:hover, ,#VRF:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    cursor: default;
 }
 
-.control-panel-buttons button:disabled:active {
+.control-panel-buttons button:disabled:active ,#VRF:disabled:active {
    background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    border: none;

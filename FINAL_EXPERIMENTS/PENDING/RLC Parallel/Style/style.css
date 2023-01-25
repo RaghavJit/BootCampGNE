@@ -779,6 +779,9 @@ body {
     position: relative;
     top:214px;
     left:128px;
+    width:25px;
+    height:25px;
+    border-radius: 25px;
     opacity: 0;
 }
 
@@ -791,14 +794,17 @@ left:73px;
 
 
 
+
 .transformer button{
     z-index: 1;
 }
 
 .jtk-endpoint { z-index:1; }
+#t_a label,#t_b label{
+transform: translate(-8px, -28px);}
+#t_c label,#t_d label{
+transform: translate(-8px, 13px);}
 
-.transformer #t_a label,#t_b label{
-transform: translate(-5px, -28px);}
 .control-panel-buttons button:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
    color: #919191;

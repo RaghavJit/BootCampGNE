@@ -636,11 +636,19 @@ img {
 #w1_motor {
     top: 0px;
     left: 70px;
+    opacity: 1;
+
+}
+#w1_motor:disabled,#w2_motor:disabled {
+    background-color: grey;
+    opacity: 1;
+
 }
 
 #w2_motor {
     top: -25px;
     left: 200px;
+    opacity:1
 }
 
 /*Calculation Implementation*/
