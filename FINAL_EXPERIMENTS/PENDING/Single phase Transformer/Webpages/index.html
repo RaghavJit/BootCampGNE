@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Labs|| To study Efficiency of Single-phase Transformer by load test</title>
     <link rel="stylesheet" href="../Style/style.css">
-    <link href="http://fonts.cdnfonts.com/css/zacbel-x" rel="stylesheet">
-    <link href="http://fonts.cdnfonts.com/css/foco-trial" rel="stylesheet">
+    <link href="../CDN_folder/Font(zacbel-x).css" rel="stylesheet">
+    <link href="../CDN_folder/Font(foco-trial).css" rel="stylesheet">
+    <link href="../CDN_folder/SevenSegmentFont.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@firestitch/jsplumb@2.12.0/dist/js/jsplumb.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+    <script src="../CDN_folder/ChartCDN.js"></script>
 
     <link rel="icon" href="../Assets/logo.jpg" type="image/x-icon">
 
@@ -154,10 +155,9 @@
                     <div class="control-panel-buttons">
                         <button id="check" disabled>CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="calculate" disabled="true">CALCULATE</button>
-                        <button id="plot" disabled="true">PLOT</button>
+                        <button id="plot">PLOT</button>
                         <button id="reset" onclick='window.location.reload();'>RESET</button>
-                        <!--   <button id="print" onclick=' window.print();' disabled="true">PRINT</button>  -->
+                          <button id="print" onclick=' window.print();' disabled="true">PRINT</button> 
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
                     </div>
                 </div>
@@ -434,6 +434,12 @@
             <div class="calculation">
 
                 <p>Graph</p>
+
+                <div class="chart-container" id="chart-container" >
+                    <canvas id="myPlot" class="MyCanvas" height="100px">
+    
+                    </canvas>
+                </div>
 
                 <!-- <img class="forbidden" src="../Assets/Power Factor of Devices.png" width = "700"alt="">
                 <input type="text" id="DeviceC1">

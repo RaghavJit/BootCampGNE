@@ -196,6 +196,10 @@ var w2val = 0
 var eff = 0
 var reg = 0
 
+var effList = []
+var regList = []
+var PowList = []
+
 function task(i, x, y) {
     setTimeout(function () {
         angle = angle + x
@@ -227,8 +231,8 @@ knob.onclick = function () {
             volt_inc = -2.2
             add.disabled = false
             sw1_disabled = 0
-            sw2_disabled = 0
-            sw3_disabled = 0
+            sw2_disabled = 1
+            sw3_disabled = 1
         }
     }
 
@@ -575,6 +579,7 @@ swit1.onclick = function call1() {
         toggleS3(0)
         swtState = 1
         updateAmmeters()
+        sw2_disabled = 0
     }
 }
 
@@ -596,6 +601,7 @@ swit2.onclick = function call1() {
         toggleS3(0)
         swtState = 2
         sw1_disabled = 1
+        sw3_disabled = 0
         updateAmmeters()
     }
 }
@@ -618,6 +624,7 @@ swit3.onclick = function call1() {
         toggleS2(0)
         toggleS3(1)
         swtState = 3
+        sw1_disabled = 1
         sw2_disabled = 1
         updateAmmeters()
     }
@@ -727,6 +734,9 @@ add.onclick = function AddToTable() {
     REG.innerHTML = reg
     index = index + 1
 
+    effList.push(eff)
+    regList.push(reg)
+    PowList.push(w2val.toFixed(0))
 
 }
 
@@ -735,10 +745,125 @@ prnt.onclick = function prntScr() {
     window.print();
 }
 
+plot.onclick = function (){
+    if (vtable.rows.length >= 4) {
 
-function myFunction() {
+        prnt.disabled = false
 
-    document.getElementById("add").disabled = true;
+        var temp1 = document.getElementById("chart-container")
+        var temp2 = temp1.innerHTML
+        temp1.innerHTML = temp2
+        
+        window.scrollTo({
+            top: 750,
+            left: 0,
+            behavior: 'smooth'
+        });
 
+        new Chart("myPlot", {
+            type: "line",
+            data: {
+                labels: PowList,
+                datasets: [{
+                    label: "Efficiency",
+                    fill: false,
+                    lineTension: 0.3,
+                    borderColor: "blue",
+                    data: effList
+                },
+                {
+                    label: "Regulation",
+                    fill: false,
+                    lineTension: 0.3,
+                    borderColor: "green",
+                    data: regList
+                }]
+            },
+
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Percent (%)"
+                        }
+                    },
+                    x: {
+                        beginAtZero: true,
+                        type: "linear",
+                        title: {
+                            display: true,
+                            text: "Output Power"
+                        }
+                    }
+                }
+            }
+        });
+    }
+    else{
+        window.alert("Please enter atleast 4 obseravtions to the table.")
+    }
 }
 
+// plot.onclick = function (){
+//     console.log("i am alive")
+    // if (vtable.ariaRowSpan.length >= 4) {
+
+    //     prnt.disabled = false
+
+    //     var temp1 = document.getElementById("chart-container")
+    //     var temp2 = temp1.innerHTML
+    //     temp1.innerHTML = temp2
+        
+    //     window.scrollTo({
+    //         top: 750,
+    //         left: 0,
+    //         behavior: 'smooth'
+    //     });
+
+    //     new Chart("myPlot", {
+    //         type: "line",
+    //         data: {
+    //             labels: PowList,
+    //             datasets: [{
+    //                 label: "I1",
+    //                 fill: false,
+    //                 lineTension: 0.3,
+    //                 borderColor: "blue",
+    //                 data: effList
+    //             },
+    //             {
+    //                 label: "I2",
+    //                 fill: false,
+    //                 lineTension: 0.3,
+    //                 borderColor: "green",
+    //                 data: regList
+    //             }]
+    //         },
+
+    //         options: {
+    //             scales: {
+    //                 y: {
+    //                     beginAtZero: true,
+    //                     title: {
+    //                         display: true,
+    //                         text: "Current Values"
+    //                     }
+    //                 },
+    //                 x: {
+    //                     beginAtZero: true,
+    //                     type: "linear",
+    //                     title: {
+    //                         display: true,
+    //                         text: "Voltage (Power Supply)"
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     });
+    // }
+    // else{
+    //     window.alert("Please enter atleast 4 obseravtions to the table.")
+    // }
+// }

@@ -280,7 +280,7 @@ font-size: 28px;
 .r3{
     float:left;
     width: 1450px;
-    height: 500px;
+    height: 720px;
     margin: 30px 30px 30px 30px;
     border-radius: 10px;
     background-color: white;
@@ -1228,8 +1228,8 @@ border-radius: 2px;
 
 .MyCanvas {
     position: relative;
-    top: -550px;
-    left: px;
+    top: 0px;
+    left: 0px;
     background-color: white;
     border-radius: 10px;
     filter: drop-shadow(10px 10px 10px rgba(75, 75, 75, 0.31))
