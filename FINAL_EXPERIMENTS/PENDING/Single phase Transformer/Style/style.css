@@ -1062,17 +1062,6 @@ width: 12px;
 }
 
 /* Making images unselectable */
-.forbidden {
-    pointer-events: none;
-    -moz-user-select: none;
-user-select: none;
-
--moz-user-select: none;
--webkit-user-drag: none;
--webkit-user-select: none;
--ms-user-select: none;
-}
-
 
 .calculation input{
     margin-top: -180px;

@@ -74,9 +74,7 @@ var check = document.getElementById("check")
 var add = document.getElementById("add")
 var plot = document.getElementById("plot")
 var prnt = document.getElementById("print")
-var prnt = document.getElementById("print")
 var reset = document.getElementById("reset")
-var myPlot = document.getElementById("myPlot")
 
 var vtable = document.getElementById("valTable")
 
@@ -127,27 +125,32 @@ var output_l_var = document.getElementById("output_l_var")
 var output_m_var = document.getElementById("output_m_var")
 var output_c_var = document.getElementById("output_c_var")
 
+var knob = document.getElementById("Var_Knob")
+
+var swit1 = document.getElementById("switch1")
+var swit2 = document.getElementById("switch2")
+var swit3 = document.getElementById("switch3")
 
 var index = 1
 
 var validConn = [
     p_mcb, a_var,
     n_mcb, b_var,
-    c_var, p_v, 
+    c_var, p_v,
     d_var, n_v,
     p_v, p_a,
     n_a, m_w,
     m_w, c_w,
     l_w, transformer_a,
     n_v, v_w,
-    v_w, transformer_b, 
-    transformer_c, output_p_v, 
+    v_w, transformer_b,
+    transformer_c, output_p_v,
     transformer_d, output_n_v,
-    output_p_v, output_p_a, 
-    output_n_a, output_m_var, 
-    output_m_var, output_c_var, 
-    output_n_v, output_v_var, 
-    lamp_load_a, output_l_var, 
+    output_p_v, output_p_a,
+    output_n_a, output_m_var,
+    output_m_var, output_c_var,
+    output_n_v, output_v_var,
+    lamp_load_a, output_l_var,
     lamp_load_b, output_v_var
 ]
 
@@ -155,6 +158,49 @@ var arrChk = []
 var arrChkStore = []
 
 var mcb_state = 0
+var var_state = 0
+var mcb_disabled = 1
+var var_disabled = 1
+
+var knob_state = 0;
+
+var var_voltage = 0
+var angle = 0
+var angle_inc = 3.6
+var volt_inc = 2.2
+
+function task(i, x, y) {
+    setTimeout(function () {
+        angle = angle + x
+        var_voltage = var_voltage + y
+
+        knob.style.transform = "rotate(" + angle + "deg)"
+        updateAmmeters()
+
+    }, 20 * i);
+}
+
+knob.onclick = function () {
+    if (var_disabled == 0) {
+        for (let i = 0; i < 100; i++) {
+            task(i, angle_inc, volt_inc);
+        }
+
+        if (angle_inc == -3.6) {
+            angle_inc = 3.6
+            volt_inc = 2.2
+            add.disabled = true
+
+        }
+        else if (angle_inc == 3.6) {
+            angle_inc = -3.6
+            volt_inc = -2.2
+            add.disabled = false
+        }
+    }
+
+}
+
 
 const instance = jsPlumb.getInstance({
     container: cont
@@ -425,24 +471,25 @@ check.onclick = function MyCheck() {
 
     flags3 = 1;
 
-    for(var i=0; i<validConn.length; i++){
+    for (var i = 0; i < validConn.length; i++) {
 
-        if(i%2 == 0){
-            console.log(isConnected(validConn[i], validConn[i+1]))
-            if(isConnected(validConn[i], validConn[i+1])){
-                arrChk.push(isConnected(validConn[i], validConn[i+1]))
+        if (i % 2 == 0) {
+            console.log(isConnected(validConn[i], validConn[i + 1]))
+            if (isConnected(validConn[i], validConn[i + 1])) {
+                arrChk.push(isConnected(validConn[i], validConn[i + 1]))
             }
         }
     }
 
-    if(arrChk.length == 18){
+    if (arrChk.length == 18) {
         window.alert("Right Connections")
         arrChk = arrChkStore
         arrChk = []
+        mcb_disabled = 0
         //code for the case when connections are correct
     }
 
-    else{
+    else {
         window.alert("Invalid Connnections")
         window.location.reload()
     }
@@ -458,42 +505,71 @@ function disconnect(num) {
 
 }
 
-MCB.onclick = function toggle() {
+MCB.onclick = function togglemcb() {
+    if (mcb_disabled == 0) {
+        if (mcb_state == 0) {
+            this.src = "../Assets/MCB_ON.png"
+            mcb_state = 1;
+            var_disabled = 0
+        }
 
-
-    add.disabled = false;
-    flags5 = 1;
-
-    if (mcb_state == 0) {
-
-        document.getElementById('MCB').src = 'images/PowerSupplyOn.png'
-        mcb_state = 1;
-    }
-
-    else if (mcb_state == 1) {
-
-        document.getElementById('MCB').src = 'images/PowerSupplyOff.png'
-        mcb_state = 0;
+        else if (mcb_state == 1) {
+            this.src = "../Assets/MCB_Off.png"
+            mcb_state = 0;
+            var_disabled = 1
+            Var.src = "../Assets/Variac_OFF.png"
+        }
     }
 }
 
-var x = 18;
+Var.onclick = function togglevar() {
+    if (var_disabled == 0) {
+        if (var_state == 0) {
+            this.src = "../Assets/Variac_ON.png"
+            var_state = 1
+        }
+        else if (var_state == 1) {
+            this.src = "../Assets/Variac_OFF.png"
+            var_state = 0
+        }
+    }
+}
+
+function isConnected(node1, node2) {
+    if ((instance.getConnections({ source: node1, target: node2 })[0] != undefined) || (instance.getConnections({ source: node2, target: node1 })[0] != undefined)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function rotateNeedle(needle, angle) {
+    needle.style.transform = "rotate(" + angle + "deg)"
+}
+
+
 function updateAmmeters() {
 
+    console.log("here")
 
-    r1 = parseFloat(r1val.value);
-    r2 = parseFloat(r2val.value);
-    r3 = parseFloat(r3val.value);
-    ps = parseFloat(PSval.value);
-
-    
 }
 
 
 
 add.onclick = function AddToTable() {
+    let row = vtable.insertRow(index);
 
-   
+    let Sno = vtable.insertRow(index);
+    let V1 = row.insertCell(0);
+    let A1 = row.insertCell(1);
+    let W1 = row.insertCell(2);
+    let V2 = row.insertCell(0);
+    let A2 = row.insertCell(1);
+    let W2 = row.insertCell(2);
+    let eff = row.insertCell(3);
+    let reg = row.insertCell(4);
+
 }
 
 
