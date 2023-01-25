@@ -66,6 +66,17 @@ var s4 = document.getElementById("s4")
 var s5 = document.getElementById("s5")
 var s6 = document.getElementById("s6")
 
+var Rcalc = document.getElementById("R")
+var XLcalc = document.getElementById("XL")
+var XCcalc = document.getElementById("XC")
+var Lcalc = document.getElementById("L")
+var Ccalc = document.getElementById("C")
+var Zcalc = document.getElementById("Z")
+var coscalc = document.getElementById("cos")
+var Pcalc = document.getElementById("P")
+var Qcalc = document.getElementById("Q")
+var verify = document.getElementById("verify")
+
 var mcb_state = 0
 var variac_state = 0
 
@@ -526,6 +537,29 @@ function setZero() {
     rotate_element(0, SecAmmeterNeedle)
     rotate_element(0, BotAmmeterNeedle)
     rotate_element(0, WattmeterNeedle)
+}
+
+verify.onclick = function verify(){
+    let ansList = [50, 6.28, 626.94, 20, 5, 6.41, 0.128, 7.7, 7.63]
+    let usrList = [Rcalc, XLcalc, XCcalc, Lcalc, Ccalc, Zcalc, coscalc, Pcalc, Qcalc]
+    let marks = 0
+    for(let i=0; i<ansList.length; i++){
+        console.log(ansList[i])
+        console.log(parseFloat(usrList[i].value))
+        if(ansList[i] == parseFloat(usrList[i].value)){
+            marks = marks + 1
+            usrList.staticConn.backgroundColor = "white"
+        }
+        else{
+            usrList[i].style.backgroundColor = "red"
+        }
+    }
+    if(marks == 9){
+        window.alert("values are correct!")
+    }
+    else{
+        window.alert("Incorrect values")
+    }
 }
 
 window.onload = function setJsPlumb() {

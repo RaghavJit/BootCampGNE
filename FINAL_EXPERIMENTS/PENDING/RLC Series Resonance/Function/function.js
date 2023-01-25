@@ -40,6 +40,9 @@ var VoltmeterNeedle = document.getElementById("P_V")
 
 var vtable = document.getElementById("valTable")
 
+var fr = document.getElementById("fr")
+var QF = document.getElementById("QF")
+var verify = document.getElementById("verify")
 
 var mcb_state = 0;
 var funcGen_state = 0;
@@ -335,6 +338,21 @@ add.onclick = function (){
 
     if(vtable.rows.length > 6){
         powDelta.disabled = false
+    }
+}
+
+verify.onclick = function checkUsr(){
+    console.log("working")
+    if(parseFloat(fr.value) == 3){
+        if(parseFloat(QF.value) == 2.34){
+            window.alert("Values are verified!")
+        }
+        else{
+            QF.style.backgroundColor = "red"
+        }
+    }
+    else{
+        fr.style.backgroundColor = "red"
     }
 }
 

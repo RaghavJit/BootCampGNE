@@ -19,7 +19,7 @@ body {
 }
 
 .heading {
-    height: 60px;
+    height: 120px;
     width: 1400px;
     margin: 0 30px;
     margin-top: 20px;
@@ -828,4 +828,69 @@ transform: translate(-5px, -28px);}
 .sliders input:disabled::-webkit-slider-thumb:active {
     cursor: default;
 
+}
+
+
+#calcImage{
+    width: 600px;
+    height: 275px;
+}
+
+#R{
+    position: relative;
+    top:-240px;
+    left: -510px;
+    width: 50px;
+}
+
+#XL{
+    position: relative;
+    top:-213px;
+    left: 95px;
+    width: 50px;
+}
+
+#XC{
+    position: relative;
+    top:-180px;
+    left: 95px;
+    width: 50px;
+}
+
+#L{
+    position: relative;
+    top:-150px;
+    left: 95px;
+    width: 50px;
+}
+
+#C{
+    position: relative;
+    top:-120px;
+    left: 95px;
+    width: 50px;
+}
+#Z{
+    position: relative;
+    top:-340px;
+    left: 300px;
+    width: 50px;
+}
+#cos{
+    position: relative;
+    top:-312px;
+    left: 330px;
+    width: 50px;
+}
+#P{
+    position: relative;
+    top:-285px;
+    left: 300px;
+    width: 50px;
+}
+#Q{
+    position: relative;
+    top:-250px;
+    left: 300px;
+    width: 50px;
 }

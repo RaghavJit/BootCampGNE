@@ -65,6 +65,17 @@ var s4 = document.getElementById("s4")
 var s5 = document.getElementById("s5")
 var s6 = document.getElementById("s6")
 
+var Rcalc = document.getElementById("R")
+var XLcalc = document.getElementById("XL")
+var XCcalc = document.getElementById("XC")
+var Lcalc = document.getElementById("L")
+var Ccalc = document.getElementById("C")
+var Zcalc = document.getElementById("Z")
+var coscalc = document.getElementById("cos")
+var Pcalc = document.getElementById("P")
+var Qcalc = document.getElementById("Q")
+var verify = document.getElementById("verify")
+
 var variac_state = 0
 var mcb_state = 0
 
@@ -550,6 +561,29 @@ window.onload = function setJsPlumb() {
         instance.connect({ source: MCB_Positive, target: MCB_Negative })
         instance.deleteEveryConnection()
     }, 50);
+}
+
+verify.onclick = function verify(){
+    let ansList = [12, 47.13, 31.83, 0.15, 100, 19.4, 0.619, 2.5, 1.96]
+    let usrList = [Rcalc, XLcalc, XCcalc, Lcalc, Ccalc, Zcalc, coscalc, Pcalc, Qcalc]
+    let marks = 0
+    for(let i=0; i<ansList.length; i++){
+        console.log(ansList[i])
+        console.log(parseFloat(usrList[i].value))
+        if(ansList[i] == parseFloat(usrList[i].value)){
+            marks = marks + 1
+            usrList.staticConn.backgroundColor = "white"
+        }
+        else{
+            usrList[i].style.backgroundColor = "red"
+        }
+    }
+    if(marks == 9){
+        window.alert("values are correct!")
+    }
+    else{
+        window.alert("Incorrect values")
+    }
 }
 
 function highlight() {

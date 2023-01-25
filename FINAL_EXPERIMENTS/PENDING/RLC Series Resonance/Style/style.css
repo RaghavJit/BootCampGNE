@@ -753,5 +753,23 @@ body {
    background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    border: none;
-   cursor: default;
+   cursor: default;
+}
+
+#calcImage{
+    width: 600px;
+    height: 300px;
+}
+
+#fr{
+    position: relative;
+    top: -250px;
+    left: -520px;
+    width: 50px;
+}
+#QF{
+    position: relative;
+    top: -220px;
+    left: 120px;
+    width: 50px;
 }
