@@ -127,11 +127,23 @@ var output_c_var = document.getElementById("output_c_var")
 
 var knob = document.getElementById("Var_Knob")
 
-var swit1 = document.getElementById("switch1")
-var swit2 = document.getElementById("switch2")
-var swit3 = document.getElementById("switch3")
+var swit1 = document.getElementById("Switch1")
+var swit2 = document.getElementById("Switch2")
+var swit3 = document.getElementById("Switch3")
 
-var index = 1
+var Load1 = document.getElementById("R-lamp")
+var Load2 = document.getElementById("Y-lamp")
+var Load3 = document.getElementById("B-lamp")
+
+var v1pointer = document.getElementById("P_V")
+var a1pointer = document.getElementById("P_A")
+var w1pointer = document.getElementById("P_W")
+
+var v2pointer = document.getElementById("output_P_V")
+var a2pointer = document.getElementById("output_P_A")
+var w2pointer = document.getElementById("output_P_W")
+
+var index = 6
 
 var validConn = [
     p_mcb, a_var,
@@ -162,12 +174,27 @@ var var_state = 0
 var mcb_disabled = 1
 var var_disabled = 1
 
+var swtState = 0
+
+var sw1_disabled = 1
+var sw2_disabled = 1
+var sw3_disabled = 1
+
 var knob_state = 0;
 
 var var_voltage = 0
 var angle = 0
 var angle_inc = 3.6
 var volt_inc = 2.2
+
+var v1val = 0
+var a1val = 0
+var w1val = 0
+var v2val = 0
+var a2val = 0
+var w2val = 0
+var eff = 0
+var reg = 0
 
 function task(i, x, y) {
     setTimeout(function () {
@@ -190,12 +217,18 @@ knob.onclick = function () {
             angle_inc = 3.6
             volt_inc = 2.2
             add.disabled = true
+            sw1_disabled = 1
+            sw2_disabled = 1
+            sw3_disabled = 1
 
         }
         else if (angle_inc == 3.6) {
             angle_inc = -3.6
             volt_inc = -2.2
             add.disabled = false
+            sw1_disabled = 0
+            sw2_disabled = 0
+            sw3_disabled = 0
         }
     }
 
@@ -535,6 +568,74 @@ Var.onclick = function togglevar() {
     }
 }
 
+swit1.onclick = function call1() {
+    if (sw1_disabled == 0) {
+        toggleS1(1)
+        toggleS2(0)
+        toggleS3(0)
+        swtState = 1
+        updateAmmeters()
+    }
+}
+
+function toggleS1(num) {
+    if (num == 0) {
+        swit1.src = '../Assets/Switch_Off.png'
+        Load1.src = '../Assets/r_off.png'
+    }
+    else if (num == 1) {
+        swit1.src = '../Assets/Switch_On.png'
+        Load1.src = '../Assets/r_on.png'
+    }
+}
+
+swit2.onclick = function call1() {
+    if (sw2_disabled == 0) {
+        toggleS1(0)
+        toggleS2(1)
+        toggleS3(0)
+        swtState = 2
+        sw1_disabled = 1
+        updateAmmeters()
+    }
+}
+
+function toggleS2(num) {
+    if (num == 0) {
+        swit2.src = '../Assets/Switch_Off.png'
+        Load2.src = '../Assets/y_off.png'
+    }
+    else if (num == 1) {
+        swit2.src = '../Assets/Switch_On.png'
+        Load2.src = '../Assets/y_on.png'
+    }
+
+}
+
+swit3.onclick = function call1() {
+    if (sw3_disabled == 0) {
+        toggleS1(0)
+        toggleS2(0)
+        toggleS3(1)
+        swtState = 3
+        sw2_disabled = 1
+        updateAmmeters()
+    }
+}
+
+function toggleS3(num) {
+    if (num == 0) {
+        swit3.src = '../Assets/Switch_Off.png'
+        Load3.src = '../Assets/b_off.png'
+    }
+    else if (num == 1) {
+        swit3.src = '../Assets/Switch_On.png'
+        Load3.src = '../Assets/b_on.png'
+    }
+}
+
+
+
 function isConnected(node1, node2) {
     if ((instance.getConnections({ source: node1, target: node2 })[0] != undefined) || (instance.getConnections({ source: node2, target: node1 })[0] != undefined)) {
         return true;
@@ -551,7 +652,52 @@ function rotateNeedle(needle, angle) {
 
 function updateAmmeters() {
 
-    console.log("here")
+    if (swtState == 0) {
+        v1val = 220 * (var_voltage / 220)
+        a1val = 0.1 * (var_voltage / 220)
+        w1val = 25 * (var_voltage / 220)
+        v2val = 108 * (var_voltage / 220)
+        a2val = 0 * (var_voltage / 220)
+        w2val = 0 * (var_voltage / 220)
+        eff = 0
+        reg =0
+    }
+    else if (swtState == 1) {
+        v1val = 218 * (var_voltage / 220)
+        a1val = 0.8 * (var_voltage / 220)
+        w1val = 70 * (var_voltage / 220)
+        v2val = 105 * (var_voltage / 220)
+        a2val = 1 * (var_voltage / 220)
+        w2val = 10 * (var_voltage / 220)
+        eff = 29
+        reg = 2.77
+    }
+    else if (swtState == 2) {
+        v1val = 217 * (var_voltage / 220)
+        a1val = 1.4 * (var_voltage / 220)
+        w1val = 130 * (var_voltage / 220)
+        v2val = 104 * (var_voltage / 220)
+        a2val = 2 * (var_voltage / 220)
+        w2val = 40 * (var_voltage / 220)
+        eff = 62
+        reg = 3.7
+    }
+    else if (swtState == 3) {
+        v1val = 216 * (var_voltage / 220)
+        a1val = 1.7 * (var_voltage / 220)
+        w1val = 185 * (var_voltage / 220)
+        v2val = 102 * (var_voltage / 220)
+        a2val = 2.9 * (var_voltage / 220)
+        w2val = 80 * (var_voltage / 220)
+        eff = 86
+        reg = 5.55
+    }
+    rotateNeedle(v1pointer, v1val * (180 / 220))
+    rotateNeedle(a1pointer, a1val * (180 / 10))
+    rotateNeedle(w1pointer, w1val * (90 / 1500))
+    rotateNeedle(v2pointer, v2val * (180 / 220))
+    rotateNeedle(a2pointer, a2val * (180 / 10))
+    rotateNeedle(w2pointer, w2val * (90 / 1500))
 
 }
 
@@ -560,15 +706,27 @@ function updateAmmeters() {
 add.onclick = function AddToTable() {
     let row = vtable.insertRow(index);
 
-    let Sno = vtable.insertRow(index);
-    let V1 = row.insertCell(0);
-    let A1 = row.insertCell(1);
-    let W1 = row.insertCell(2);
-    let V2 = row.insertCell(0);
-    let A2 = row.insertCell(1);
-    let W2 = row.insertCell(2);
-    let eff = row.insertCell(3);
-    let reg = row.insertCell(4);
+    let Sno = row.insertCell(0);
+    let V1 = row.insertCell(1);
+    let A1 = row.insertCell(2);
+    let W1 = row.insertCell(3);
+    let V2 = row.insertCell(4);
+    let A2 = row.insertCell(5);
+    let W2 = row.insertCell(6);
+    let EFF = row.insertCell(7);
+    let REG = row.insertCell(8);
+
+    Sno.innerHTML = index - 6
+    V1.innerHTML = v1val.toFixed(0)
+    A1.innerHTML = a1val.toFixed(1)
+    W1.innerHTML = w1val.toFixed(0)
+    V2.innerHTML = v2val.toFixed(0)
+    A2.innerHTML = a2val.toFixed(0)
+    W2.innerHTML = w2val.toFixed(0)
+    EFF.innerHTML = eff
+    REG.innerHTML = reg
+    index = index + 1
+
 
 }
 
