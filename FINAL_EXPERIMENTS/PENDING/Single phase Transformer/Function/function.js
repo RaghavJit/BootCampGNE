@@ -180,6 +180,10 @@ var sw1_disabled = 1
 var sw2_disabled = 1
 var sw3_disabled = 1
 
+var switch1 = document.getElementById("switch1")
+var switch2 = document.getElementById("switch2")
+var switch3 = document.getElementById("switch3")
+
 var knob_state = 0;
 
 var var_voltage = 0
@@ -230,9 +234,6 @@ knob.onclick = function () {
             angle_inc = -3.6
             volt_inc = -2.2
             add.disabled = false
-            sw1_disabled = 0
-            sw2_disabled = 1
-            sw3_disabled = 1
         }
     }
 
@@ -579,7 +580,8 @@ swit1.onclick = function call1() {
         toggleS3(0)
         swtState = 1
         updateAmmeters()
-        sw2_disabled = 0
+        sw2_disabled = 1
+        add.disabled = false
     }
 }
 
@@ -595,13 +597,14 @@ function toggleS1(num) {
 }
 
 swit2.onclick = function call1() {
-    if (sw2_disabled == 0) {
+    if ((sw2_disabled == 0)) {
         toggleS1(0)
         toggleS2(1)
         toggleS3(0)
         swtState = 2
         sw1_disabled = 1
-        sw3_disabled = 0
+        add.disabled = false
+        sw3_disabled = 1
         updateAmmeters()
     }
 }
@@ -626,6 +629,7 @@ swit3.onclick = function call1() {
         swtState = 3
         sw1_disabled = 1
         sw2_disabled = 1
+        add.disabled = false
         updateAmmeters()
     }
 }
@@ -737,6 +741,37 @@ add.onclick = function AddToTable() {
     effList.push(eff)
     regList.push(reg)
     PowList.push(w2val.toFixed(0))
+
+    if(swtState == 0){
+        sw1_disabled = 0
+        sw2_disabled = 1
+        sw3_disabled = 1
+        switch1.style.color = 'red'
+        switch2.style.color = 'white'
+        switch3.style.color = 'white'
+    }
+    if(swtState == 1){
+        sw1_disabled = 1
+        sw2_disabled = 0
+        sw3_disabled = 1
+        switch1.style.color = 'white'
+        switch2.style.color = 'red'
+        switch3.style.color = 'white'
+    }
+    if(swtState == 2){
+        sw1_disabled = 1
+        sw2_disabled = 1
+        sw3_disabled = 0
+        switch1.style.color = 'white'
+        switch2.style.color = 'white'
+        switch3.style.color = 'red'
+    }
+    if(swtState == 3){
+        sw1_disabled = 1
+        sw2_disabled = 1
+        sw3_disabled = 1
+    }
+    this.disabled = true
 
 }
 
