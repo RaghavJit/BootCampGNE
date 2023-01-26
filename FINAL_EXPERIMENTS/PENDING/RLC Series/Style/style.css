@@ -873,8 +873,8 @@ transform: translate(-5px, -28px);}
 }
 #Z{
     position: relative;
-    top:-340px;
-    left: 300px;
+    top:-342px;
+    left: 290px;
     width: 50px;
 }
 #cos{
@@ -885,14 +885,14 @@ transform: translate(-5px, -28px);}
 }
 #P{
     position: relative;
-    top:-285px;
-    left: 300px;
+    top:-278px;
+    left: 290px;
     width: 50px;
 }
 #Q{
     position: relative;
-    top:-250px;
-    left: 300px;
+    top:-255px;
+    left: 290px;
     width: 50px;
 }
 

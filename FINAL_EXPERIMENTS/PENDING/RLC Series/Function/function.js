@@ -302,7 +302,7 @@ add.onclick = function () {
         pow.innerHTML = 1500
 
         if (vtable.row.length >= 2) {
-            powDelta.disabled = false
+            verify.disabled = false
         }
     }
 }

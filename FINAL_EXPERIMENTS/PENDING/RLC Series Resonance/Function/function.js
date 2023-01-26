@@ -340,7 +340,7 @@ add.onclick = function () {
         }
 
         if (vtable.rows.length > 6) {
-            plot.disabled = false
+            verify.disabled = false
         }
     }
 }

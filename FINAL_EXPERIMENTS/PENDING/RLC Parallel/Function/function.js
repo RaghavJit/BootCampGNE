@@ -467,7 +467,7 @@ add.onclick = function () {
         pow.innerHtml = 984
 
         if (vtable.rows.length >= 2) {
-            powDelta.disabled = false
+            verify.disabled = false
         }
     }
 }
