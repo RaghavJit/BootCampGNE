@@ -310,12 +310,12 @@ function staticConn() {
     for (let i = 0; i < 2; i++) {
         if (isConnected(WattmeterV, VarOut[i])) {
             if (isConnected(Ammeter[i], VarOut[conjNum(i)])) {
-                if(ThreeNodes(Ammeter[conjNum(i)], WattmeterC, WattmeterM) && (conn == 4)){
+                if (ThreeNodes(Ammeter[conjNum(i)], WattmeterC, WattmeterM) && (conn == 4)) {
                     return true
                 }
             }
             else if (isConnected(Ammeter[conjNum(i)], VarOut[conjNum(i)])) {
-                if(ThreeNodes(Ammeter[i], WattmeterC, WattmeterM) && (conn == 4)){
+                if (ThreeNodes(Ammeter[i], WattmeterC, WattmeterM) && (conn == 4)) {
                     return true
                 }
             }
@@ -340,7 +340,7 @@ function AmmeterToLoad() {
     LList = []
     for (let i = 0; i < ammeterList.length; i++) {
         for (let j = 0; j < loadList.length; j++) {
-            if(checkNodes(ammeterList[i], loadList[j])){
+            if (checkNodes(ammeterList[i], loadList[j])) {
                 connList.push(j)
             }
         }
@@ -372,7 +372,7 @@ function ResolveVandL() {
     }
 }
 
-function PolarityCheck(){
+function PolarityCheck() {
     let indcAmm = ammeterList[connList.indexOf(2)]
     return ((indcAmm[0], InductorPositive) || (indcAmm[1], InductorNegative))
 }
@@ -391,18 +391,18 @@ check.onclick = function checkConn() {
                 window.alert("Invalid connections! ")
             }
         }
-        else if(instance.getAllConnections().length == 0){
+        else if (instance.getAllConnections().length == 0) {
             window.alert("Please make connections!")
         }
         else {
             window.alert("Invalid connections! ")
         }
     }
-    else if(instance.getAllConnections().length == 0){
+    else if (instance.getAllConnections().length == 0) {
         window.alert("Please make connections!")
     }
-    else{
-        window.alert("Invalid connections! ") 
+    else {
+        window.alert("Invalid connections! ")
     }
 }
 
@@ -445,28 +445,30 @@ Variac.onclick = function () {
 }
 
 add.onclick = function () {
-    flags6 = 1
+    if (vtable.rows.length >= 6) {
+        flags6 = 1
 
-    let row = vtable.insertRow(rindex + 1);
-    rindex = rindex + 1;
-    let SNo = row.insertCell(0);
-    let voltage = row.insertCell(1)
-    let current = row.insertCell(2);
-    let ai = row.insertCell(3);
-    let ar = row.insertCell(4);
-    let ac = row.insertCell(5);
-    let pow = row.insertCell(6);
+        let row = vtable.insertRow(rindex + 1);
+        rindex = rindex + 1;
+        let SNo = row.insertCell(0);
+        let voltage = row.insertCell(1)
+        let current = row.insertCell(2);
+        let ai = row.insertCell(3);
+        let ar = row.insertCell(4);
+        let ac = row.insertCell(5);
+        let pow = row.insertCell(6);
 
-    SNo.innerHtml = rindex
-    voltage.innerHtml = 220
-    current.innerHtml = 34.97
-    ai.innerHtml = 35.03
-    ar.innerHtml = 4.4
-    ac.innerHtml = 0.33
-    pow.innerHtml = 984
+        SNo.innerHtml = rindex
+        voltage.innerHtml = 220
+        current.innerHtml = 34.97
+        ai.innerHtml = 35.03
+        ar.innerHtml = 4.4
+        ac.innerHtml = 0.33
+        pow.innerHtml = 984
 
-    if (vtable.rows.length >= 2) {
-        powDelta.disabled = false
+        if (vtable.rows.length >= 2) {
+            powDelta.disabled = false
+        }
     }
 }
 
@@ -499,7 +501,7 @@ knob.onclick = function () {
             volt_inc = -2.2
             add.disabled = false
         }
-        
+
     }
 }
 
@@ -508,26 +510,26 @@ function rotate_element(deg, elemnt) {
 }
 
 function calculateVars() {
-    
-    Mamm = (var_voltage/220)*34.97
-    Mvol = (var_voltage/220)*220
-    Watt = (var_voltage/220)*984
+
+    Mamm = (var_voltage / 220) * 34.97
+    Mvol = (var_voltage / 220) * 220
+    Watt = (var_voltage / 220) * 984
 
     let loadValueList = [36.03, 4.4, 0.33]
-    amm1 = (var_voltage/220)*loadValueList[connList[0]]
-    amm2 = (var_voltage/220)*loadValueList[connList[1]]
-    amm3 = (var_voltage/220)*loadValueList[connList[2]]
+    amm1 = (var_voltage / 220) * loadValueList[connList[0]]
+    amm2 = (var_voltage / 220) * loadValueList[connList[1]]
+    amm3 = (var_voltage / 220) * loadValueList[connList[2]]
 }
 
 function updateMeters() {
     calculateVars()
 
-    rotate_element(Mamm*(180/50), MainAmmeterNeedle)
-    rotate_element(Mvol*(180/220), MainVoltmeterNeedle)
-    rotate_element(amm1*(180/50), TopAmmeterNeedle)
-    rotate_element(amm2*(180/50), SecAmmeterNeedle)
-    rotate_element(amm3*(180/50), BotAmmeterNeedle)
-    rotate_element(Watt*(90/1500), WattmeterNeedle)
+    rotate_element(Mamm * (180 / 50), MainAmmeterNeedle)
+    rotate_element(Mvol * (180 / 220), MainVoltmeterNeedle)
+    rotate_element(amm1 * (180 / 50), TopAmmeterNeedle)
+    rotate_element(amm2 * (180 / 50), SecAmmeterNeedle)
+    rotate_element(amm3 * (180 / 50), BotAmmeterNeedle)
+    rotate_element(Watt * (90 / 1500), WattmeterNeedle)
 }
 
 function setZero() {
@@ -539,25 +541,25 @@ function setZero() {
     rotate_element(0, WattmeterNeedle)
 }
 
-verify.onclick = function verify(){
+verify.onclick = function verify() {
     let ansList = [50, 6.28, 626.94, 20, 5, 6.41, 0.128, 7.7, 7.63]
     let usrList = [Rcalc, XLcalc, XCcalc, Lcalc, Ccalc, Zcalc, coscalc, Pcalc, Qcalc]
     let marks = 0
-    for(let i=0; i<ansList.length; i++){
+    for (let i = 0; i < ansList.length; i++) {
         console.log(ansList[i])
         console.log(parseFloat(usrList[i].value))
-        if(ansList[i] == parseFloat(usrList[i].value)){
+        if (ansList[i] == parseFloat(usrList[i].value)) {
             marks = marks + 1
             usrList.staticConn.backgroundColor = "white"
         }
-        else{
+        else {
             usrList[i].style.backgroundColor = "red"
         }
     }
-    if(marks == 9){
+    if (marks == 9) {
         window.alert("values are correct!")
     }
-    else{
+    else {
         window.alert("Incorrect values")
     }
 }

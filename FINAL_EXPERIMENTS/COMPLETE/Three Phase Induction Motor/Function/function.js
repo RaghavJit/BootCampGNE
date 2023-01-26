@@ -388,9 +388,9 @@ function calculateTorque() {
         let currentOptions = [NaN, 0.5, 1, 1.5, 2, 2.5, 3]
         Current = currentOptions[w1.selectedIndex]
 
-        prnt.disabled=false
+        prnt.disabled = false
     }
-    else{
+    else {
         window.alert("Please select values of weights w1 and w2")
     }
 }
@@ -403,7 +403,7 @@ function disconnect(num) {
 function setMeters() {
     if (w1.selectedIndex != 0) {
         calculateTorque()
-        VoltmeterNeedle.style.transform = "rotate("+ 144 +"deg)"
+        VoltmeterNeedle.style.transform = "rotate(" + 144 + "deg)"
         AmmeterNeedle.style.transform = "rotate(" + Current * 18 + "deg)"
     }
 }
@@ -468,36 +468,38 @@ MCB.onclick = function toggle_MCB() {
 }
 
 add.onclick = function AddToTable() {
-    calculateTorque()
-    var torque = Torque;
-    var speed = MTSpeed
+    if (index <= 6) {
+        calculateTorque()
+        var torque = Torque;
+        var speed = MTSpeed
 
-    let row = vtable.insertRow(index);
+        let row = vtable.insertRow(index);
 
-    let Sno = row.insertCell(0)
-    let volt = row.insertCell(1)
-    let curr = row.insertCell(2)
-    let w1Val = row.insertCell(3)
-    let w2Val = row.insertCell(4)
-    let tqVal = row.insertCell(5)
-    let spVal = row.insertCell(6)
+        let Sno = row.insertCell(0)
+        let volt = row.insertCell(1)
+        let curr = row.insertCell(2)
+        let w1Val = row.insertCell(3)
+        let w2Val = row.insertCell(4)
+        let tqVal = row.insertCell(5)
+        let spVal = row.insertCell(6)
 
-    Sno.innerHTML = index
-    volt.innerHTML = 400
-    setMeters()
-    curr.innerHTML = Current.toFixed(2)
-    w1Val.innerHTML = w1.value
-    w2Val.innerHTML = w2.value
-    tqVal.innerHTML = torque.toFixed(2)
-    spVal.innerHTML = speed.toFixed(3)
+        Sno.innerHTML = index
+        volt.innerHTML = 400
+        setMeters()
+        curr.innerHTML = Current.toFixed(2)
+        w1Val.innerHTML = w1.value
+        w2Val.innerHTML = w2.value
+        tqVal.innerHTML = torque.toFixed(2)
+        spVal.innerHTML = speed.toFixed(3)
 
-    TorqueList.push(torque)
-    SpeedList.push(speed)
+        TorqueList.push(torque)
+        SpeedList.push(speed)
 
-    index = index + 1
+        index = index + 1
 
-    if (index > 6) {
-        plot.disabled = false
+        if (index > 6) {
+            plot.disabled = false
+        }
     }
 }
 

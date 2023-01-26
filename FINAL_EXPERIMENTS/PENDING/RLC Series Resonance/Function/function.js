@@ -63,13 +63,13 @@ var ValidConn = [MCB_Positive, FunctGeneA, MCB_Negative, FunctGeneB, FunctGeneC,
 
 function disconnect(num) {
     let node_list = [
-        MCB_Positive, MCB_Negative, 
-        VoltmeterPositive, VoltmeterNegative, 
-        AmmeterPositive, AmmeterNegative, 
-        ResistorPositive, ResistorNegative, 
-        InductorPositive, InductorNegative, 
-        CapacitorPositive, CapacitorNegative, 
-        FunctGeneA, FunctGeneB, FunctGeneC, FunctGeneD 
+        MCB_Positive, MCB_Negative,
+        VoltmeterPositive, VoltmeterNegative,
+        AmmeterPositive, AmmeterNegative,
+        ResistorPositive, ResistorNegative,
+        InductorPositive, InductorNegative,
+        CapacitorPositive, CapacitorNegative,
+        FunctGeneA, FunctGeneB, FunctGeneC, FunctGeneD
 
     ]
     instance.deleteConnectionsForElement(node_list[num])
@@ -129,9 +129,9 @@ instance.bind("ready", function () {
 
 })
 
-FreqSlider.oninput = function (){
+FreqSlider.oninput = function () {
     flagS = 1
-    FunctGeneDis.value = "Fq = " + FreqSlider.value +" Hz"
+    FunctGeneDis.value = "Fq = " + FreqSlider.value + " Hz"
     calculateVars()
     updateMeters()
     add.disabled = false
@@ -141,7 +141,7 @@ function conjNum(num) {
     return Math.abs(num - 1)
 }
 
-function ToLoads(ammNode, funNode){
+function ToLoads(ammNode, funNode) {
     let inductor = [InductorPositive, InductorNegative]
     let resistor = [ResistorPositive, ResistorNegative]
     let capacitor = [CapacitorPositive, CapacitorNegative]
@@ -219,27 +219,27 @@ function staticConn() {
     console.log(conn)
 
     for (let i = 0; i < 2; i++) {
-        if(isConnected(Ammeter[i], VarOut[i])){
-            if(ToLoads(Ammeter[conjNum(i)], VarOut[conjNum(i)])){
+        if (isConnected(Ammeter[i], VarOut[i])) {
+            if (ToLoads(Ammeter[conjNum(i)], VarOut[conjNum(i)])) {
                 return true
             }
         }
-        else if(isConnected(Ammeter[i], VarOut[conjNum(i)])){
-            if(ToLoads(Ammeter[conjNum(i)], VarOut[i])){
+        else if (isConnected(Ammeter[i], VarOut[conjNum(i)])) {
+            if (ToLoads(Ammeter[conjNum(i)], VarOut[i])) {
                 return true
             }
-        } 
+        }
     }
 }
 
 check.onclick = function checkConn() {
     flags2 = 1
-    
-    if(staticConn()){
+
+    if (staticConn()) {
         MCB.disabled = false
         window.alert("Right connections!")
     }
-    else{
+    else {
         window.alert("Invalid connections!")
     }
 }
@@ -257,12 +257,12 @@ function rotate_element(deg, elemnt) {
     elemnt.style.transform = "rotate(" + deg + "deg)"
 }
 
-function setZero(){
+function setZero() {
     rotate_element(0, AmmeterNeedle)
     rotate_element(0, VoltmeterNeedle)
 }
 
-function calculateVars(){
+function calculateVars() {
     let freqList = [1, 2, 3, 4, 5, 6, 7, 8]
     let currList = [3.6, 7.0, 10, 8.8, 7.2, 6, 5.2, 4.6]
 
@@ -270,11 +270,11 @@ function calculateVars(){
     Mvol = 10
 }
 
-function updateMeters(){
+function updateMeters() {
     calculateVars()
 
-    rotate_element(Mamm*(180/10), AmmeterNeedle)
-    rotate_element(Mvol*(180/220), VoltmeterNeedle)
+    rotate_element(Mamm * (180 / 10), AmmeterNeedle)
+    rotate_element(Mvol * (180 / 220), VoltmeterNeedle)
 
 }
 
@@ -295,8 +295,8 @@ MCB.onclick = function () {
         MCB_image.src = '../Assets/MCB_ON.png'
         MCB.style.transform = "translate(0px, -49px)"
         FunctionGene.disabled = false
-        if(funcGen_state == 1){
-        updateMeters()
+        if (funcGen_state == 1) {
+            updateMeters()
         }
     }
 }
@@ -306,54 +306,56 @@ FunctionGene.onclick = function () {
     if (funcGen_state == 1) {
         funcGen_state = 0
         FunctG_image.src = '../Assets/function-generator-off.png'
-        FreqSlider.disabled=true
+        FreqSlider.disabled = true
         setZero()
     }
     else if (funcGen_state == 0) {
         funcGen_state = 1
         FunctG_image.src = '../Assets/function-generator-on.png'
-        FreqSlider.disabled=false
-        if(mcb_state == 1){
+        FreqSlider.disabled = false
+        if (mcb_state == 1) {
             updateMeters()
         }
     }
 }
 
-add.onclick = function (){
-    flags6 = 1
+add.onclick = function () {
+    if (vtable.rows.length <= 6) {
+        flags6 = 1
 
-    let row = vtable.insertRow(rindex + 1);
-    rindex = rindex + 1
-    let SNo = row.insertCell(0);
-    let voltage = row.insertCell(1);
-    let current = row.insertCell(2);
-    let freqency = row.insertCell(3);
+        let row = vtable.insertRow(rindex + 1);
+        rindex = rindex + 1
+        let SNo = row.insertCell(0);
+        let voltage = row.insertCell(1);
+        let current = row.insertCell(2);
+        let freqency = row.insertCell(3);
 
-    SNo.innerHTML = rindex;
-    voltage.innerHTML = 10
-    current.innerHTML = Mamm
-    freqency.innerHTML = FreqSlider.value
+        SNo.innerHTML = rindex;
+        voltage.innerHTML = 10
+        current.innerHTML = Mamm
+        freqency.innerHTML = FreqSlider.value
 
-    if ((FreqSlider.value == '3') && (flagS != 0) && (funcGen_state != 0)) {
-        vtable.rows[rindex].style.backgroundColor = "yellow"
-    }
+        if ((FreqSlider.value == '3') && (flagS != 0) && (funcGen_state != 0)) {
+            vtable.rows[rindex].style.backgroundColor = "yellow"
+        }
 
-    if(vtable.rows.length > 6){
-        plot.disabled = false
+        if (vtable.rows.length > 6) {
+            plot.disabled = false
+        }
     }
 }
 
-verify.onclick = function checkUsr(){
+verify.onclick = function checkUsr() {
     console.log("working")
-    if(parseFloat(fr.value) == 3){
-        if(parseFloat(QF.value) == 2.34){
+    if (parseFloat(fr.value) == 3) {
+        if (parseFloat(QF.value) == 2.34) {
             window.alert("Values are verified!")
         }
-        else{
+        else {
             QF.style.backgroundColor = "red"
         }
     }
-    else{
+    else {
         fr.style.backgroundColor = "red"
     }
 }
