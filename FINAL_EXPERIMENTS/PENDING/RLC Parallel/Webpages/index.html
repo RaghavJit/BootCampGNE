@@ -10,7 +10,7 @@
     <!-- <link rel="stylesheet" href="../Style/disabledrag.css"> -->
     <link href="../CDN_folder/Font(zacbel-x).css" rel="stylesheet">
     <link href="../CDN_folder/Font(foco-trial).css" rel="stylesheet">
-    <link href="../CDN_folder/SevenSegmentFont.css" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">            
     <script src="https://cdn.jsdelivr.net/npm/@firestitch/jsplumb@2.12.0/dist/js/jsplumb.min.js"></script>
     <script src="../CDN_folder/ChartCDN.js"></script>
 
@@ -156,8 +156,8 @@
                         <div class="ammeter">
                             <img class="forbidden" src="../Assets/A.png" width="179" height="179" alt="" id="A">
                             <img class="forbidden" src="../Assets/Pointer.png" width="44" height="14" alt="" id="P_A">
-                            <button id="Mp_a"><label onclick="disconnect(4)">5</label></button>
-                            <button id="Mn_a"><label onclick="disconnect(5)">6</label></button>
+                            <button id="Mp_a"><label style="z-index: 2;" onclick="disconnect(4)">5</label></button>
+                            <button id="Mn_a"><label style="z-index: 2;" onclick="disconnect(5)">6</label></button>
                         </div>
 
 
@@ -202,7 +202,7 @@
                         <div class="rlc">
                             <div class="rheostat">
 
-                                <img class="forbidden" src="../Assets/resistor.png" width="300" height="300" alt=""
+                                <img class="forbidden" src="../Assets/resistor.png" style="z-index: -2;" width="300" height="300" alt=""
                                     id="rheostat">
                                 <button id="rh_p"><label onclick="disconnect(16)">17</label></button>
                                 <button id="rh_n"><label onclick="disconnect(17)">18</label></button>

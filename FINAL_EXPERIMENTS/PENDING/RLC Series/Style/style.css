@@ -895,3 +895,32 @@ transform: translate(-5px, -28px);}
     left: 300px;
     width: 50px;
 }
+
+#verify {
+    border: none;
+    height: 35px;
+    outline: none;
+    background-color: rgba(129, 129, 129, 0.313);
+
+    margin: 0px 10px;
+    border-radius: 10px;
+
+
+    text-align: center;
+    font-family: 'Foco Trial', sans-serif;
+    font-size: 20px;
+    transition: all 0.25s ease-in, border 0.001s ease-in-out;
+    cursor: pointer;
+}
+
+#verify:hover {
+    background-color: #1e1e1ee8;
+    color: rgb(238, 234, 234);
+
+}
+
+#verify:active {
+    background-color: #606471;
+    color: rgb(238, 234, 234);
+    border: 3px solid #6a6b6e;
+}

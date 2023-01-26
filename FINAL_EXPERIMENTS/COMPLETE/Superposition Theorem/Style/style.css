@@ -982,7 +982,7 @@ changeable-symbols{
 
 .sliders input:disabled::-webkit-slider-thumb:hover {
     cursor: default;
-    background-color: #d0d0d0
+    background-color: blue;
 }
 
 .sliders input:disabled::-webkit-slider-thumb:active {

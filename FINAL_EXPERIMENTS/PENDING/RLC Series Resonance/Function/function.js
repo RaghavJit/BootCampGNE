@@ -306,11 +306,13 @@ FunctionGene.onclick = function () {
     if (funcGen_state == 1) {
         funcGen_state = 0
         FunctG_image.src = '../Assets/function-generator-off.png'
+        FreqSlider.disabled=true
         setZero()
     }
     else if (funcGen_state == 0) {
         funcGen_state = 1
         FunctG_image.src = '../Assets/function-generator-on.png'
+        FreqSlider.disabled=false
         if(mcb_state == 1){
             updateMeters()
         }
@@ -337,7 +339,7 @@ add.onclick = function (){
     }
 
     if(vtable.rows.length > 6){
-        powDelta.disabled = false
+        plot.disabled = false
     }
 }
 

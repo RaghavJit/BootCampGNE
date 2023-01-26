@@ -48,7 +48,7 @@
                     </li>
                     <li id="s6">Click on ‘ADD’ button to add the readings in the observation table.</li>
                     <li id="s7">Repeat the above steps to get atleast 6 observations.</li>
-                    <li id="s8">Click on ‘PLOT’ button to plot the graph.</li>
+                    <!-- <li id="s8">Click on ‘PLOT’ button to plot the graph.</li> -->
                     <li id="s9">Now manually input the values in caluclation tab.</li>
 
                 </ul>
@@ -72,7 +72,7 @@
                     <div class="control-panel-buttons">
                         <button id="check">CHECK</button>
                         <button id="add" disabled="true">ADD</button>
-                        <button id="plot" disabled="true">PLOT</button>
+                        <!-- <button id="plot" disabled="true">PLOT</button> -->
                         <button id="reset" onclick='window.location.reload();'>RESET</button>
                         <button id="print" onclick=' window.print();'>PRINT</button>
                         <!--THIS IS TO BE KEPT IN A FLEX BOX-->
@@ -86,8 +86,9 @@
                     \[Quality Factor = \frac{2 \pi f_{r}L}{R}\]
                     \[f_{r} = \frac{1}{2 \pi \sqrt{LC}}\]
 
-
-
+                    <label for="RL">Voltage</label>
+                    
+                    
                 </div>
                 <!--Row 2 Col 1 Row2-->
                 <div class="o_table">
@@ -117,7 +118,7 @@
                 <div class="circuit">
                     <p>EXPERIMENT</p>
                     <div class="c-diag">
-                        <top-row>
+
                         <div class="mcb">
 
 
@@ -145,10 +146,6 @@
                             <button id="p_a"><label onclick="disconnect(4)">5</label></button>
                             <button id="n_a"><label onclick="disconnect(5)">6</label></button>
                         </div>
-
-                    </top-row>
-
-
 
                         <div class="break">
                         <br>
@@ -200,13 +197,11 @@
                             <button id="fg_b"><label onclick="disconnect(13)">14</label></button>
                             <button id="fg_c"><label onclick="disconnect(14)">15</label></button>
                             <button id="fg_d"><label onclick="disconnect(15)">16</label></button>
-
+                            
 
 
                             <img class="forbidden" src="../Assets/function-generator-off.png" width="400" height="250" alt="" id="transformer">
-
-                            <input type="range" name="RL" id="RL" , min="1" max="8" step="1" value="0.1">
-
+                            <input type="range" disabled='true' name="RL" id="RL" , min="1" max="8" step="1" value="0.1" style="z-index: 0;">
 
 
 
@@ -240,11 +235,11 @@
         <div class="r3">
             <div class="r3c1">
                 <div class="graph" id="plotContiner">
-                    <p>GRAPH</p>
+                    <p>CALCULATIONS</p>
                 </div>
-                <img id="calcImage" src="../Assets/7.png">
-                <input id="fr"><br>
-                <input id="QF">
+                <img src="../Assets/7.png" id="calcImage">
+                <input id="fr">
+                <input id="QF"><br>
                 <button id="verify">verify</button>
             </div>
             <div class="calc_output"></div>

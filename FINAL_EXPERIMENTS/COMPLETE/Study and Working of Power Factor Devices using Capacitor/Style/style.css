@@ -909,7 +909,7 @@ border-radius: 2px;
     left:250px;
 }
 
-.control-panel-buttons button:disabled:hover, ,#VRF:disabled:hover {
+.control-panel-buttons button:disabled:hover, #VRF:disabled:hover {
     background-color: rgba(129, 129, 129, 0.313);
    color: #919191;
    cursor: default;
