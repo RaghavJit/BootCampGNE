@@ -971,7 +971,7 @@ changeable-symbols{
 
 }
 
-.sliders input:disabled:-webkit-slider-thumb {
+.formulas input:disabled:-webkit-slider-thumb {
     appearance: none;
     height: 20px;
     width: 30px;
@@ -980,12 +980,12 @@ changeable-symbols{
     transition: background-color 0.2s ease-in;
 }
 
-.sliders input:disabled::-webkit-slider-thumb:hover {
+.formulas input:disabled::-webkit-slider-thumb:hover {
     cursor: default;
-    background-color: blue;
+    background-color: #d0d0d0
 }
 
-.sliders input:disabled::-webkit-slider-thumb:active {
+.formulas input:disabled::-webkit-slider-thumb:active {
     cursor: default;
 
 }
