@@ -512,7 +512,7 @@ check.onclick = function chkConn() {
     }
     else {
         window.alert("Invalid Connections!")
-        //window.location.reload();
+        window.location.reload();
     }
 }
 
@@ -563,7 +563,7 @@ function setZero() {
 
 function updateVals() {
 
-    d2 = var_voltage * 0.6
+    d2 = var_voltage * (180/500)
 
     if ((mcb_state == 1) && (onOff_state == 1) && (var_state == 1)) {
         P_V.style.transform = "rotate(" + Math.abs(d2) + "deg)"
