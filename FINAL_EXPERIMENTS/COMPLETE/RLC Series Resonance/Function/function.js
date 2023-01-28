@@ -348,23 +348,26 @@ add.onclick = function () {
 verify.onclick = function checkUsr() {
     let marks = 0
     if (parseFloat(fr.value) == 3) {
-        marks = mark+1
+        marks = marks+1
+        fr.style.backgroundColor = "white"
     }
     else {
         fr.style.backgroundColor = "red"
-        window.alert("Incorrect values")
     }
 
     if (parseFloat(QF.value) == 2.34) {
         marks = marks + 1
+        QF.style.backgroundColor = "white"
     }
     else {
         QF.style.backgroundColor = "red"
-        window.alert("Incorrect values")
     }
 
     if(marks == 2){
         window.alert("Values are Verified!")
+    }
+    else{
+        window.alert("Incorrect Values")
     }
 }
 

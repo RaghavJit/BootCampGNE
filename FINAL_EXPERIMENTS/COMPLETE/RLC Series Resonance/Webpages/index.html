@@ -38,10 +38,11 @@
                         <li>6->7, 8->12, 10->11</li>
                     </ul>
                     <li id="s2"> Now, Check the connections by clicking on ‘CHECK’ button.</li>
-                        <ul>
-                            <li>If the connections are ‘Invalid connections’ click on corresponding node to remove the connection.</li>
-                            <li>And if the connections are ‘Right Connections’ then follow the below steps.</li>
-                        </ul>
+                    <ul>
+                        <li>If the connections are ‘Invalid connections’ click on corresponding node to remove the
+                            connection.</li>
+                        <li>And if the connections are ‘Right Connections’ then follow the below steps.</li>
+                    </ul>
                     <li id="s3"> Turn on the MCB.</li>
                     <li id="s4">Click on Function Generator ‘Power’ button.</li>
                     <li id="s5"> Vary the frequency by moving the slider.
@@ -87,8 +88,8 @@
                     \[f_{r} = \frac{1}{2 \pi \sqrt{LC}}\]
 
                     <label for="RL">Voltage</label>
-                    
-                    
+
+
                 </div>
                 <!--Row 2 Col 1 Row2-->
                 <div class="o_table">
@@ -130,12 +131,15 @@
                         </div>
 
 
-                        <div class="voltmeter">
-                            <img class="forbidden" src="../Assets/V1.png" width="179" height="179" alt="" id="V">
-                            <img class="forbidden" src="../Assets/Pointer.png" width="44" height="14" alt="" id="P_V">
-                            <button id="p_v"><label onclick="disconnect(2)">3</label></button>
-                            <button id="n_v"><label onclick="disconnect(3)">4</label></button>
+                        <div class="fix">
+                            <div class="voltmeter">
+                                <img class="forbidden" src="../Assets/V1.png" width="179" height="179" alt="" id="V">
+                                <img class="forbidden" src="../Assets/Pointer.png" width="44" height="14" alt=""
+                                    id="P_V">
+                                <button id="p_v"><label onclick="disconnect(2)">3</label></button>
+                                <button id="n_v"><label onclick="disconnect(3)">4</label></button>
 
+                            </div>
                         </div>
 
 
@@ -148,8 +152,8 @@
                         </div>
 
                         <div class="break">
-                        <br>
-                    </div>
+                            <br>
+                        </div>
                         <div class="rlc">
                             <div class="rheostat">
 
@@ -197,10 +201,11 @@
                             <button id="fg_b"><label onclick="disconnect(13)">14</label></button>
                             <button id="fg_c"><label onclick="disconnect(14)">15</label></button>
                             <button id="fg_d"><label onclick="disconnect(15)">16</label></button>
-                            
 
 
-                            <img class="forbidden" src="../Assets/function-generator-off.png" width="400" height="250" alt="" id="transformer">
+
+                            <img class="forbidden" src="../Assets/function-generator-off.png" width="400" height="250"
+                                alt="" id="transformer">
                             <input type="range" disabled='true' name="RL" id="RL" , min="0" max="8" step="1" value="0">
 
 
@@ -259,5 +264,7 @@
 <script src="../Function/function.js"></script>
 <!-- latex cdn -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.js"></script> -->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+
 </html>

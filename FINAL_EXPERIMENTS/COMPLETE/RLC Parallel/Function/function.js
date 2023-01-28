@@ -450,6 +450,7 @@ add.onclick = function () {
 
         let row = vtable.insertRow(rindex + 1);
         rindex = rindex + 1;
+
         let SNo = row.insertCell(0);
         let voltage = row.insertCell(1)
         let current = row.insertCell(2);
@@ -458,13 +459,13 @@ add.onclick = function () {
         let ac = row.insertCell(5);
         let pow = row.insertCell(6);
 
-        SNo.innerHtml = rindex
-        voltage.innerHtml = 220
-        current.innerHtml = 34.97
-        ai.innerHtml = 35.03
-        ar.innerHtml = 4.4
-        ac.innerHtml = 0.33
-        pow.innerHtml = 984
+        SNo.innerHTML = rindex
+        voltage.innerHTML = 220
+        current.innerHTML = 34.97
+        ai.innerHTML = 35.03
+        ar.innerHTML = 4.4
+        ac.innerHTML = 0.33
+        pow.innerHTML = 984
 
 
         verify.disabled = false
@@ -545,11 +546,9 @@ verify.onclick = function verify() {
     let usrList = [Rcalc, XLcalc, XCcalc, Lcalc, Ccalc, Zcalc, coscalc, Pcalc, Qcalc]
     let marks = 0
     for (let i = 0; i < ansList.length; i++) {
-        console.log(ansList[i])
-        console.log(parseFloat(usrList[i].value))
         if (ansList[i] == parseFloat(usrList[i].value)) {
             marks = marks + 1
-            usrList.staticConn.backgroundColor = "white"
+            usrList[i].style.backgroundColor = "white"
         }
         else {
             usrList[i].style.backgroundColor = "red"

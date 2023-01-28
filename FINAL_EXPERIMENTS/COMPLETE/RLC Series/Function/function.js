@@ -571,7 +571,7 @@ verify.onclick = function verify() {
     for (let i = 0; i < ansList.length; i++) {
         if (ansList[i] == parseFloat(usrList[i].value)) {
             marks = marks + 1
-            usrList.staticConn.backgroundColor = "white"
+            usrList[i].style.backgroundColor = "white"
         }
         else {
             usrList[i].style.backgroundColor = "red"

@@ -246,14 +246,12 @@ body {
 }
 
 .voltmeter {
-    /* position:relative; */
-    /* left: 190px; */
-    margin-left: 10px;
+    margin-left: 110px;
 }
 
 .ammeter{
     position: relative;
-    left: 10px;
+    left: 170px;
 }
 
 .ammeter-vertical {
@@ -280,7 +278,7 @@ body {
 .mcb {
     position: relative;
 
-    left: 90px;
+    left: 120px;
     top: 10px;
 }
 
